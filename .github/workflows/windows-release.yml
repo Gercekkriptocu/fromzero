@@ -50,7 +50,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         shell: pwsh
         run: |
-          $version = (Get-Item -LiteralPath 'dist/FromZero-Setup-win-x64.exe').VersionInfo.ProductVersion
+          $version = (Get-Item -LiteralPath 'dist/FromZero-Setup-win-x64.exe').VersionInfo.ProductVersion.Trim()
           if ($version -notin @($env:GITHUB_REF_NAME.TrimStart('v'),($env:GITHUB_REF_NAME.TrimStart('v') + '.0'))) {
             throw "Setup version $version does not match $env:GITHUB_REF_NAME."
           }
