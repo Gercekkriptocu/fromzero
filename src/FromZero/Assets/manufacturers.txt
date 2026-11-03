@@ -1,0 +1,173 @@
+# Category|Name|Official URL|Local matching terms
+Bilgisayar|Dell|https://www.dell.com/support/home/en-us?app=drivers|Dell,Alienware
+Bilgisayar|HP|https://support.hp.com/drivers|HP,Hewlett-Packard
+Bilgisayar|Lenovo|https://pcsupport.lenovo.com/us/en/|Lenovo,ThinkPad,ThinkCentre,IdeaPad,Legion
+Bilgisayar|ASUS|https://www.asus.com/support/download-center/|ASUS,ASUSTeK,ROG
+Bilgisayar|MSI|https://www.msi.com/support/download|MSI,Micro-Star
+Bilgisayar|Acer|https://www.acer.com/us-en/support/drivers-and-manuals|Acer,Predator
+Anakart / GPU|Gigabyte|https://www.gigabyte.com/Support/Consumer/Download|Gigabyte,AORUS
+Anakart / GPU|ASRock|https://www.asrock.com/support/index.asp?cat=Drivers|ASRock
+Bilgisayar|Samsung|https://www.samsung.com/us/support/downloads/|Samsung
+Bilgisayar|Microsoft Surface|https://support.microsoft.com/en-gb/surface/drivers-firmware/download-drivers-and-firmware-for-surface|Surface
+Bilgisayar|Framework|https://resources.frame.work/|Framework Laptop,Framework Computer
+Bilgisayar|Dynabook|https://support.dynabook.com/drivers|Dynabook,Toshiba
+Bilgisayar|Fujitsu|https://support.ts.fujitsu.com/|Fujitsu
+Bilgisayar|Panasonic|https://dl-pc-support.connect.panasonic.com/itn/drivers/|Panasonic,TOUGHBOOK
+Bilgisayar|Huawei|https://consumer.huawei.com/en/support/driver-list/|Huawei,MateBook
+Bilgisayar|LG|https://www.lg.com/us/support/software-firmware-drivers|LG,LG Electronics
+Bilgisayar|Razer|https://mysupport.razer.com/|Razer,VID_1532
+Bilgisayar|Clevo|https://www.clevo.com.tw/e-service/Download/default.asp|Clevo
+Bilgisayar|Sager|https://www.sagernotebook.com/drivers.php|Sager
+Bilgisayar|XMG / Schenker|https://download.schenker-tech.de/|Schenker,XMG
+Bilgisayar|Monster|https://www.monsternotebook.com.tr/suruculer/|Monster,Abra,Tulpar,Semruk
+Bilgisayar|Casper|https://www.casper.com.tr/driver-indirme|Casper,Excalibur
+Bilgisayar|Medion|https://www.medion.com/gb/service/product-detail|Medion
+Bilgisayar|VAIO|https://support.us.vaio.com/|VAIO
+Bilgisayar|Chuwi|https://www.chuwi.com/support.html|Chuwi
+Bilgisayar|Minisforum|https://www.minisforum.com/new/support|Minisforum
+Bilgisayar|Beelink|https://forum.bee-link.com/|Beelink,AZW
+Bilgisayar|Geekom|https://www.geekompc.com/support/|Geekom
+Bilgisayar|Zotac|https://www.zotac.com/us/support|Zotac,ZBOX
+Bilgisayar|Origin PC|https://www.originpc.com/support/|Origin PC
+Bilgisayar|Eluktronics|https://www.eluktronics.com/driver-downloads|Eluktronics
+Bilgisayar|MAINGEAR|https://help.maingear.com/|MAINGEAR
+Bilgisayar|iBUYPOWER|https://www.ibuypower.com/support/driver-downloads|iBUYPOWER
+Bilgisayar|CyberPowerPC|https://support.cyberpowerpc.com/hc/en-us/categories/360002574133-Drivers-Software|CyberPowerPC
+Bilgisayar|Eurocom|https://eurocom.com/ec/drivers(1)ec|Eurocom
+Bilgisayar|PC Specialist|https://www.pcspecialist.co.uk/downloads/|PC Specialist,PCSpecialist
+Bilgisayar|Getac|https://support.getac.com/|Getac
+Anakart / GPU|Sapphire|https://www.sapphiretech.com/en/drivers-download|Sapphire
+Anakart / GPU|PowerColor|https://www.powercolor.com/download|PowerColor
+Anakart / GPU|XFX|https://www.xfxforce.com/support/drivers-downloads|XFX
+Anakart / GPU|Palit|https://www.palit.com/palit/download.php?lang=en|Palit
+Anakart / GPU|Gainward|https://www.gainward.com/main/download.php?lang=en|Gainward
+Anakart / GPU|PNY|https://www.pny.com/support|PNY
+Anakart / GPU|Inno3D|https://www.inno3d.com/software|Inno3D
+Anakart / GPU|Colorful|https://en.colorful.cn/en/home/DownLoad|Colorful
+Anakart / GPU|Biostar|https://www.biostar.com.tw/app/en/support/download.php|Biostar
+Anakart / GPU|Supermicro|https://www.supermicro.com/en/support/resources/downloadcenter|Supermicro,Super Micro
+Anakart / GPU|EVGA|https://www.evga.com/support/download/|EVGA
+Yonga / bileşen|NVIDIA|https://www.nvidia.com/en-us/drivers/|NVIDIA,VEN_10DE
+Yonga / bileşen|AMD|https://www.amd.com/en/support/download/drivers.html|AMD,Advanced Micro Devices,VEN_1002,VEN_1022
+Yonga / bileşen|Intel|https://www.intel.com/content/www/us/en/download-center/home.html|Intel,VEN_8086
+Yonga / bileşen|Qualcomm|https://www.qualcomm.com/support|Qualcomm,Atheros,VEN_168C|Windows Wi-Fi sürücüsünde bilgisayar / adaptör üreticisinin model sayfasını tercih et. Bu bağlantı Qualcomm destek girişidir; otomatik genel sürücü paketi değildir.
+Yonga / bileşen|MediaTek|https://www.mediatek.com/products/networking-and-connectivity|MediaTek,Ralink,VEN_14C3|MediaTek son kullanıcıları cihaz üreticisine yönlendirir. Wi-Fi / Bluetooth için bilgisayar veya adaptör üreticisinin model sayfasını kullan. Eski yonga dosyaları ortaklar içindir.
+Yonga / bileşen|Realtek|https://www.realtek.com/Download/List?cate_id=593&menu_id=298|Realtek,VEN_10EC,VID_0BDA
+Yonga / bileşen|Broadcom|https://www.broadcom.com/support/download-search|Broadcom,VEN_14E4
+Yonga / bileşen|Marvell|https://www.marvell.com/support/downloads.html|Marvell,Aquantia,VEN_11AB,VEN_1D6A
+Yonga / bileşen|VIA|https://www.viatech.com/en/support/drivers/|VIA,VEN_1106
+Yonga / bileşen|ASIX|https://www.asix.com.tw/en/support/download|ASIX,VID_0B95
+Yonga / bileşen|FTDI|https://ftdichip.com/drivers/|FTDI,VID_0403
+Yonga / bileşen|Prolific|https://www.prolific.com.tw/portfolio-item/pl2303gl/|Prolific,VID_067B
+Ağ|TP-Link|https://www.tp-link.com/en/support/download/|TP-Link,TPLink
+Ağ|D-Link|https://support.dlink.com/|D-Link
+Ağ|NETGEAR|https://www.netgear.com/support/download/|NETGEAR
+Ağ|Tenda|https://www.tendacn.com/download/default.html|Tenda
+Ağ|Mercusys|https://www.mercusys.com/en/support/find-your-product|Mercusys
+Ağ|Ubiquiti|https://ui.com/download|Ubiquiti
+Ağ|MikroTik|https://mikrotik.com/download|MikroTik
+Ağ|Zyxel|https://www.zyxel.com/global/en/support/download|Zyxel
+Ağ|Edimax|https://www.edimax.com/edimax/download/download/data/edimax/global/download/|Edimax
+Ağ|Linksys|https://support.linksys.com/|Linksys
+Ağ|TRENDnet|https://www.trendnet.com/support/|TRENDnet
+Ağ|ALFA Network|https://support.alfa.com.tw/|ALFA,AWUS
+Ağ|BrosTrend|https://www.brostrend.com/pages/download-center|BrosTrend
+Depolama|Samsung SSD|https://semiconductor.samsung.com/consumer-storage/support/tools/|Samsung
+Depolama|Western Digital|https://www.wd.com/content/store/en-us/support.html|WDC,Western Digital
+Depolama|SanDisk|https://support-en.sandisk.com/app/products/downloads|SanDisk
+Depolama|Kingston|https://www.kingston.com/en/support|Kingston
+Depolama|Crucial|https://www.crucial.com/support/ssd-support|Crucial,Micron
+Depolama|Seagate|https://www.seagate.com/support/downloads/|Seagate
+Depolama|Toshiba Storage|https://storage.toshiba.com/consumer-hdd/support|Toshiba
+Depolama|Kioxia|https://personal.kioxia.com/en-emea/support/download.html|Kioxia
+Depolama|Solidigm|https://www.solidigm.com/support.html|Solidigm
+Depolama|SK hynix|https://ssd.skhynix.com/download/|SK hynix
+Depolama|Sabrent|https://sabrent.com/pages/downloads|Sabrent
+Depolama|ADATA|https://www.adata.com/en/support/downloads/|ADATA,XPG
+Depolama|Silicon Power|https://www.silicon-power.com/download/|Silicon Power
+Depolama|Transcend|https://www.transcend-info.com/Support/software|Transcend
+Depolama|Patriot|https://support.patriotmemory.com/hc/en-us|Patriot
+Depolama|TeamGroup|https://support.teamgroupinc.com/en/support/download.php|TeamGroup,TEAM TM
+Depolama|Lexar|https://www.lexar.com/support/download/|Lexar
+Depolama|QNAP|https://www.qnap.com/en/download|QNAP
+Depolama|Synology|https://www.synology.com/en-global/support/download|Synology
+Çevre birimleri|Logitech|https://support.logi.com/hc/en-us|Logitech,VID_046D
+Çevre birimleri|Corsair|https://www.corsair.com/us/en/s/downloads|Corsair,VID_1B1C
+Çevre birimleri|SteelSeries|https://steelseries.com/gg|SteelSeries,VID_1038
+Çevre birimleri|HyperX|https://hyperx.com/pages/ngenuity|HyperX
+Çevre birimleri|Cooler Master|https://www.coolermaster.com/en-global/support/|Cooler Master
+Çevre birimleri|Glorious|https://www.gloriousgaming.com/pages/downloads|Glorious
+Çevre birimleri|Turtle Beach / ROCCAT|https://support.turtlebeach.com/|Turtle Beach,ROCCAT
+Çevre birimleri|Elgato|https://www.elgato.com/us/en/s/downloads|Elgato,VID_0FD9
+Çevre birimleri|Wacom|https://www.wacom.com/en-us/support/product-support/drivers|Wacom,VID_056A
+Çevre birimleri|Huion|https://www.huion.com/download/|Huion
+Çevre birimleri|XPPen|https://www.xp-pen.com/download|XP-PEN,XPPen
+Çevre birimleri|Gaomon|https://download.gaomon.net/plus/list.php?cateId=10&system=0&tid=9|Gaomon
+Çevre birimleri|Xencelabs|https://www.xencelabs.com/support/download-drivers|Xencelabs
+Çevre birimleri|Keychron|https://www.keychron.com/pages/firmware|Keychron
+Çevre birimleri|Ducky|https://www.duckychannel.com.tw/en/Support/Detail/19|Ducky
+Çevre birimleri|Akko|https://en.akkogear.com/download/|Akko
+Çevre birimleri|Varmilo|https://varmilo.com/pages/manual|Varmilo
+Çevre birimleri|8BitDo|https://support.8bitdo.com/|8BitDo
+Çevre birimleri|GuliKit|https://www.gulikit.com/Download|GuliKit
+Çevre birimleri|Thrustmaster|https://support.thrustmaster.com/en/|Thrustmaster
+Çevre birimleri|Fanatec|https://www.fanatec.com/us/en/s/downloads|Fanatec
+Çevre birimleri|MOZA Racing|https://support.mozaracing.com/en/support/solutions/articles/70000627795-moza-pit-house-downloads|MOZA
+Çevre birimleri|Simagic|https://simagic.com/pages/download-center|Simagic
+Çevre birimleri|Simucube|https://simucube.com/pages/simucube-downloads|Simucube
+Ses|Creative|https://support.creative.com/|Creative,Sound Blaster,VEN_1102
+Ses|Focusrite|https://downloads.focusrite.com/|Focusrite,Scarlett,Clarett
+Ses|Behringer|https://support.empowertribe.com/|Behringer
+Ses|PreSonus|https://www.presonus.com/pages/downloads|PreSonus
+Ses|Universal Audio|https://www.uaudio.com/downloads/|Universal Audio,Apollo
+Ses|Audient|https://support.audient.com/hc/en-us/articles/54047224171668-Drivers-Software-Downloads|Audient
+Ses|MOTU|https://motu.com/en-us/download/|MOTU
+Ses|RME|https://www.rme-audio.de/downloads.html|RME,Fireface,Babyface
+Ses|Steinberg|https://o.steinberg.net/en/support/downloads_hardware.html|Steinberg
+Ses|Yamaha|https://download.yamaha.com/|Yamaha
+Ses|Roland|https://www.roland.com/global/support/|Roland
+Ses|Native Instruments|https://www.native-instruments.com/en/support/downloads/|Native Instruments,Traktor,Komplete
+Ses|Arturia|https://www.arturia.com/support/downloads&manuals|Arturia
+Ses|Shure|https://www.shure.com/en-US/support/downloads|Shure
+Ses|Sennheiser|https://www.sennheiser.com/en-us/support/downloads-and-instructions|Sennheiser
+Ses|Antelope Audio|https://en.antelopeaudio.com/support/downloads/|Antelope
+Ses|Zoom Audio|https://zoomcorp.com/en/us/support/|ZOOM U-22,ZOOM U-24,ZOOM U-44,ZOOM H1,ZOOM H2,ZOOM H3,ZOOM H4,ZOOM H5,ZOOM H6,ZOOM H8,ZOOM F3,ZOOM F6,ZOOM F8,ZOOM L-8,ZOOM L-12,ZOOM L-20,ZOOM R4,ZOOM R8,ZOOM R12,ZOOM R16,ZOOM R20,ZOOM R24,ZOOM AMS,ZOOM Corporation
+Yazıcı / tarayıcı|Canon|https://www.usa.canon.com/support|Canon,VID_04A9
+Yazıcı / tarayıcı|Epson|https://epson.com/Support/sl/s|Epson,VID_04B8
+Yazıcı / tarayıcı|Brother|https://support.brother.com/|Brother,VID_04F9
+Yazıcı / tarayıcı|Xerox|https://www.support.xerox.com/|Xerox
+Yazıcı / tarayıcı|Ricoh|https://support.ricoh.com/|Ricoh
+Yazıcı / tarayıcı|Kyocera|https://www.kyoceradocumentsolutions.com/download/|Kyocera
+Yazıcı / tarayıcı|Lexmark|https://support.lexmark.com/|Lexmark
+Yazıcı / tarayıcı|OKI|https://www.oki.com/uk/printing/support/drivers-and-utilities/index.html|OKI
+Yazıcı / tarayıcı|Pantum|https://global.pantum.com/support/download/driver/|Pantum
+Yazıcı / tarayıcı|Konica Minolta|https://www.konicaminolta.eu/eu-en/support/download-centre|Konica Minolta
+Yazıcı / tarayıcı|Sharp|https://global.sharp/products/copier/downloads/|Sharp
+Yazıcı / tarayıcı|Fujifilm|https://support-fb.fujifilm.com/|Fujifilm,FUJI XEROX
+Yazıcı / tarayıcı|Dymo|https://www.dymo.com/support?cfid=online-support|Dymo
+Yazıcı / tarayıcı|Zebra|https://www.zebra.com/us/en/support-downloads.html|Zebra
+Yazıcı / tarayıcı|Plustek|https://plustek.com/us/support/drivers-and-downloads.html|Plustek
+Yazıcı / tarayıcı|ScanSnap|https://www.pfu.ricoh.com/global/scanners/scansnap/dl/|ScanSnap,PFU
+USB / görüntü / dock|DisplayLink|https://www.synaptics.com/products/displaylink-graphics/downloads/windows|DisplayLink,VID_17E9
+USB / görüntü / dock|StarTech|https://www.startech.com/en-us/faq/drivers|StarTech
+USB / görüntü / dock|Plugable|https://plugable.com/pages/drivers|Plugable
+USB / görüntü / dock|Cable Matters|https://www.cablematters.com/downloads.aspx|Cable Matters
+USB / görüntü / dock|Anker|https://service.anker.com/recommended?otherType=Anker_EN_Extemal_Manual_and_Download&secondType=Manuals|Anker
+USB / görüntü / dock|UGREEN|https://www.ugreen.com/pages/download|UGREEN
+USB / görüntü / dock|Belkin|https://www.belkin.com/support/|Belkin
+USB / görüntü / dock|IOGEAR|https://www.iogear.com/support/|IOGEAR
+USB / görüntü / dock|CalDigit|https://www.caldigit.com/download/|CalDigit
+USB / görüntü / dock|Satechi|https://support.satechi.com/|Satechi
+USB / görüntü / dock|Sonnet|https://www.sonnettech.com/support/|Sonnet
+USB / görüntü / dock|OWC|https://www.owc.com/support|OWC,Other World Computing
+USB / görüntü / dock|Orico|https://www.orico.cc/index/attachment/index.html?mtpl=1|Orico
+USB / görüntü / dock|AVerMedia|https://www.avermedia.com/support/download|AVerMedia
+USB / görüntü / dock|Blackmagic Design|https://www.blackmagicdesign.com/support/|Blackmagic
+
+
+
+
+
+
+
+

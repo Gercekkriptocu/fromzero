@@ -1,0 +1,1631 @@
+0|Launch options:
+1|The vendor's installer will open. Choose installation options there. Continue?
+2|This is a firmware/BIOS package. FromZero does not install it. Follow the hardware vendor's official support and recovery instructions.
+3|This driver will be downloaded from Windows Update. Accept the vendor's license terms to continue. Drivers are backed up first. Your display or network may be interrupted and a restart may be needed.\n\nAccept the terms and continue installing?
+4|These are resource-use measurements, not FPS or speed measurements. Different apps or workloads cannot be compared directly.
+5|Hardware IDs:
+6|File:
+7|Verified publisher:
+8|Visual detail may decrease. Resolution, refresh rate and input settings are preserved. The complete file is backed up first. The game reads the changes on startup; game updates or cloud sync may overwrite them. FPS improvement has not been measured. Apply?
+9|Use Verify capsule to check file integrity. This kit includes hardware and app inventory; store it securely.
+10|Load a baseline recording before comparing.
+11|Current drivers will be backed up before the vendor's installer opens. The installer checks hardware and Windows compatibility. INF matching is not performed for this EXE. Continue?
+12|No game process name was supplied. End this session manually; closing FromZero also restores it.
+13|Baseline measurement saved.
+14|A change cannot be attributed to optimization unless the scene and settings are the same.
+15|You are accepting the selected vendors' / Microsoft's installation and license terms. Administrator permission is required; display or network may be interrupted. Save your work. Installers may open their own windows. Start?
+16|The chosen location is on the Windows disk. Move the kit to USB or another disk before formatting.
+17|Windows will request administrator permission to export drivers. Hardware and app names are saved in this local kit.
+18|Driver backup and
+20|Windows trust verification passed.\nPublisher:
+21|Windows packages are stored in the Windows Update cache. Installation is selected separately.
+22|Publisher:
+23|Drivers will be backed up before the vendor's installer opens. Compatibility and update selection are handled by that installer. Display interruption or restart may be required. Open it?
+24|Working drivers will be backed up first, then the package is passed to Windows for installation. Administrator permission, a restart or temporary network interruption may be needed. Continue?
+25|Open the vendor's installer?
+26|Third-party driver packages were exported. This is not a complete system backup.
+27|Operation report:
+28|1% low change: %
+29|File hash and signature are checked again before opening.
+30|Launch options:
+31|A launchable EXE could not be verified. The registry entry may be stale or use another install location.
+32|Crosshair checked:
+33|Continue?
+34|Settings are backed up first and restored when the session ends.
+35|File:
+36|Power:
+37|Observed at source:
+38|Average FPS change: %
+39|Game graphics:
+40|Games:
+41|Official package verified:
+42|SHA-256 and a Windows signature are required.
+43|Version:
+44|The publisher signature is verified.
+45|Publisher:
+46|Drivers are backed up first. Accept the license and install? The display/network may be interrupted and a restart may be needed.
+47|The original power plan and registry preferences were saved locally.
+48|Publisher SHA-256 record; no digital signature.
+49|Operation stopped; completed deletions cannot be undone.
+50|/ DISABLED BY FROMZERO
+51|/ unsupported
+52|/ change preview
+53|/ error
+54|/ in-game settings
+55|/ REVIEW REQUIRED
+56|FPS\n1% low:
+57|FPS\nP99 frame time:
+58|MB\nPublisher:
+59|Windows / driver packages and
+60|Windows / driver offers
+61|Windows/software ·
+62|steps complete ·
+63|keys missing. Preview does not change files.
+64|keys not found in the file.
+65|tools ·
+66|settings saved and backed up. Verify them in the game's Video menu and measure FPS in the same scene.\n\nMissing keys were not added:
+67|settings backed up.
+68|devices ·
+69|devices need attention.
+70|devices scanned.
+71|crosshair code and preview refreshed.
+72|support pages ·
+73|values restored;
+74|changes ·
+75|devices needing attention
+76|hardware-compatible offers
+77|files
+78|files skipped.
+79|files found.
+80|files removed ·
+81|files ·
+82|verified ·
+83|verified installers ready. After formatting, open App\FromZero.exe → Prepare my PC → System and installation → USB driver folder. Select the kit root folder. This is not a personal-file backup.
+84|external changes preserved.
+85|GPU was not detected on this PC. Download its official tool anyway?
+86|matches ·
+87|matches.
+88|showing the first 12 matches. Narrow your search.
+89|installed app records · checked
+90|hidden/old · checked
+91|updates
+92|targets selected ·
+93|accounts / settings files found.
+94|source settings refreshed.
+95|source warnings. No download was started.
+96|records could not be checked
+97|records;
+98|code copied · CS2 → Settings → Crosshair/Scopes → Share / Import
+99|user tests /
+100|installers will be downloaded.\nWindows packages go to the Windows Update cache; installers go to FromZero's downloads folder. Nothing is installed. Accept the Windows packages' license terms and continue?
+101|desktop / Store records.\nAn uninstall entry alone does not prove the app can run; opening it requires a verified EXE.
+102|game components
+103|games found.
+104|packages selected
+105|downloaded from the official source.\nPublisher:
+106|seconds · Without confirmation, the previous refresh rate is restored.
+107|selected
+108|selected apps missing · power:
+109|after /
+110|results · Page
+111|drivers ·
+112|drivers,
+113|warnings.
+114|apps
+115|in-app downloads
+116|apps selected for automatic maintenance.
+117|apps ·
+118|app/release channels, Windows offers and .NET SDK bands are checked.
+119|app/release channels: 30 direct vendor records and 570 Scoop Extras community manifests. Scoop/WinGet is not required; manifest scripts are never executed. Extended catalogue packages require SHA-256 and a trusted Windows signature. Stable .NET and SDK bands are checked separately. Metadata is cached for 15 minutes; source errors and check times are displayed.
+120|apps; available RAM
+121|apps support controlled installation / updates. Already-current versions are skipped.
+122|apps will receive a normal close request. Continue?
+123|apps processed · Working-set change:
+125|· check
+126|runtimes;
+127|· Detected vendor
+128|· CROSSHAIR CODE COPIED
+129|· Player:
+130|· graphics:
+131|· ready
+132|· latest release
+133|· Previous record kept:
+138|No universal -high / -threads boost pack is added. Unlimited FPS is not always smoothest for G-Sync. Save existing options first and avoid duplicate commands.
+139|. Only unchanged files from this scan can be deleted.
+140|Include unsupported .NET release lines from 3.0 onward
+141|.NET source failed:
+142|.NET release lines ·
+143|.NET and SDK
+144|/10 crosshairs refreshed
+145|01  Back up drivers\n02  Save hardware and app inventory\n03  Include portable FromZero\n04  Verify kit integrity
+146|02 / RECOVERY CAPSULE
+147|03 / DRIVER CENTER
+148|04 / NETWORK STATION
+149|05 / GAMING STATION
+150|06 / STARTUP
+151|07 / APP KIT
+152|08 / HISTORY AND RECOVERY
+153|Refresh 10 crosshairs
+154|Confirm within 15 seconds, or the previous refresh rate will be restored.
+155|Review 233 app, browser, Windows and game cache rules. Inspect the targets and full file list before deleting.
+156|233 rules: Windows, browsers, apps, games and developer caches.
+157|240 FPS limit
+158|300 FPS limit
+159|50 pro players
+160|50 pro players and the global FACEIT top 10 · view, preview and copy codes.
+161|FPS between 60 and 1000
+164|AMD Auto-Detect checks your hardware and Windows version for compatible Adrenalin/driver packages. The small setup file is not a complete GPU driver; it requires internet access. Manage graphics and game profiles in AMD Software.
+165|Adapter, gateway and DNS. Find the issue step by step.
+166|Check adapter, driver, gateway and DNS status separately.
+167|Adapters and local network information
+168|Choose your adapter, then a DNS profile. The previous setting is backed up; Windows may request administrator permission.
+169|Stream:
+170|Return to your familiar workspace.
+171|Current RAM usage is not high. Usage alone does not measure slowness.
+172|Apex Legends: choose a VRAM budget for your GPU. Compare dynamic resolution and FPS limits in the same scene. Use a renderer supported by the current game version.
+173|Tools
+174|Choose background apps to close
+175|Archive manager
+176|Settings file not found.
+177|Settings file not found. Open the game once and save its graphics settings.
+178|Settings advice
+179|Device Manager
+180|Compare the same game, scene, resolution and recording duration. Profiles do not guarantee higher FPS. This version compares CSV recordings; it does not include an automatic in-game overlay.
+181|Show details
+182|Light wall
+183|Review open windows
+184|What starts with Windows?
+185|Choose startup apps. Changes are backed up and can be restored.
+186|NETWORK STATUS
+187|Network check
+188|Open network repair
+189|Network reset settings
+190|Network recovery card
+191|CONNECTION
+192|RAM USAGE / THIS SESSION / 2 SECONDS
+193|FREE SPACE
+194|Connection report
+195|Find where the connection breaks.
+196|Inspect connection →
+197|Test connection
+198|Failed
+199|Startup
+200|Restore startup entries
+201|Startup apps
+202|Startup manager
+203|Started:
+204|Disable at startup
+205|Copy launch options
+206|Launch options supported by the game
+207|Ready to start ·
+208|Release RAM under memory pressure
+209|Memory usage is high. Review the apps and workload below; this alone is not evidence of a memory leak.
+210|Memory usage is high. Closing unnecessary apps frees memory more permanently.
+211|There is enough available memory. Releasing RAM does not appear necessary right now.
+212|Make room in memory.
+213|The component store, old Windows installations, virtual disks and report rules are not deleted directly. Manage them through Windows Storage. Targets requiring administrator permission can be rescanned after reopening FromZero as administrator.
+214|Check components
+215|Save PC passport
+216|Prepare my PC
+217|PC preparation plan
+218|Prepare my PC
+219|Prepare my PC →
+220|A fresh start for your PC.
+221|Your PC, ready for you.
+222|Get your PC ready.\nPick up where you left off.
+223|Choose an adapter.
+224|A change observed after a step does not prove that step caused it. External changes such as unplugging a USB device are also reflected in the report.
+225|No active driver record could be matched to this GPU. Check device error codes in Updates.
+226|A setup plan for this PC
+227|No INF matches this PC's hardware IDs. Also check Windows version and architecture.
+228|No players match this filter.
+229|No results match this filter. Disable the vendor filter or change the search.
+230|No updates match this filter.
+231|No files to clean match this filter.
+232|No active profile for this account.
+233|No status changes were found in this comparison.
+234|CPU and RAM readings for this session were saved. Compare the same workload under similar conditions.
+235|No automatic settings-file recipe exists for this game. Add launch options supported by its developer and compare graphics settings using the steps above.
+236|This version exports app names. It does not automatically restore app data or preferences. Choose a signed vendor installer to start installation.
+237|These preferences apply only when selected. Power plans and supported game files are backed up first.
+238|This user's startup entry will be moved to a backup registry key. The running app will stay open.
+239|No verified crosshair source record is available for this new account yet.
+240|Highest at this resolution:
+241|No GPU from this vendor was detected. The tool remains available; its installer checks compatibility.
+242|Not found
+243|Enlarge
+244|CS2 / Steam launch options
+245|CS2 Steam launch options
+246|Live usage, selective RAM release and maintenance based on memory pressure.
+247|Device inventory and offline drivers
+248|Device error code:
+249|Search by device or provider
+251|Cloudflare: 1.1.1.1 · Google: 8.8.8.8 · Quad9: 9.9.9.9. Secondary and IPv6 addresses are also configured. DNS queries go to the selected provider and may affect VPN/work-network names. This does not enable encrypted DNS or guarantee lower game ping.
+252|Counter-Strike 2: test resolution, MSAA, shadows and supported low-latency settings in the game menu. Measure the current FPS limit and frame consistency first. Do not automatically apply Source 1 -threads/-high lists.
+253|Crosshair check
+254|Refresh crosshair
+255|Adapter for DNS changes
+256|Choose the adapter whose DNS you want to change.
+257|Refresh DNS list
+258|DNS could not be read:
+259|The DNS resolver cache will be cleared. DNS servers will not change. Continue?
+260|DNS cache
+261|Clear DNS cache
+262|HARDWARE DETECTED /
+263|Balanced graphics
+264|Storage maintenance
+265|Support pages
+266|Open support page
+267|Choose a supported refresh rate.
+268|No supported refresh rate found.
+269|Restart Windows before continuing.
+270|Show targets with data-loss risk
+271|Caution: possible data loss or performance impact
+272|DirectX and game components
+273|DirectX, XNA and 12 Visual C++ installers
+274|DirectX, XNA and Visual C++ 2005–v14
+275|Uses medium texture and anti-aliasing settings.
+276|Reduces texture, effects and anti-aliasing load.
+277|Preparing hardware inventory…
+278|Hardware match
+279|No physical network adapter or problem device with a hardware ID was found.
+280|Save hardware passport
+281|Hardware scan
+282|Scanning hardware
+283|Choose the hardware vendor's official setup EXE
+284|Hardware, drivers and apps are checked separately.
+285|Install hardware-compatible drivers
+286|Scan hardware
+287|Rescan hardware
+288|Hardware-aware setup. Measured results. Reversible preferences.
+289|File:
+290|Review files
+291|Dota 2: test effects/shadows and render scale separately. Compare Vulkan and DirectX using the current game menu and supported hardware.
+292|The right hardware. The right driver.
+293|Verified
+294|Verified installer ready
+295|Download verified installer
+296|Verified installation
+297|Verified package ready
+298|Stop requested. It will stop after the current installer finishes.
+299|Check status
+300|Dust2 / real screenshot
+301|Refresh ELO ranking
+302|ACTIVE
+303|Choose EXE
+304|Display / refresh rate
+305|Display information could not be read:
+306|Does the display look correct?
+307|Restore display on exit
+308|GPU apps and drivers
+309|Manage GPU apps
+310|GPU and vendor apps
+311|Install / check the GPU's official app
+312|Display profile active
+313|Display refresh rate
+314|Read displays again
+315|Missing drivers, Windows updates and\nyour chosen apps in one queue.
+316|Verify and fix manually
+317|No stream with at least 100 valid frames was found.
+318|Apps using the most memory
+319|Inventory has not been read yet. Real device and app information appears after the scan.
+320|Legacy DirectX and Visual C++ game components
+321|The active display mode could not be read. Check Windows display settings.
+322|Applies to selected, currently minimized apps if the threshold stays exceeded for 30 seconds. Waits at least 10 minutes between attempts. Pauses while a known game or FromZero game session is running. Works only while FromZero is open.
+323|No matching device found.
+324|ONE FLOW AFTER A FRESH INSTALL
+325|Apply FPS settings
+326|FPS lab
+327|FPS recording imported
+328|FPS measurement and extra tools
+330|Firmware: use the vendor's process
+331|Your post-install roadmap
+332|Prepare USB before formatting
+333|Choose a USB or external-disk folder before formatting
+334|Choose the FromZero USB kit root or driver folder
+335|Release selected apps' RAM before launching a game through FromZero
+336|Free space with FromZero
+337|Find caches, review the list and clean what you choose.
+338|FromZero capsule|capsule.json
+339|FromZero cleanup
+340|Releases the working sets of FromZero and the selected minimized apps below. Apps remain open and reload data when needed. Switching back may initially be slower; this does not guarantee higher FPS.
+341|GPU app opened
+342|GPU app verified
+343|GPU app installation
+344|GPU and display settings
+345|GPU and window optimizations
+346|Recheck GPU and apps
+347|GPU vendor installer opened
+348|Overview
+349|Not needed
+350|Files do not go to the Recycle Bin. Cache rebuilding may slow the next launch. Open apps, locked files and changed files are skipped.
+351|Restore
+352|Restore
+353|Enable again
+354|Go back
+355|Inspect real memory pressure, resource usage and storage space.
+356|Check actual readiness
+357|Valid CS2 code. Game files were not changed.
+358|Choose a valid game name and EXE.
+359|Temporary files
+360|History
+361|Hidden offer: excluded from downloads
+362|Show hidden and superseded offers
+363|UPDATE CENTER
+364|Task Manager
+365|Graphics settings restored
+366|Graphics settings saved
+367|Display looks good / keep
+368|Graphics profile
+369|Graphics backup
+370|Up to date or newer
+371|Updates
+372|Search updates
+373|Scan for updates
+374|Choose a trusted vendor's installer
+375|Power settings
+376|Power plans
+377|Review power plans
+378|Power plan
+379|Keep the current power plan
+380|Restore power plan
+381|Power saver
+382|Power and graphics preferences
+383|Ready · Apply while the game is closed.
+384|Prepare
+385|Prepare and launch →
+386|Prepare, check and continue. All your tools in one station.
+387|Preparation did not start.
+388|Preparation was not started; the plan was not approved.
+389|Preparation stopped.
+390|Preparation cannot start yet
+391|Backups and before/after changes appear here once you create a preparation plan.
+392|Resuming preparation
+393|Resume preparation
+394|Search target names or descriptions
+395|No operation history yet.
+396|No comparison yet. Before/after snapshots are recorded around sensitive steps when installation starts.
+397|No game profiles yet. Scan Steam libraries or add a profile by selecting the game's EXE.
+398|No scan yet.
+399|Not scanned yet
+400|Every change leaves a trace.
+401|A checkpoint before every fresh install.
+402|After each full scan, downloads supported installed .NET patches, stable updates for installed apps and current driver offers whose licenses were already accepted. Old, hidden, BIOS/firmware and unsupported packages are excluded. Nothing is installed. Windows packages may require administrator permission and use mobile data. Enable?
+403|Account / settings file
+404|Quick installation tools
+405|INF file could not be verified
+407|Intel DSA scans supported Intel products for compatible updates. Not every Intel GPU or hardware generation is supported; check the vendor's result.
+408|Open Intel update scanner
+409|CHECK REQUIRED /
+410|AVAILABLE RAM
+411|INSTALL RECORD FOUND /
+412|SEARCH INSTALLED APPS
+413|INSTALL RECORD FOUND /
+414|Close request
+415|Choose apps to close
+416|Full update scan
+417|Capsule details and post-install steps
+418|Capsule verification
+419|Capsule could not be read.
+420|Create capsule
+421|Create capsule →
+422|Matching packages in capsule
+423|Find drivers in capsule
+424|Verify capsule
+425|Compare frame times
+426|Uses the chosen cap to compare frame pacing. The menu limit is 120 FPS.
+427|Check unsaved work. Selected apps receive normal close requests; canceled or unresponsive apps remain open.
+428|Refresh record
+429|Source: Windows Update\nIdentity:
+430|Targeted registry changes
+431|Recorded:
+432|Your own crosshair code
+433|Your code
+434|Identity / details
+435|Personal documents, app settings, accounts and Wi-Fi passwords are not backed up. This kit does not replace Windows installation media. A working driver backup does not guarantee compatibility with a different Windows version.
+436|Code editor
+437|Copy code
+438|Check required
+439|Copy. Paste into Steam.
+440|Copied · Steam → CS2 → Properties → General → Launch Options
+441|User
+442|Back up startup entries before disabling them; restore the original value whenever you want.
+443|User report:
+444|User test
+445|Available RAM:
+446|Recovery tools
+447|Recovery capsule ready
+448|Choose a network driver from the recovery capsule or save hardware IDs in a help card. Download a package from the vendor using a phone/another PC and bring it by USB. Extract it, then use Updates → Choose local INF.
+449|Recovery and export
+450|Installer ready
+451|All installed stable patches are read. Unsupported release lines are for legacy compatibility only and are not recommended for new apps. x86 and x64 are separate runtimes.
+452|Verify installed file signature
+453|The installed file's publisher does not match the expected vendor.
+454|Installed app name or publisher
+455|Installed apps
+456|Show installed apps
+457|List installed apps, save your installation list and continue using official sources.
+458|Installation tools
+459|Check connection, drivers, audio, apps and games for the selected profile without starting installation.
+460|Installation started
+461|Installer opened
+462|Installer|*.exe;*.msi
+463|No install record detected.
+464|Continue in the installer window. When finished, use Scan hardware to check the driver. FromZero does not assume installation succeeded.
+465|Before installation / latest state
+466|Current drivers are backed up before installation. Windows checks package signature, compatibility and driver ranking. Adding a package does not forcibly replace a better-ranked driver.
+467|Partial scan; only listed files will be cleaned.
+468|License / package details
+469|Use Scan all sources to fill this list.
+470|I reviewed the list; permanently delete the selected files.
+471|Manual game mode
+472|Search vendor or tool name
+473|Search vendors or tools
+474|Desktop apps are read from 32/64-bit user and system registries; Store/MSIX apps come from Windows package inventory. Portable apps without registrations may not appear.
+475|Media player
+476|Disable existing Game DVR recording preferences during the session (experimental)
+477|Enable the existing Windows Game Mode preference (experimental)
+478|Use an existing High Performance power plan during the session
+479|Prepare current drivers and selected supported installers on an external disk. Failed or missing downloads are listed separately in the report.
+480|Choose the model and Windows version on the vendor's page. This link is not an automatically scanned driver package.
+481|Modern Standby and vendor power plans may differ. Close games before editing their graphics files and launch each game at least once first. No FPS gain is claimed without measurement.
+482|NVIDIA / display FPS profile
+483|NVIDIA App manages driver updates, Game Ready / Studio selection and supported game optimization in its own interface.
+484|How will you use this PC?
+485|Where do I paste this?
+486|Choose your crosshair.
+487|GAME SESSION RESTORED
+488|GAMES / CROSSHAIR
+489|Could not read
+490|Automatic RAM maintenance
+491|Automatic maintenance and pre-game settings
+492|No process name is available for automatic session end. End it manually.
+493|Reset automatic app list
+494|Session changes:
+495|Your session plan
+496|End session and restore settings
+497|Game EXE or steam.exe path
+498|Removes the game's FPS cap; it does not guarantee better hardware performance.
+499|Game name
+500|Restoring game settings
+501|Restore game settings
+502|Enable mode without launching a game
+503|Game components
+504|Keep current game graphics settings
+505|Game graphics profile
+506|Game monitoring
+507|Settings are restored after the detected game process exits. If no process appears within 5 minutes, the session is restored.
+508|Your game library
+509|Game library
+510|Game center
+511|Game mode plan
+512|Game session settings
+513|Game profile
+514|Add game profile
+515|Game profiles, reversible system preferences and real frame-time comparisons.
+516|Removes the game cap; heat and power consumption may rise. The menu limit is 120 FPS.
+517|Games and CS2 options
+518|Game capture settings
+519|Before gaming
+520|Pre-game RAM
+521|Final pre-game checks
+522|Prepare the station before you play.
+523|Prepare for gaming
+524|Game-specific launch profile
+525|Search players
+526|Player or FACEIT nickname
+527|Games
+528|Games ·
+529|PUBG: compare render scale, shadows and effects. Consider how view distance and anti-aliasing affect visibility. Keep the official launcher and anti-cheat flow.
+530|Package integrity could not be verified. Installation stopped.
+531|Package license
+532|No package selected.
+533|Review and install package
+534|Options are saved in your profile and passed to the game. Steam's own launch settings are not changed. No universal -high, -threads or -dx12 pack is added; supported options vary by game. Use the official launcher when Steam/anti-cheat requires it.
+535|Passport exported
+536|Performance measurement saved
+537|Review plan
+538|Import a PresentMon CSV recording. Process and swapchain streams are calculated separately; at least 100 valid frames are needed. Average FPS = 1000 / average frame time. The 1% low uses the slowest 1% of frames. This measures CPU presentation pacing and may differ from displayed FPS.
+539|Profile active ·
+540|Profile:
+541|Edit profile
+542|Save profile
+543|Choose a profile and optional preferences. Review the plan or start preparation.
+544|Opening the QR on your phone sends the hardware ID to Microsoft Update Catalog as a search query. Check Windows version/architecture and bring the correct package via USB. Extract CAB files in Windows, then select a matching INF. This does not automatically select a package or transfer it to your PC.
+545|Release RAM
+546|RAM releaser
+547|RAM releaser /
+548|RAM threshold (%)
+549|RAM optimizer / pre-game maintenance
+550|RAM and disk-backed memory budget
+551|Open reports folder
+552|Competitive FPS
+553|Official download page ↗
+554|Download and verify official package
+555|Official vendor sources
+556|Enter a numeric FPS limit.
+557|Audio is marked heard only when you confirm it. Microphone audio is not recorded.
+558|Try selected Hz
+559|Permanently delete selected files
+560|Download selected installers
+561|Download selected packages
+562|Download selected runtimes
+563|Send close request to selected apps
+564|Download selected
+565|Permanently delete selected
+566|Clean selected
+567|Selected CS2 / VALORANT · balanced
+568|Selected CS2 / VALORANT · competitive FPS
+569|Clear selection
+570|Deselect
+571|Clear selection
+572|Review before selecting
+573|Checks launchers, libraries and requirements for selected games. Game downloads and account sign-in are never started automatically.
+574|Selected windows receive normal close requests. Apps show their own save prompts; processes are never forcibly terminated.
+575|Review your selection before deleting
+576|Verify system files
+577|System-file verification
+578|System and installation options
+579|System, security and known game processes are protected. Minimize other apps first, then refresh. Save preferences to include your selection in automatic maintenance.
+580|Last operation ·
+581|Compare with last measurement
+582|Compare the next recording
+583|Next measurement CSV
+584|Next →
+585|Steam App ID (leave empty for local games)
+586|Steam App ID must be numeric.
+587|No installed games were found in Steam libraries. You can add a game profile.
+588|Steam game scan
+589|Find Steam games
+590|Offered
+591|Driver
+592|Choose a capsule to search for drivers
+593|No driver information
+594|Driver update scan
+595|Driver recovery
+596|Driver installation plan
+597|Driver installation result
+598|Driver installation
+599|Open driver center →
+600|Driver package|*.inf
+601|Open driver backups
+602|Driver backup
+603|Choose a driver backup location
+604|Driver backups contain exported third-party packages only. There is no universal driver/Windows rollback. Verify the device identity first. Use a matching signed INF in Updates or Device Manager's Roll Back Driver option when available.
+605|Check drivers, apps and game components in one place.
+606|Driver:
+607|Back up drivers
+608|Use Roll Back Driver in Device Manager. If unavailable, inspect a matching backed-up INF. Windows may keep a higher-ranked driver; no forced downgrade is performed.
+609|No version information
+610|No version
+611|SYSTEM DISK
+612|Unknown class
+613|Unlimited FPS (remove cap)
+614|Queued
+615|COMMIT / LIMIT
+616|CLEANUP
+617|Save full list
+618|Completed
+619|Unknown device
+620|Recognized settings already match this profile.
+621|Waiting for scan
+622|Scanning never deletes files. Files are cleaned only after you review the selection and confirm permanent deletion.
+623|Scan coverage
+624|Scan and download options
+625|Automatically download eligible drivers, app and installed .NET updates after scanning
+626|Browser
+627|One-click DNS
+628|One-click graphics profiles
+629|Check again
+630|Phone / USB help card
+631|Search using a phone QR
+632|Phone-based network recovery
+633|Continue using your phone's connection
+634|Scan files to clean
+635|Free space with cleanup
+636|Save preferences
+637|Play test sound
+638|The test sends ICMP to the gateway, plus DNS and a port 443 connection to microsoft.com. It is not a speed test.
+640|Total RAM changes are also affected by other apps. Shared pages mean a working-set total is not a physical RAM saving.
+641|All categories
+642|All
+643|Choose a USB or disk location that will not be formatted
+644|USB preparation kit
+645|USB preparation package
+646|USB preparation profile
+647|Create USB kit
+648|Clear USB selection
+649|Choose USB driver folder
+650|USB and recovery
+651|USB → App / FromZero.exe → Verify capsule → Updates / Find drivers in capsule → Check connectivity → Windows Update scan → Apps
+652|APP FILE FOUND /
+653|App name
+654|Search apps
+655|Waiting for app inventory…
+656|App sources failed:
+657|App installation
+658|App list saved
+659|Save app list
+660|App release scan
+661|App versions
+662|App:
+663|Applications
+664|Applications ·
+665|Search applications
+666|Choose applications
+667|Scan applications
+668|Use Scan applications to list this Windows user's open windows.
+669|Scan and select an eligible app. Other apps must be minimized first.
+670|Rescan applications
+671|The app's signature publisher is not the expected vendor.
+672|App close request
+673|Open app / check updates
+674|Application|*.exe
+675|Not applicable
+676|Applied
+677|No eligible adapter found. Refresh the list.
+678|Select eligible minimized apps
+679|Select eligible caches
+680|Use a compatible vendor tool
+681|Disable VSync (may cause tearing)
+682|Default
+683|Cancel
+686|Wi-Fi settings
+687|Create Wi-Fi report
+688|Wi-Fi and network
+689|Windows / drivers
+690|Windows / drivers
+691|Scanning Windows / drivers and official runtime catalogues…
+692|Windows / software
+693|Windows INF file exists
+694|Windows Game Mode
+695|Windows Update + local INF + working driver backup. Driver operations do not use WinGet.
+696|Windows Update returns packages offered to this PC.
+697|Scanning the Windows Update driver catalogue; this may take a few minutes…
+698|Windows Update currently offers no driver updates for this PC.
+699|Drivers offered by Windows Update
+700|Search Windows Update for drivers
+701|Windows startup settings
+702|Windows storage tools
+703|Windows display settings
+704|Signed in Windows inventory
+705|Windows security and reliability updates
+706|Windows reports no error
+707|Windows source failed:
+708|Windows system files will be checked with SFC /verifyonly. This does not repair files and may take several minutes. Administrator permission is required. Continue?
+709|Windows and hardware offers
+710|Ready in Windows cache
+711|Include hidden and superseded Windows offers
+712|Areas managed by Windows
+713|RESTART REQUIRED
+714|LOCAL GAME
+715|Detected vendors only
+716|Favorites only
+717|Installed apps only
+718|Scan applications only
+719|Adapter status only
+720|Updates available only
+721|Companion app not detected. The driver and companion app are independent.
+722|Back up and install
+723|The backed-up user startup entry will be restored.
+724|Paste a new-format code beginning with CS.
+725|Show my progress after restarting
+726|Restart
+727|Rebuildable cache / log
+728|Could not refresh; previous record kept:
+729|Free space. Know what you delete.
+730|Choose local INF
+731|Vendor matching uses the local system manufacturer and present device names/hardware IDs. It does not prove driver compatibility.
+732|Local driver plan
+733|Superseded: excluded from downloads
+734|High Performance applies only if the plan already exists; heat and power use may rise. Registry preferences change existing DWORD values only. Effects vary by Windows version; verify in Settings. Changed values are restored at session end.
+735|High performance · AC power required
+736|Choose capsule.json
+737|keep unchanged
+738|power saver
+740|px · Gap
+741|px · Thickness
+742|competitive FPS
+743|high performance
+744|OFFLINE
+745|Carry working drivers, a hardware passport and your app list in one folder.
+746|Runtimes and development tools
+747|Running
+748|Resolution and display arrangement are preserved. A higher Hz can improve smoothness but does not directly increase rendered FPS. Restores automatically if not confirmed within 15 seconds.
+749|Could not measure
+750|Select recording stream
+751|Measurement comparison
+752|Measurement saved
+753|Measurement steps:\n1. Record the same scene with default settings.\n2. Change one setting at a time.\n3. Compare average FPS and 1% low.\n\nGPU-limited: test render scale, shadows, volumetric effects and ray tracing in turn. Choose a supported upscaler in the game menu.\nCPU-limited: inspect crowd/simulation/view distance and background workloads.\nChoose texture quality for available VRAM.\nEvaluate VSync/FPS caps for your display's refresh rate and VRR support.
+754|Save measurement
+755|Refresh measurement
+756|Cache is stale/changed; downloading the current package again…
+757|Caches may rebuild. Files belonging to open apps are blocked; links, cloud files and app data are preserved.
+758|Search caches
+759|Scan caches
+760|Save a measurement first.
+761|Wait for the current operation to finish first.
+762|Run a full scan and select packages first. Outdated installed release lines are selected automatically.
+763|Open the game, save its graphics settings and check again.
+764|Scan and select cleanup targets first.
+765|Scan first, then choose
+766|Back up → matching USB network driver if available → Windows driver offers → supported vendor tool → Windows / components / apps → final check. USB packages require exact hardware IDs and signed CAT files; Windows ranks its own compatible online offers.
+767|Measure first. Then improve.
+768|Use Check now to scan the current state first.
+769|Restore previous DNS
+770|Load baseline FPS recording
+771|Restoring the previous display trial
+772|Previous display change pending
+773|Restore previous refresh rate
+774|Restoring previous game session
+775|Baseline measurement CSV
+776|Select recommended updates
+777|Preview
+778|Preview
+779|Close preview
+780|Custom
+781|Custom FPS limit
+782|Custom selections
+783|Vendor SHA-256 verified (no digital signature)
+784|Vendor tools
+785|Vendor support
+786|Vendor firmware update
+787|Vendor installer
+788|Vendor setup EXE
+789|Vendor setup package|*.exe
+790|Vendor license terms
+791|Vendor page
+792|Vendor driver installer opened
+793|Vendor driver package
+794|Check vendor releases
+795|Check driver updates and game settings in the vendor's app. FromZero displays the installed driver; it does not assume that it is current.
+796|Use vendor workflow
+797|Vendor, device or update name
+798|Continue in the vendor's window. When finished, press Recheck GPU and apps. Opening an installer does not prove successful installation.
+799|Official vendor page ↗
+800|Choose an INF from the extracted vendor package
+801|Third-party driver packages · Hardware details · Installed desktop apps · Startup entry reference list · FromZero app
+802|DOWNLOADED PACKAGE /
+803|CANCELED /
+804|Find what you need. Queue it. Update.
+805|Communication
+806|Needs attention
+807|Showing the first 100 devices. Search for other devices.
+808|Signature information not verified
+809|Signature and integrity verified
+810|Choose signed installer
+811|Review and install
+812|Review →
+813|Show targets needing review
+814|Available to download
+815|Could not download:
+816|Downloaded installer opened
+817|Downloaded package record could not be read.
+818|Check / install downloaded package
+819|Rechecking downloaded package integrity and vendor signature…
+820|Not downloaded
+821|Download failed:
+822|Downloads folder
+823|Download queue
+824|Add to download queue
+825|Download results
+826|If there is no internet
+827|Station tasks
+828|Optional
+829|Tracking:
+830|Actual game process name (without .exe)
+831|Tracked process:
+832|Import / export
+833|OPERATION FAILED / Details saved.
+834|PROCESSOR
+835|No process name selected; end the session manually.
+836|Operation details
+837|Export operation log
+838|Operation plan
+839|Review results, access driver backups and use recovery options.
+840|Select process and swapchain stream
+841|Check now
+842|Current:
+843|A new recovery folder will be created at:
+844|· Existing AutoGameModeEnabled value set to 1
+845|· Existing GameDVR_Enabled and AppCaptureEnabled values set to 0
+846|· Keep the current power plan
+847|· High Performance power plan
+848|← Games
+849|← Previous
+850|⌁ Network diagnostics
+851|⌁ Understand your connection
+852|▤ Personal recovery kit
+853|▦ Driver check
+854|✚ SESSION ACTIVE /
+855|Global 3D profile saved; game-specific driver profiles may take priority. Actual display Hz is configured separately. The profile persists; Restore returns to previous settings. It affects new game launches. FPS improvement has not been measured.
+856|NVIDIA settings affect the GLOBAL 3D profile; game-specific settings may override them. Texture quality may decrease and heat/power consumption may rise. Disabling VSync can cause tearing. G-Sync/VRR may be smoother with VSync + Reflex + an appropriate FPS cap.\n\nPrevious settings are backed up. Actual display Hz uses the separate trial below. FPS improvement depends on hardware/game. Apply?
+857|Drivers are backed up first. Accept the vendor's license and download/install? Connectivity/display may be interrupted and a restart may be required.
+858|Signature verified. Open the vendor's installer? Choose installation/repair options in its window.
+859|Gateway:
+860|After this step
+861|This check does not prove the package's source is trustworthy.
+862|Install this package through the hardware vendor's official update workflow.
+863|These tests do not measure bandwidth. Microsoft is the test target; network administrators may see the queries and connections.
+864|Status:
+865|The active driver is checked separately at the final check.
+866|Interfaces without IP addresses are omitted. All devices are listed in Updates.
+867|Windows verifies final package integrity and driver ranking.
+868|Will set it to Normal. This affects all TCP connections; the original value is saved. Continue?
+869|Adding a package to the driver store does not mean the active driver changed. Rescan the inventory.
+870|Could not compare the final state:
+871|Previous drivers:
+872|New packages were installed across three scan rounds. Continue to check for newly eligible packages again.
+873|/ official release list…
+874|/ comparing the next state…
+875|/ default
+876|/ saving the previous state…
+877|/ custom
+878|/ vendor release record…
+879|/ vendor SHA-256 verified (no digital signature)
+881|DNS configuration verified. The original setting was backed up.
+882|GB free
+883|GB required; approximately
+884|Could not read current vendor release:
+885|Check the power plan in Windows Settings.
+886|Hz. This is not an FPS measurement.
+887|MB more space needed. Free space on another disk does not meet Windows' system-disk requirement.
+888|Game launch, sign-in and actual FPS measurements require separate testing.
+889|Could not read the Visual C++ installer's target version; update status must be checked separately.
+890|settings; backup:
+891|devices; pairing/connectivity requires a user test.
+892|is running. Save your work and close the app before continuing.
+893|band (manual selection)
+894|component / architecture checks
+895|not found
+896|values;
+897|files verified.\nDevice:
+898|restored.
+899|graphics settings applied; file backed up.
+900|updates offered.
+901|for
+902|resolving official download…
+903|for:
+904|checks passed;
+905|user confirmations needed. This step does not download games or sign in.
+906|user tests. See Prepare / Check status for details.
+907|complete the vendor's choices in the installer…
+908|is not an existing DWORD value. Configure it in Windows Settings; no guessed registry value was created.
+909|possible regressions detected. Recheck or review Recovery. Timing alone does not prove causation.
+910|changed or was deleted outside the session; not overwritten.
+911|game checks;
+912|issues / missing and
+913|ranking markup changed; previous global record kept.
+914|extracting the complete package…
+915|will be enabled again.
+916|not detected
+917|app is already installed.
+918|Could not get the online release; trying a signed USB package.
+919|vendor app missing. Its official installer will open; complete the vendor's options.
+920|· Install record exists; verify the executable separately.
+921|· Type:
+922|· Executable:
+923|! DNS test failed or timed out.
+924|! External connectivity test failed. Check VPN, firewall or ISP.
+925|! No active network connection found.
+932|).\nUpdate the app or inspect the reports folder under USB and recovery. This error alone does not prove an administrator-permission issue.
+933|). The package was not executed.
+934|). Driver support or administrator permission may be required.
+935|). No unsupported or restart-requiring display mode was used.
+936|. Details: dell-update.log
+937|. Try again later.
+938|. File presence does not guarantee the component works in-game.
+939|. Installation was not marked complete.
+940|. If the model/OS is unsupported (4096 / 4104), Windows driver sources are used. Details:
+941|. Verify TPM version / game acceptance separately; security settings were not changed.
+942|The .NET installer is not on an official vendor address.
+943|.NET release metadata is too large.
+945|Select 1–200 updates.
+946|Below 32 MB
+947|: adapter is off or disabled.
+948|: settings already match.
+949|: missing
+950|: active backup exists; not overwritten.
+951|: error
+952|: error
+953|: content changed
+954|: not connected to Wi-Fi.
+955|: no valid IP lease from the router (APIPA).
+956|; skipped
+957|; service was not started or installed.
+960|; recording preference:
+961|; highest listed refresh rate at this resolution:
+962|; vendor matching alone does not establish package compatibility.
+963|; game mode preference:
+965|; high performance:
+967|? Gateway did not answer ICMP; this alone does not prove a fault.
+968|? Gateway test:
+969|Adapter no longer exists; rescan.
+970|Invalid adapter identity.
+971|Adapters exist but no IP address has been obtained yet.
+972|Enable adapter
+973|Optimize TCP receive settings
+974|Transfer optimization
+975|Restore transfer profile
+976|Detected GPU's vendor app
+978|Animation preference could not be read.
+979|Settings key could not be opened.
+980|No settings file. Open the game once and save graphics preferences.
+981|Device
+982|Device status
+983|Device code
+984|Not detected in this device class; verify whether the model supports the feature.
+985|Device not detected
+986|Device, driver, app, audio, display and connectivity state saved.
+987|On
+988|Open apps could not be verified. Rescan.
+989|Network
+990|No network adapter found. Check missing devices in Updates.
+991|Network operation
+992|Network repair
+993|Network repair /
+994|Network, chipset, GPU and other drivers
+995|Some preferences could not be restored; backup kept.
+996|Connection status
+997|Connectivity may be interrupted temporarily.
+998|Network station
+999|Connection check
+1000|Network diagnostics
+1001|Reset network software
+1002|Rechecking connectivity, hardware, audio, games and apps…
+1003|Linked file or folder rejected.
+1004|Linked folders are not supported.
+1005|Linked, cloud, read-only or protected file skipped.
+1006|Connected
+1007|Not connected
+1008|Another preparation operation is running.
+1009|Another release line is installed
+1010|Startup
+1011|Startup terminal
+1012|Launch options must be on one line.
+1013|Launch options contain an unclosed quote.
+1014|Launcher
+1015|No launcher install record. Check the game store or current installation location.
+1016|Component installation was verified by rescanning.
+1017|Components
+1018|Information could not be read. Try a status scan as administrator.
+1019|Check PC and connection
+1020|Unknown CS2 settings value:
+1021|Unknown VSync value.
+1022|Unknown VALORANT quality value:
+1023|Unknown
+1024|Choose an INF file.
+1025|A RAM operation is already running.
+1026|Bluetooth hardware not detected.
+1027|This DNS profile is already active. No change needed.
+1028|No verified source mapping for this FACEIT account.
+1029|No exact hardware-ID match between this INF and present devices. No broad or guessed match was installed.
+1030|This adapter will be enabled.
+1031|No FromZero DNS backup for this adapter.
+1032|This adapter's DHCP lease will be renewed. Connectivity may be interrupted.
+1033|This PC does not offer a High Performance power plan. The vendor may manage power; disable this option to continue.
+1034|This preparation's power preference is already active.
+1035|These recipes target Windows x64. Use the official vendor page for your architecture.
+1036|No connectivity fault was detected by these checks. Speed and signal quality may be inspected separately.
+1037|No driver catalogue file found for this architecture.
+1038|This game settings file is not among detected targets.
+1039|This scan is no longer valid.
+1040|No new installable package offered in this scan.
+1041|This cleanup plan is invalid or already used. Rescan.
+1042|This refresh rate is already active.
+1043|Automatic driver sources for this vendor are Windows Update and the selected USB kit. Model-specific tools are under Updates → Vendor tools.
+1044|CS2 / Steam account
+1045|CS2 graphics keys not recognized. Save graphics settings in the game first.
+1046|CS2 graphics schema not recognized. The file was not changed.
+1047|CSV is empty.
+1048|CSV too large; use a shorter recording.
+1049|Live memory tracking, selective RAM release and pre-game maintenance.
+1050|Chrome x64 (all users)
+1052|Missing crosshair field:
+1053|Crosshair settings are outside supported CS2 ranges.
+1054|Crosshair catalogue source could not be verified.
+1055|Crosshair catalogue not found.
+1056|Crosshair source rejected.
+1057|Crosshair source too large.
+1058|Crosshair outline not recognized.
+1059|Invalid crosshair code length.
+1060|Crosshair checksum or version is not supported.
+1061|Crosshair ratio not recognized.
+1062|Invalid crosshair color.
+1063|Crosshair page too large.
+1064|Crosshair numeric field not recognized.
+1065|Crosshair style not recognized.
+1066|Crosshair preference not recognized.
+1067|Renew DHCP lease
+1068|Invalid DNS adapter record.
+1069|DNS address families do not match.
+1070|Invalid DNS address family.
+1071|DNS was changed outside FromZero. The old backup is kept; current settings were not overwritten.
+1072|DNS settings could not be verified. Recovery backup kept.
+1073|DNS settings changed later. Not overwritten; backup kept.
+1074|DNS restored
+1075|DNS profile
+1076|Unsupported DNS profile.
+1077|Invalid DNS server record.
+1078|DNS backup belongs to another adapter.
+1079|DNS backup could not be read.
+1080|DNS resolution
+1081|DNS resolution failed.
+1082|Refresh DNS cache
+1083|Dell Command Update CLI not found; this model or its prerequisites may be outside vendor support.
+1084|Dell Command Update: driver category
+1085|Dell tool publisher could not be verified.
+1086|Dell tool's .NET Desktop 10 prerequisite verified.
+1087|Applying model-compatible Dell drivers…
+1088|Supported settings file found. An FPS/balanced profile can be applied after backup.
+1089|Model-specific drivers from supported vendors
+1090|Unsupported .NET release line.
+1091|Unsupported GPU setting found in backup.
+1092|Unsupported NVIDIA setting.
+1093|Unsupported NVIDIA setting/value.
+1094|Unsupported NVIDIA recovery setting.
+1095|Unsupported network operation.
+1096|Unsupported graphics profile.
+1097|Unsupported capsule version.
+1098|Unsupported game settings encoding.
+1099|Unsupported game.
+1100|Unsupported app.
+1101|A restart is required to continue.
+1102|Value
+1103|Direct3D 11 system component not found.
+1104|Additional DirectX game libraries
+1105|Additional DirectX game libraries (full package)
+1106|DirectX installer could not be verified.
+1107|Installing DirectX game libraries…
+1108|Offline additional DirectX game libraries
+1109|Disk cleanup
+1110|Laptop
+1111|Laptop / portable
+1112|Laptop components
+1113|Laptop use
+1114|More repair and diagnostic tools
+1115|Other game components
+1116|Hardware
+1117|Hardware drivers, DirectX libraries and game runtimes in one place.
+1118|Scanning hardware…
+1119|Saving hardware and app inventory…
+1120|Hardware feature level
+1121|Hardware feature level could not be read (0x
+1122|File information could not be verified.
+1123|Missing file filter.
+1124|File changed after the scan.
+1125|Preparing SHA-256 verification for files…
+1126|The file's actual path changed.
+1127|Verified signature chain could not be read.
+1128|Verified installer record not found.
+1129|Stopped; you can resume where you left off.
+1130|Could not finish in four attempts. Review the details.
+1131|Could not finish in four restart rounds. Review the installation report.
+1132|Invalid Edge USB record.
+1133|Unsupported Edge hash algorithm.
+1134|Editor, Git, Node.js LTS, PowerShell and terminal checks.
+1135|Incompatible display API structure.
+1136|Display is no longer connected.
+1137|Display settings changed later; your new selection was preserved.
+1138|Display is disconnected; backup kept.
+1139|Display not found.
+1140|Refresh rate could not be applied (Windows
+1141|Could not read display modes:
+1142|Invalid display backup.
+1143|Display backup could not be read.
+1144|Display timeout recovery
+1145|Display resolution or arrangement changed; rescan.
+1146|Select at least one preference.
+1148|Checks Epic Games Launcher, GPU and game records; account sign-in is up to you.
+1149|Access denied; skipped
+1150|Legacy game libraries
+1152|Active
+1153|No active transfer profile.
+1154|An active network adapter has a gateway.
+1155|No active gateway detected.
+1156|No active gateway. Fix connectivity, enable USB tethering or select a USB folder with signed drivers/installers.
+1157|Active display
+1158|No active display device found.
+1159|No active display change.
+1160|Active power plan
+1161|No active recording endpoint found.
+1162|Active microphone
+1163|Active microphone
+1164|No active game session.
+1165|No active profile.
+1166|Could not read active audio endpoints:
+1167|Active audio output
+1168|Could not read active audio output.
+1169|No active driver record found.
+1170|Active output
+1171|No active output found
+1172|Matching devices:
+1173|Unknown FACEIT region.
+1174|Invalid FACEIT crosshair source or account mapping.
+1175|FACEIT crosshair records not found.
+1176|FACEIT catalogue not found.
+1177|FACEIT ranking record could not be verified.
+1178|Prepare your display and GPU for FPS.
+1179|FPS profile
+1180|Apply FPS profile
+1181|FPS limit must be 0 (unlimited) or 60–1000.
+1183|Firmware/BIOS packages are not installed through FromZero. Use the vendor's official update and recovery workflow.
+1184|Physical adapter not found.
+1185|Physical network adapter not found. Check Updates.
+1186|FromZero is already open. Use the existing taskbar window.
+1187|GPU tools
+1188|Development
+1189|Invalid extended catalogue record:
+1190|Extended catalogue ·
+1191|Extended package catalogue not found.
+1192|Reopen as administrator if needed
+1193|Required component installation verified.
+1194|Choose a valid adapter identity.
+1195|A valid
+1196|Invalid file filter.
+1197|Invalid display trial duration.
+1198|Invalid update identity.
+1199|Invalid cleanup rule.
+1200|Invalid application name.
+1201|Invalid update or automatic download is disabled.
+1202|The temporary folder itself cannot be deleted.
+1203|Entry changed; refresh the list.
+1204|Captive portal / HTTP test
+1206|Graphics driver
+1207|UPDATES
+1208|Embedded vendor record could not be verified.
+1209|Select CS2 or VALORANT before choosing graphics preferences.
+1210|Graphics backup integrity failed.
+1211|Current vendor record could not be verified. This package was not installed automatically:
+1212|Update workshop
+1213|Update available
+1214|Start an online scan to see updates.
+1215|Everyday use
+1216|Unsafe rule path:
+1217|Power
+1218|The power plan changed later. Current preferences were preserved; backup kept.
+1219|Could not activate the power plan.
+1220|Could not restore power plan:
+1221|Invalid power plan record.
+1222|Invalid power plan identity.
+1223|Could not read power plan:
+1224|Power plan changed outside the session; your selection was preserved.
+1225|Power plan applied and verified by reading it again. Previous plan backed up.
+1226|Power plan:
+1227|Could not verify the applied power plan. Recovery backup kept.
+1228|Power preference
+1229|Unknown power preference.
+1230|Invalid power backup.
+1231|No power backup.
+1232|Power management
+1233|HP Image Assistant code:
+1234|HP Image Assistant: model / OS verification
+1235|Could not extract the HP tool:
+1236|Reviewing model-compatible HP drivers…
+1237|HP package changed during transfer.
+1238|HP consumer model / HPIA business-model match not found. Windows Update and local driver sources were used. Review model-specific packages on HP support.
+1239|HP Image Assistant publisher could not be verified.
+1240|HTTP target could not be read. Corporate/filtered networks may block this test; review HTTPS separately.
+1241|Could not verify HTTPS target:
+1242|The HTTPS target did not return the expected response; this alone does not prove that all internet access is down.
+1243|Ready
+1244|Preparation steps are modified or invalid.
+1245|Preparation steps missing.
+1246|Unknown preparation step.
+1247|Invalid preparation startup arguments.
+1248|Preparation could not start
+1249|Preparation could not start.
+1250|Preparation could not start:
+1251|Invalid preparation state record.
+1252|Preparation record belongs to another user or PC.
+1253|Preparation record too large.
+1254|Invalid preparation identity.
+1255|Preparation installation requires administrator permission.
+1256|Preparation engine
+1257|Preparation package rejected.
+1258|Preparation plan not found.
+1259|Preparation plan has not been accepted. Review and approve it in the app first.
+1260|Unknown preparation profile.
+1261|Invalid preparation profile or app selection.
+1262|Preparation report limit exceeded.
+1263|Preparation selections missing.
+1264|Post-preparation comparison
+1265|Preparation result
+1266|Preparation finished with items that need checking.
+1267|Unknown preparation app.
+1268|Preparation worker must not open a separate app window.
+1269|Preparation worker exited without saving a result (code 0x
+1270|Unexpected window opened in preparation worker.
+1271|Target path changed.
+1272|An entry with this name already exists at the destination. Not overwritten.
+1273|Not checked yet.
+1274|Not every missing library is required. Install only components requested by your game. The legacy DirectX package does not upgrade Windows' DirectX version.
+1275|Fast sync
+1276|Renew IP address
+1277|Off
+1278|Capsule is empty.
+1279|Capsule could not be verified:
+1280|Capsule is incomplete.
+1281|Save the capsule outside the app's own folder.
+1282|No stable numeric release found.
+1283|No stable release found.
+1284|Could not read chassis type.
+1285|Player is outside this catalogue.
+1286|Duplicate catalogue identity.
+1287|Catalogue package has no trusted Windows signature.
+1288|Duplicate source field.
+1289|Source size limit exceeded.
+1290|Source crosshair table changed; previous record kept.
+1291|Source player identity changed; previous account record kept.
+1292|Source too large.
+1293|History archive
+1294|Record needs checking
+1295|Game folder could not be verified in registered libraries. No full-disk scan was performed; install through the launcher or point it to the existing folder.
+1296|Saved app path changed; create a new plan.
+1297|Check
+1298|Protected process
+1299|Protected cleanup target:
+1300|Could not read user identity.
+1301|Highest available
+1302|Usage
+1303|Rule target missing.
+1304|Rule target changed.
+1305|Recovery capsule created
+1306|Installer could not start.
+1307|Installer exited but the expected app/component could not yet be verified. Check vendor logs and pending restarts.
+1308|Installer code:
+1309|Installer requests a restart; verification will follow.
+1310|Installed / check after restarting
+1311|Not installed
+1312|Was not installed
+1313|Installed version meets the target package:
+1314|Installed version compared with the vendor's stable release:
+1315|Installer changed during transfer.
+1316|Installation process could not start.
+1317|Install record not found
+1318|Install record not found.
+1319|Invalid installation identity.
+1320|Installation engine cannot run without administrator permission.
+1321|Installer exceeds the size limit.
+1322|Installer too large.
+1323|Installation plan has not been accepted.
+1324|Invalid installation result.
+1325|Installation and target release verified:
+1326|Installer publisher could not be verified.
+1327|Save pre-installation state
+1328|Verify installations and remaining gaps
+1329|Checks launcher/Store records and existing installation. Requirements differ for Java and Bedrock.
+1330|Prefer maximum performance
+1331|Manifest could not be read.
+1332|Desktop / type not verified
+1333|Menu limit must be between 60 and 200.
+1334|Central square
+1335|Current TCP autotuning level:
+1336|Current Windows package finished; queue stopped.
+1337|Existing devices and services are checked; function keys need a user test.
+1338|No problem codes reported by present devices.
+1339|No local driver exactly matches present hardware IDs.
+1340|Could not read current power plan.
+1341|Back up current drivers
+1342|Microsoft HTTPS target verified: TLS, HTTP 200 and the expected text content type.
+1343|Could not extract Microsoft package:
+1344|Internet access to the Microsoft test target could not be verified.
+1345|MsBetweenPresents or FrameTime column missing. Choose a PresentMon CSV.
+1346|An absolute local path is required.
+1347|NVIDIA NVAPI driver component not found.
+1348|Disable NVIDIA VSync (may cause tearing and affect G-Sync smoothness)
+1349|NVIDIA detected · Selected global 3D preferences are saved using NVAPI.
+1350|NVIDIA not detected · Windows and display settings are available.
+1351|NVIDIA settings operation failed (NVAPI
+1352|Read NVIDIA settings
+1353|NVIDIA setting is not a DWORD.
+1354|NVIDIA texture filtering: high performance (quality may decrease)
+1355|NVIDIA global 3D settings
+1356|NVIDIA power management: prefer maximum performance
+1357|NVIDIA driver does not provide this settings function.
+1358|NVIDIA driver did not verify the selected values; restoring the profile.
+1359|NVIDIA preferred refresh rate: highest
+1361|Node.js SHA-256 record not found.
+1362|Invalid Node.js USB record.
+1363|OBS encoder and audio recording
+1364|Verify the encoder, microphone level and a short recording in OBS's auto-configuration wizard. GPU brand alone does not prove encoder operation.
+1365|OBS, audio editing, microphone and graphics checks.
+1366|Post-repair check
+1367|Confirmation timed out; change restored.
+1368|Automatic (router / network)
+1369|No automatically repairable configuration issue was found. Review the detailed report for router, signal, cable or ISP issues. Restart the adapter if needed.
+1370|Automatic decisions use current device inventory and Windows offers.
+1371|Automatic installation requires Windows 10 2004 or later / Windows 11 x64.
+1372|Automatic installation requires a fixed expected publisher signature.
+1373|No automatic installation recipe.
+1374|Settings changed outside the session are preserved.
+1375|Session ended.
+1376|Unsupported registry setting in the session record.
+1377|Invalid power plan identity in session record.
+1378|Game
+1379|Game /
+1380|Game / VALORANT
+1381|Game did not appear within 5 minutes.
+1382|Game settings changed; the file was not written.
+1383|Game settings file is larger than expected.
+1384|Game settings changed after preview. Review again.
+1385|Game launched
+1386|Game components, Steam and checks for your selected games.
+1387|Check game components
+1388|Game graphics profile restored
+1389|Game mode restore
+1390|Game mode prepared
+1391|Could not read game session record
+1392|Arcade
+1393|Invalid game or usage preference.
+1394|Game runtime
+1395|Game/Steam executable not found.
+1396|No supported GPU identified by PCI ID. Generic display devices use Windows drivers and the final check.
+1400|Package SHA-256 does not match the vendor's release record.
+1401|Package SHA-512 does not match the vendor's release record.
+1402|File path outside the package rejected.
+1403|Package folder already exists.
+1404|Package incomplete. Do not use this folder for recovery.
+1405|Package publisher could not be verified.
+1406|Package path must be relative.
+1407|Brightness and function keys
+1408|Test brightness, volume and touchpad shortcuts on the keyboard. Camera video and battery health are not measured by this scan.
+1409|Performance garage
+1410|Performance recovery incomplete
+1411|Connect AC power for the performance plan. High Performance was not automatically enabled on battery.
+1412|Performance profile
+1413|Performance profile active
+1414|Performance profile restored
+1415|Performance profile applied
+1416|Performance backup could not be read.
+1417|Plan ready.
+1418|Profile options
+1419|Profile changes were restored. Values changed afterwards were preserved.
+1421|Open RAM optimizer
+1422|Invalid RAM preferences.
+1423|Competitive gaming
+1424|Address outside the official .NET release source rejected.
+1425|Official support address must use HTTPS.
+1426|Official source
+1427|Official installation package verified
+1430|Reads Riot/Vanguard status and Windows 11 TPM/Secure Boot state. Firmware settings are not changed.
+1431|Read-only, linked or cloud files cannot be modified.
+1432|Selected NVIDIA preferences could not be backed up safely; nothing was changed.
+1433|The selected adapter will restart. Connectivity will be interrupted temporarily.
+1434|Selected display preferences are already active.
+1435|Selected power plan is unavailable on this PC. OEM / Modern Standby support may differ.
+1436|Selected power plan is already active.
+1437|Selected preparation steps completed and verified.
+1438|Apply selected usage preferences
+1439|Readiness checks for selected games
+1440|No supported graphics file found for selected games. Save CS2 / VALORANT preferences in the game first.
+1441|Selected offline packages will be used.
+1442|Unknown vendor source.
+1443|System / game protected
+1444|System startup entries are managed through Windows Settings.
+1445|Not present in the last scan
+1446|Could not read in the last scan
+1447|Result
+1448|Standard Microsoft connectivity-test text received. This HTTP check does not establish HTTPS trust.
+1449|Standard test text not received. A captive portal or HTTP target block may be present; review HTTPS separately.
+1451|Steam is installed; its own updater is used.
+1452|Invalid Steam game identity.
+1453|Steam → Library → Counter-Strike 2 → Properties → General → Launch Options. Save your existing line first. Remove conflicting +fps_max / +fps_max_ui commands before pasting this line; preserve your other personal options. Restart the game and verify game/menu FPS limits in Advanced Video.\n\nUnlimited only removes the game's FPS cap; it cannot create performance the hardware cannot produce. Heat/power use and frame-time variation may rise. The menu is capped at 120 FPS. External driver/VSync limits may still apply. For G-Sync/VRR, compare smoothness with a suitable cap.\n\n-high, -threads, -heapsize, -dxlevel, -tickrate and old CS:GO packs are not added automatically. Renderer, anti-cheat, network and Steam files are not changed. To restore, remove the two added commands and reselect previous FPS values in the game menu.
+1454|Checks Steam, the active GPU driver and existing game settings. Launch options can be copied.
+1455|Checks Steam/EA launcher, game registration and graphics driver.
+1456|Reads Steam/Epic/Rockstar libraries. Games are not downloaded or moved.
+1457|Store record
+1458|Store/MSIX inventory unavailable; desktop apps are listed.
+1459|Server returned text/a webpage instead of an installer.
+1460|Search driver updates
+1461|Driver did not verify the requested refresh rate.
+1462|Too many INF files in the driver folder.
+1463|Driver result
+1464|Driver default / normal
+1465|Installation was not performed because driver backup failed.
+1466|Exporting drivers to the USB kit…
+1467|Drivers and game components.
+1468|Choose a refresh rate offered by the driver.
+1469|Version could not be compared
+1470|Release metadata exceeds the size limit.
+1471|Release metadata limit exceeded.
+1472|Release metadata too large.
+1473|Ranking page too large.
+1474|TCP receive settings
+1475|TCP receive-window autotuning verified as Normal. This affects all TCP connections, not signal strength or your internet plan's speed limit. Restore returns to the previous level.
+1476|Could not verify applied TCP settings; backup kept.
+1477|Unsupported TCP autotuning level.
+1478|TCP autotuning is already Normal. No unnecessary change was made.
+1479|TCP profile
+1480|TCP profile restored
+1481|TCP profile ended. Later changes were preserved.
+1482|TCP backup could not be read.
+1483|Incomplete CSV field.
+1484|Scan
+1485|Target not present in the scan rejected.
+1486|One-click FPS profile
+1487|Duplicate cleanup rule.
+1488|Core hardware and Windows updates. Choose additional apps yourself.
+1489|Cleanup rules not found.
+1490|Cleanup rules could not be read.
+1491|Cleanup company
+1492|Preferred refresh rate
+1493|Play the test sound and verify the result yourself.
+1497|Invalid Thunderbird USB record.
+1498|Community package source/hash/signature requirements could not be verified.
+1499|Touchpad / pointing device
+1500|Touchpad, camera, battery, function keys and vendor components
+1501|Touchpad, camera, audio, battery and vendor component checks.
+1502|All devices and driver details
+1503|USB / vendor signature
+1504|USB installer integrity could not be verified.
+1505|USB installer publisher did not match.
+1506|Invalid USB installation list.
+1507|USB package list could not be verified.
+1508|USB package does not match the official vendor release.
+1509|USB package lacks vendor metadata. Recreate the USB kit with the latest FromZero.
+1510|USB driver folder not selected.
+1511|USB driver:
+1512|USB vendor fields missing.
+1513|USB vendor metadata could not be verified.
+1514|Install matching USB drivers
+1515|Application
+1516|App is open, administrator permission is required or an official tool is needed.
+1517|Application error
+1518|App download source could not be verified.
+1519|Managed by the app
+1520|App store
+1521|App release source rejected.
+1522|Applied at:
+1523|Invalid app path.
+1524|App location changed. Create a new plan.
+1525|Applied settings
+1527|Invalid VLC release record.
+1528|VLC release metadata too large.
+1529|No VLC offline package.
+1530|VALORANT quality group not recognized. Save graphics preferences in the game first; the file schema may have changed.
+1532|Visual C++ v14 version verified:
+1533|Visual Studio Code (all users)
+1534|Starts WLAN AutoConfig without changing its startup type.
+1535|Wi-Fi / Ethernet transfer optimization
+1536|Wi-Fi service is not running.
+1537|Start Wi-Fi service
+1538|Check Wi-Fi. Repair the issue.
+1539|Managed through Windows / vendor tool
+1540|Checks TCP receive-window autotuning. If restricted, it can be set to Normal and the original level restored.
+1541|Windows Update + official model-specific support
+1542|Windows Update driver
+1543|Windows High Performance plan (if available)
+1544|Windows animation preference could not be applied.
+1545|Windows returned an empty result.
+1546|Windows could not verify a trusted digital signature (0x
+1547|Downloading and installing Windows security / reliability updates…
+1548|Windows optional feature
+1549|Windows installation result missing.
+1550|Reduce Windows window animations
+1551|Windows permission request canceled.
+1552|Windows will request administrator permission. Continue?
+1553|Check in Windows
+1554|Downloading and installing Windows-offered drivers for this hardware…
+1555|Windows, NVIDIA 3D preferences and display refresh rate. Review, apply and restore changes.
+1556|Resets the Winsock catalogue. A restart is required; VPN/network software may be affected. Static IP and DNS servers are not changed.
+1557|Reset Winsock
+1558|Winsock will be reset. A restart is required and VPN/network software may be affected. Continue?
+1559|Only driver-offered rates at the current resolution can be selected.
+1560|Requests a new lease only for the selected DHCP adapter. Static IP settings are preserved.
+1561|Streaming
+1562|Streaming and content
+1563|Software development
+1564|Backup could not be verified.
+1565|No third-party drivers to back up. Windows inbox drivers are not included in this export.
+1566|Enter a new-format 46-character crosshair code beginning with CS. Legacy CSGO codes are not supported in this preview.
+1567|A new terminal / sign-in session or app-path check is required.
+1568|Local network active; download sources will be checked separately.
+1569|Local connection
+1570|Local game record / folder
+1571|Local driver folder exceeds the size limit.
+1572|Local driver folder not found.
+1573|Local driver package
+1574|Elevated process could not start.
+1575|Duplicate graphics key:
+1577|A user's Steam path cannot be used in an administrator rule.
+1578|Administrator permission required
+1579|Redirect address missing.
+1580|High quality
+1581|High performance
+1585|enabled again
+1586|signature not verified
+1587|signed
+1588|disabled
+1596|Runtime source could not be verified.
+1597|Offline package
+1598|Unknown offline vendor recipe.
+1599|Too many download redirects.
+1600|Multipart packages are not supported.
+1601|Measurements, memory usage and maintenance
+1602|Preflight checks passed.
+1603|In foreground
+1604|Clears the cache without changing DNS servers.
+1605|Find the fault first, then apply the appropriate repair.
+1606|Restart the PC first. Completed steps are preserved.
+1607|Restore this file's active graphics profile first.
+1608|Restore the active display profile first.
+1609|Restore the active performance profile first.
+1610|Review a fresh change plan first.
+1611|Close first:
+1612|Accept the installation plan first.
+1613|Restore the current game session first.
+1614|End the game session first.
+1615|Close the game first. Graphics settings cannot be changed while it is running.
+1616|Minimize the window first
+1617|Restore the previous transfer profile first.
+1618|The previous DNS setting is already active. Profile ended.
+1619|Previous DNS could not be verified; backup kept.
+1620|Restore previous settings
+1621|Previous display refresh rate restored.
+1622|Previous power plan could not be verified. Backup kept.
+1623|Previous power plan restored and verified.
+1624|A previous power backup exists. Restore it in Recovery or create a new preparation plan.
+1625|Previous operation interrupted; installation records will be checked before continuing.
+1626|Previous plan upgraded for new features. Review the new steps and approve again.
+1627|Previous static / automatic DNS preferences restored.
+1628|Previous preview settings copied. Old backups were not deleted.
+1629|The previous preview app is still open. Finish and close it before opening FromZero.
+1630|Recommended network repair
+1631|Apply recommended repair
+1632|Vendor
+1633|Invalid vendor tool record.
+1634|Vendor tools and offline installation
+1635|Vendor repository changed.
+1636|Non-vendor download address rejected.
+1637|Vendor catalogue not found.
+1638|Invalid vendor record.
+1639|Vendor source rate limit/access block:
+1640|Vendor license
+1641|Vendor page too large.
+1642|Vendor release record not found:
+1643|Could not read vendor version number.
+1644|Vendor release redirect rejected.
+1645|Verifying the vendor's SHA-256 record…
+1646|Verifying the vendor's digital signature…
+1647|The vendor's current installer link was not found on the page. Use the official page or try again later.
+1648|Could not read the vendor's target version.
+1649|Invalid vendor stable-release tag.
+1650|No matching x64 installer on the vendor's stable-release page.
+1651|Could not read the vendor's stable-release redirect.
+1652|Productivity
+1653|Third-party drivers backed up:
+1654|First launch and FPS verification
+1655|File not found for signature check.
+1656|Invalid signature certificate size.
+1657|Signature certificate empty.
+1658|Signature certificate not found.
+1659|Signature publisher did not match the expected vendor:
+1660|Could not read signature publisher.
+1661|vcredist.msi not found in the signed Microsoft archive.
+1662|Download and install
+1663|Downloaded file is not the expected Windows installer format.
+1664|Downloaded file is empty or incomplete.
+1665|Downloaded package changed since its last verification. Download again.
+1666|Download domain changed; review the new package manually.
+1667|Download redirected outside official HTTPS domains.
+1668|Download result could not be read.
+1669|Download incomplete.
+1670|Internet / HTTPS
+1671|Process could not start.
+1672|Process changed; skipped
+1673|Operation stopped or timed out.
+1674|Operation stopped at a safe step boundary.
+1675|Process exited / inaccessible; skipped
+1676|Operation result could not be read.
+1677|Process exited without producing a result.
+1678|· This PC offers no High Performance plan; the current plan was preserved.
+1679|· Windows High Performance power plan active.
+1680|· Windows High Performance power plan already active.
+1681|· Windows client-area animations disabled.
+1682|· Windows window animations off
+1683|· Windows: High Performance if available
+1684|✓ Gateway response:
+1685|✓ DNS resolution successful (microsoft.com).
+1686|✓ External connection: microsoft.com:443 is reachable.
+1687|✓ Active network connection found.

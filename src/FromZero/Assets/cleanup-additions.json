@@ -1,0 +1,482 @@
+[
+  {
+    "id": "fz-teamspeak-render",
+    "group": "apps",
+    "name": "TeamSpeak 6 graphics and code cache",
+    "nameTr": "TeamSpeak 6 görüntü ve kod önbelleği",
+    "description": "TeamSpeak 6 graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "TeamSpeak 6 görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\TeamSpeak\\GPUCache",
+      "%APPDATA%\\TeamSpeak\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "TeamSpeak.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-parsec-render",
+    "group": "apps",
+    "name": "Parsec graphics and code cache",
+    "nameTr": "Parsec görüntü ve kod önbelleği",
+    "description": "Parsec graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "Parsec görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\Parsec\\GPUCache",
+      "%APPDATA%\\Parsec\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "parsecd.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-plex-render",
+    "group": "apps",
+    "name": "Plex graphics and code cache",
+    "nameTr": "Plex görüntü ve kod önbelleği",
+    "description": "Plex graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "Plex görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%LOCALAPPDATA%\\Plex\\GPUCache",
+      "%LOCALAPPDATA%\\Plex\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "Plex.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-balena-render",
+    "group": "apps",
+    "name": "balenaEtcher graphics and code cache",
+    "nameTr": "balenaEtcher görüntü ve kod önbelleği",
+    "description": "balenaEtcher graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "balenaEtcher görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\balena-etcher\\GPUCache",
+      "%APPDATA%\\balena-etcher\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "balenaEtcher.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-miro-render",
+    "group": "apps",
+    "name": "Miro graphics and code cache",
+    "nameTr": "Miro görüntü ve kod önbelleği",
+    "description": "Miro graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "Miro görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\Miro\\GPUCache",
+      "%APPDATA%\\Miro\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "Miro.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-linear-render",
+    "group": "apps",
+    "name": "Linear graphics and code cache",
+    "nameTr": "Linear görüntü ve kod önbelleği",
+    "description": "Linear graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "Linear görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\Linear\\GPUCache",
+      "%APPDATA%\\Linear\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "Linear.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-figma-render",
+    "group": "apps",
+    "name": "Figma graphics and code cache",
+    "nameTr": "Figma görüntü ve kod önbelleği",
+    "description": "Figma graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "Figma görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\Figma\\GPUCache",
+      "%APPDATA%\\Figma\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "Figma.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-beekeeper-render",
+    "group": "apps",
+    "name": "Beekeeper Studio graphics and code cache",
+    "nameTr": "Beekeeper Studio görüntü ve kod önbelleği",
+    "description": "Beekeeper Studio graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "Beekeeper Studio görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\beekeeper-studio\\GPUCache",
+      "%APPDATA%\\beekeeper-studio\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "beekeeper-studio.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-marktext-render",
+    "group": "apps",
+    "name": "MarkText graphics and code cache",
+    "nameTr": "MarkText görüntü ve kod önbelleği",
+    "description": "MarkText graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "MarkText görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\marktext\\GPUCache",
+      "%APPDATA%\\marktext\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "MarkText.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-tuta-render",
+    "group": "apps",
+    "name": "Tuta Desktop graphics and code cache",
+    "nameTr": "Tuta Desktop görüntü ve kod önbelleği",
+    "description": "Tuta Desktop graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "Tuta Desktop görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\tutanota-desktop\\GPUCache",
+      "%APPDATA%\\tutanota-desktop\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "Tuta Mail.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-standard-notes-render",
+    "group": "apps",
+    "name": "Standard Notes graphics and code cache",
+    "nameTr": "Standard Notes görüntü ve kod önbelleği",
+    "description": "Standard Notes graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "Standard Notes görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\Standard Notes\\GPUCache",
+      "%APPDATA%\\Standard Notes\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "Standard Notes.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-stremio-render",
+    "group": "apps",
+    "name": "Stremio graphics and code cache",
+    "nameTr": "Stremio görüntü ve kod önbelleği",
+    "description": "Stremio graphics and code cache. Files older than 168 hours.",
+    "descriptionTr": "Stremio görüntü ve kod önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%LOCALAPPDATA%\\Smart Code ltd\\Stremio\\GPUCache",
+      "%LOCALAPPDATA%\\Smart Code ltd\\Stremio\\Code Cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "stremio.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-godot-cache",
+    "group": "games",
+    "name": "Godot editor cache",
+    "nameTr": "Godot düzenleyicisi önbelleği",
+    "description": "Godot editor cache. Files older than 168 hours.",
+    "descriptionTr": "Godot düzenleyicisi önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%LOCALAPPDATA%\\Godot\\shader_cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "Godot.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-playnite-cache",
+    "group": "games",
+    "name": "Playnite cache",
+    "nameTr": "Playnite önbelleği",
+    "description": "Playnite cache. Files older than 168 hours.",
+    "descriptionTr": "Playnite önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\Playnite\\cache\\web"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "Playnite.DesktopApp.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-modrinth-cache",
+    "group": "games",
+    "name": "Modrinth App cache",
+    "nameTr": "Modrinth App önbelleği",
+    "description": "Modrinth App cache. Files older than 168 hours.",
+    "descriptionTr": "Modrinth App önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\ModrinthApp\\GPUCache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "Modrinth App.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-thunderstore-cache",
+    "group": "games",
+    "name": "Thunderstore Mod Manager cache",
+    "nameTr": "Thunderstore Mod Manager önbelleği",
+    "description": "Thunderstore Mod Manager cache. Files older than 168 hours.",
+    "descriptionTr": "Thunderstore Mod Manager önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\Thunderstore Mod Manager\\GPUCache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "Thunderstore Mod Manager.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-prism-cache",
+    "group": "games",
+    "name": "Prism Launcher archived logs",
+    "nameTr": "Prism Launcher eski günlükleri",
+    "description": "Prism Launcher archived logs. Files older than 168 hours.",
+    "descriptionTr": "Prism Launcher eski günlükleri. 168 saatten eski dosyalar.",
+    "paths": [
+      "%APPDATA%\\PrismLauncher\\logs"
+    ],
+    "mode": "files",
+    "include": [
+      "*.log.gz"
+    ],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "prismlauncher.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-ytdlp-cache",
+    "group": "media",
+    "name": "yt-dlp extractor cache",
+    "nameTr": "yt-dlp çözümleyici önbelleği",
+    "description": "yt-dlp extractor cache. Files older than 168 hours.",
+    "descriptionTr": "yt-dlp çözümleyici önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%USERPROFILE%\\.cache\\yt-dlp"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "yt-dlp.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-huggingface-xet-cache",
+    "group": "ai",
+    "name": "Hugging Face Xet transfer cache",
+    "nameTr": "Hugging Face Xet aktarım önbelleği",
+    "description": "Hugging Face Xet transfer cache. Files older than 336 hours.",
+    "descriptionTr": "Hugging Face Xet aktarım önbelleği. 336 saatten eski dosyalar.",
+    "paths": [
+      "%USERPROFILE%\\.cache\\huggingface\\xet\\*\\chunk_cache",
+      "%USERPROFILE%\\.cache\\huggingface\\xet\\*\\shard_cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 336,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "hf.exe",
+      "python.exe",
+      "pythonw.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-node-compile-cache",
+    "group": "dev",
+    "name": "Node.js compile cache",
+    "nameTr": "Node.js derleme önbelleği",
+    "description": "Node.js compile cache. Files older than 168 hours.",
+    "descriptionTr": "Node.js derleme önbelleği. 168 saatten eski dosyalar.",
+    "paths": [
+      "%TEMP%\\node-compile-cache"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 168,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "node.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-torch-inductor-cache",
+    "group": "ai",
+    "name": "PyTorch Inductor compiler cache",
+    "nameTr": "PyTorch Inductor derleyici önbelleği",
+    "description": "PyTorch Inductor compiler cache. Files older than 336 hours.",
+    "descriptionTr": "PyTorch Inductor derleyici önbelleği. 336 saatten eski dosyalar.",
+    "paths": [
+      "%TEMP%\\torchinductor_*"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 336,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "python.exe",
+      "pythonw.exe"
+    ],
+    "verified": false
+  },
+  {
+    "id": "fz-rustup-downloads",
+    "group": "dev",
+    "name": "Rustup cached downloads",
+    "nameTr": "Rustup indirme önbelleği",
+    "description": "Rustup cached downloads. Files older than 336 hours.",
+    "descriptionTr": "Rustup indirme önbelleği. 336 saatten eski dosyalar.",
+    "paths": [
+      "%USERPROFILE%\\.rustup\\downloads"
+    ],
+    "mode": "contents",
+    "include": [],
+    "exclude": [],
+    "minAgeHours": 336,
+    "risk": "review",
+    "admin": false,
+    "closeApps": [
+      "rustup.exe"
+    ],
+    "verified": false
+  }
+]

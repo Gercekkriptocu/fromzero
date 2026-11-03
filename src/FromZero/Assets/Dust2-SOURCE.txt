@@ -1,0 +1,15 @@
+Dust2 / double doors — Counter-Strike 2
+Copyright Valve Corporation. All rights reserved.
+
+Original screenshot referenced by Valve's official CS2 introduction page:
+https://www.counter-strike.net/cs2
+https://cdn.akamai.steamstatic.com/apps/csgo/images/csgo_react/cs2/maps/dust2_double_doors_s2.jpg
+
+Retrieved: 2026-10-27. The original JPEG is bundled unchanged.
+FromZero displays an aspect-preserving crop as the crosshair preview background.
+FromZero is not affiliated with or endorsed by Valve, FACEIT, or crosshair.club.
+
+Team and affiliation labels checked 2026-11-04 against ProSettings player profiles and the Valve November 2 global roster snapshot.
+https://prosettings.net/lists/cs2/
+https://github.com/ValveSoftware/counter-strike_regional_standings/blob/main/live/2026/standings_global_2026_11_02.md
+https://www.hltv.org/player/22863/kad1m

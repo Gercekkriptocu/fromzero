@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><DefineConstants>$(DefineConstants);CHECKS</DefineConstants></PropertyGroup>
+ <ItemGroup>
+  <Compile Include="../../src/FromZero/Models.cs" Link="Models.cs"/>
+  <Compile Include="../../src/FromZero/Core/*.cs" Link="Core/%(Filename)%(Extension)"/>
+  <Compile Include="../../src/FromZero/Services/WindowsServices.cs" Link="WindowsServices.cs"/>
+  <Compile Include="../../src/FromZero/Services/GameService.cs" Link="GameService.cs"/>
+  <Compile Include="../../src/FromZero/Services/AppDownloads.cs" Link="AppDownloads.cs"/>
+  <Compile Include="../../src/FromZero/Services/InstalledSoftware.cs" Link="InstalledSoftware.cs"/>
+  <Compile Include="../../src/FromZero/Services/AppUninstaller.cs" Link="AppUninstaller.cs"/>
+  <EmbeddedResource Include="../../src/FromZero/Assets/locale-en.json" LogicalName="FromZero.locale-en.json"/>
+  <Compile Include="../../src/FromZero/Services/Authenticode.cs" Link="Authenticode.cs"/>
+  <Compile Include="../../src/FromZero/Services/NetworkRepair.cs" Link="NetworkRepair.cs"/>
+  <Compile Include="../../src/FromZero/Services/NetworkQuality.cs" Link="NetworkQuality.cs"/>
+  <Compile Include="../../src/FromZero/Services/OfflineDriverCatalog.cs" Link="OfflineDriverCatalog.cs"/>
+  <Compile Include="../../src/FromZero/Services/CrosshairArchive.cs" Link="CrosshairArchive.cs"/>
+  <Compile Include="../../src/FromZero/Services/TcpOptimizer.cs" Link="TcpOptimizer.cs"/>
+  <Compile Include="../../src/FromZero/Services/NvidiaSettings.cs" Link="NvidiaSettings.cs"/>
+  <Compile Include="../../src/FromZero/Services/PerformanceProfile.cs" Link="PerformanceProfile.cs"/>
+  <Compile Include="../../src/FromZero/Services/MemoryOptimizer.cs" Link="MemoryOptimizer.cs"/>
+  <Compile Include="../../src/FromZero/Services/DnsService.cs" Link="DnsService.cs"/>
+  <Compile Include="../../src/FromZero/Services/DisplaySettings.cs" Link="DisplaySettings.cs"/>
+  <Compile Include="../../src/FromZero/Services/Cs2LaunchOptions.cs" Link="Cs2LaunchOptions.cs"/>
+  <Compile Include="../../src/FromZero/Services/CrosshairCatalog.cs" Link="CrosshairCatalog.cs"/>
+  <Compile Include="../../src/FromZero/Services/FaceitCatalog.cs" Link="FaceitCatalog.cs"/>
+  <Compile Include="../../src/FromZero/Services/FaceitCrosshairs.cs" Link="FaceitCrosshairs.cs"/>
+  <EmbeddedResource Include="../../src/FromZero/Assets/valorant-crosshairs.json" LogicalName="FromZero.valorant-crosshairs.json"/>
+  <EmbeddedResource Include="../../src/FromZero/Assets/cleanup-additions.json" LogicalName="FromZero.cleanup-additions.json"/>
+  <EmbeddedResource Include="../../src/FromZero/Assets/faceit-crosshairs.json" LogicalName="FromZero.faceit-crosshairs.json"/>
+  <EmbeddedResource Include="../../src/FromZero/Assets/crosshairs.json" LogicalName="FromZero.crosshairs.json"/>
+  <Compile Include="../../src/FromZero/Services/GameComponents.cs" Link="GameComponents.cs"/>
+  <Compile Include="../../src/FromZero/Services/ReclaimCleaner.cs" Link="ReclaimCleaner.cs"/>
+  <Compile Include="../../src/FromZero/Services/ReclaimFileDelete.cs" Link="ReclaimFileDelete.cs"/>
+  <Compile Include="../../src/FromZero/Services/RuntimeCatalog.cs" Link="RuntimeCatalog.cs"/>
+  <Compile Include="../../src/FromZero/Services/WindowsUpdateCatalog.cs" Link="WindowsUpdateCatalog.cs"/>
+  <Compile Include="../../src/FromZero/Services/GameGraphicsService.cs" Link="GameGraphicsService.cs"/>
+  <Compile Include="../../src/FromZero/Services/ApplicationCatalog.cs" Link="ApplicationCatalog.cs"/>
+  <EmbeddedResource Include="../../src/FromZero/Assets/producer-snapshots.json" LogicalName="FromZero.producer-snapshots.json"/>
+  <Compile Include="../../src/FromZero/Services/ApplicationSources.cs" Link="ApplicationSources.cs"/>
+  <Compile Include="../../src/FromZero/Services/ReleaseFeedCache.cs" Link="ReleaseFeedCache.cs"/>
+  <Compile Include="../../src/FromZero/Services/CommunityPackageCatalog.cs" Link="CommunityPackageCatalog.cs"/>
+  <EmbeddedResource Include="../../src/FromZero/Assets/application-packages.json" LogicalName="FromZero.application-packages.json"/>
+  <EmbeddedResource Include="../../src/FromZero/Assets/faceit-top10.json" LogicalName="FromZero.faceit-top10.json"/>
+  <Compile Include="../../src/FromZero/Services/OemSources.cs" Link="OemSources.cs"/>
+  <Compile Include="../../src/FromZero/Services/PreparationPackages.cs" Link="PreparationPackages.cs"/>
+  <Compile Include="../../src/FromZero/Services/PreparationWindows.cs" Link="PreparationWindows.cs"/>
+  <Compile Include="../../src/FromZero/Services/PreparationBackend.cs" Link="PreparationBackend.cs"/>
+  <Compile Include="../../src/FromZero/Services/PreparationWorker.cs" Link="PreparationWorker.cs"/>
+  <Compile Include="../../src/FromZero/Services/PreparationDiagnostics.cs" Link="PreparationDiagnostics.cs"/>
+  <Compile Include="../../src/FromZero/Services/PreparationGameReadiness.cs" Link="PreparationGameReadiness.cs"/>
+  <Compile Include="../../src/FromZero/Services/PreparationRecovery.cs" Link="PreparationRecovery.cs"/>
+  <EmbeddedResource Include="../../src/FromZero/Assets/manufacturers.txt" LogicalName="FromZero.manufacturers.txt"/>
+  <EmbeddedResource Include="../../src/FromZero/Assets/manufacturer-tools.txt" LogicalName="FromZero.manufacturer-tools.txt"/>
+  <EmbeddedResource Include="../../src/FromZero/ThirdParty/Reclaim/targets.json" LogicalName="FromZero.Reclaim.targets.json" />
+  <Compile Include="../../src/FromZero/BrandMigration.cs" Link="BrandMigration.cs"/>
+ </ItemGroup>
+</Project>
+
+

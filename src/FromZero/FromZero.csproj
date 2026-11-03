@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>FromZero</AssemblyName>
+    <RootNamespace>FromZero</RootNamespace>
+    <Version>0.18.0</Version>
+    <ApplicationIcon>Assets\FromZero.ico</ApplicationIcon>
+    <Description>Windows kurtarma ve bakım istasyonu</Description>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(FromZeroReleasePublicKey)' != ''"><EmbeddedResource Include="$(FromZeroReleasePublicKey)" LogicalName="FromZero.release-public-key.pem" /></ItemGroup>
+  <ItemGroup><Resource Include="Assets\Fonts\PixelifySans.ttf" /></ItemGroup>
+  <ItemGroup><Resource Include="Assets\FromZero.ico"/><Resource Include="Assets\FromZero.png"/><EmbeddedResource Include="Assets\locale-en.json" LogicalName="FromZero.locale-en.json"/></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="Assets\manufacturers.txt" LogicalName="FromZero.manufacturers.txt" /><EmbeddedResource Include="Assets\manufacturer-tools.txt" LogicalName="FromZero.manufacturer-tools.txt" /></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="Assets\cleanup-additions.json" LogicalName="FromZero.cleanup-additions.json" /></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="ThirdParty\Reclaim\targets.json" LogicalName="FromZero.Reclaim.targets.json" /></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="Assets\crosshairs.json" LogicalName="FromZero.crosshairs.json" /></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="Assets\producer-snapshots.json" LogicalName="FromZero.producer-snapshots.json" /></ItemGroup>
+  <ItemGroup><Resource Include="Assets\ascent-mid.jpg"/><EmbeddedResource Include="Assets\valorant-crosshairs.json" LogicalName="FromZero.valorant-crosshairs.json"/></ItemGroup>
+  <ItemGroup><Resource Include="Assets\dust2-double-doors.jpg" /><EmbeddedResource Include="Assets\faceit-crosshairs.json" LogicalName="FromZero.faceit-crosshairs.json" /></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="Assets\application-packages.json" LogicalName="FromZero.application-packages.json" /><EmbeddedResource Include="Assets\faceit-top10.json" LogicalName="FromZero.faceit-top10.json" /></ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="QRCoder" Version="1.8.0" />
+  </ItemGroup>
+
+</Project>
+
+
+
+
+

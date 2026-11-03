@@ -1,0 +1,352 @@
+[
+  {
+    "Id": "tenz",
+    "Name": "TenZ",
+    "Code": "0;s;1;P;c;5;o;0;f;0;0l;2;0v;2;0g;1;0o;1;0a;1;0f;0;1b;0",
+    "Team": "T1",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "zekken",
+    "Name": "Zekken",
+    "Code": "0;s;1;P;c;1;t;2;o;1;d;1;0b;0;1b;0;S;b;1;c;8;s;0.823",
+    "Team": "MIBR",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "f0rsaken",
+    "Name": "f0rsakeN",
+    "Code": "0;p;0;c;1;s;1;P;h;0;f;0;s;0;0l;3;0v;3;0g;1;0o;0;0a;1;0f;0;1b;0;A;o;1;d;1;0b;0;1b;0;S;d;0",
+    "Team": "Paper Rex",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "demon1",
+    "Name": "Demon1",
+    "Code": "0;p;0;s;1;P;o;1;f;0;0t;1;0l;3;0o;2;0a;1;0f;0;1b;0;A;o;1;0t;1;0l;3;0o;2;0a;1;0f;0;1b;0;S;c;1;o;1",
+    "Team": "Team Envy",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "something",
+    "Name": "something",
+    "Code": "0;s;1;P;h;0;0l;2;0o;1;0a;1;0f;0;1b;0;S;c;0;s;0.713;o;1",
+    "Team": "Paper Rex",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "aspas",
+    "Name": "aspas",
+    "Code": "0;P;h;0;0l;4;0o;0;0a;1;0f;0;1b;0",
+    "Team": "MIBR",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "jinggg",
+    "Name": "Jinggg",
+    "Code": "0;s;1;P;c;5;o;1;f;0;m;1;0t;3;0l;0;0v;1;0g;1;0o;0;0a;1;0f;0;1t;1;1l;4;1g;1;1o;0;1a;1;1m;0;1f;0;S;c;5;o;1",
+    "Team": "Free Agent",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "zmjjkk",
+    "Name": "ZmjjKK",
+    "Code": "0;P;h;0;d;1;f;0;0l;2;0v;2;0g;1;0o;1;0f;0;1b;0",
+    "Team": "Edward Gaming",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "t3xture",
+    "Name": "t3xture",
+    "Code": "0;s;1;P;o;0;f;0;0l;3;0o;2;0a;1;0f;0;1b;0;S;o;0",
+    "Team": "Gen.G",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "less",
+    "Name": "Less",
+    "Code": "0;s;1;P;o;1;d;1;f;0;0l;2;0o;0;0a;1;0f;0;1b;0",
+    "Team": "KRÜ Esports",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "yay",
+    "Name": "yay",
+    "Code": "0;s;1;P;o;1;d;1;z;1;0b;0;1b;0;S;o;1",
+    "Team": "Free Agent",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "johnqt",
+    "Name": "johnqt",
+    "Code": "0;p;0;s;1;P;c;5;h;0;0l;4;0o;1;0a;1;0f;0;1b;0;A;o;1;d;1;0b;0;1b;0",
+    "Team": "Sentinels",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "alfajer",
+    "Name": "Alfajer",
+    "Code": "0;p;0;s;1;P;h;0;f;0;0l;2;0o;2;0a;1;0f;0;1b;0;A;c;5;o;1;d;1;0b;0;1b;0;S;s;0.628;o;1",
+    "Team": "Fnatic",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "sacy",
+    "Name": "Sacy",
+    "Code": "0;P;c;5;o;1;0t;1;0l;4;0o;1;0a;1;0f;0;1t;3;1o;2;1a;1;1m;0;1f;0",
+    "Team": "MIBR",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "benjyfishy",
+    "Name": "benjyfishy",
+    "Code": "0;c;1;s;1;P;c;7;h;0;f;0;m;1;0l;2;0o;1;0a;1;0f;0;1b;0;S;s;1.001",
+    "Team": "Team Heretics",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "qck",
+    "Name": "qck",
+    "Code": "0;P;c;5;o;1;d;1;z;1;f;0;0b;0;1b;0",
+    "Team": "2GAME ESPORTS",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "meteor",
+    "Name": "Meteor",
+    "Code": "0;s;1;P;o;1;d;1;f;0;0b;0;1b;0;S;o;1",
+    "Team": "T1",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "trent",
+    "Name": "trent",
+    "Code": "0;P;o;1;0l;3;0o;2;0a;1;0f;0;1b;0",
+    "Team": "G2 Esports",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "mindfreak",
+    "Name": "mindfreak",
+    "Code": "0;P;c;1;o;1;0l;4;0o;0;0a;1;0f;0;1b;0",
+    "Team": "Free Agent",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "suygetsu",
+    "Name": "Suygetsu",
+    "Code": "0;P;o;1;d;1;0b;0;1b;0",
+    "Team": "Karmine Corp",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "xdll",
+    "Name": "Xdll",
+    "Code": "0;P;h;0;0t;1;0l;2;0o;1;0a;1;0f;0;1b;0",
+    "Team": "ZETA DIVISION",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "miniboo",
+    "Name": "MiniBoo",
+    "Code": "0;p;0;s;1;P;c;7;o;1;f;0;0t;1;0l;2;0o;2;0a;1;0f;0;1b;0;A;o;1;d;1;z;3;0b;0;1b;0;S;c;1;o;1",
+    "Team": "Team Liquid",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "mwzera",
+    "Name": "mwzera",
+    "Code": "0;P;c;4;h;0;f;0;0l;2;0o;2;0a;1;0f;0;1b;0",
+    "Team": "KRÜ Esports",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "cryocells",
+    "Name": "Cryocells",
+    "Code": "0;s;1;P;c;5;o;1;0l;3;0o;0;0a;1;0f;0;1b;0",
+    "Team": "100 Thieves",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "chronicle",
+    "Name": "Chronicle",
+    "Code": "0;P;h;0;f;0;0t;1;0l;4;0o;0;0a;1;0f;0;1b;0",
+    "Team": "Team Vitality",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "marteen",
+    "Name": "marteen",
+    "Code": "0;s;1;P;c;5;o;1;0l;3;0o;0;0a;1;0f;0;1b;0",
+    "Team": "Gentle Mates",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "bcj",
+    "Name": "BCJ",
+    "Code": "0;P;c;5;h;0;0l;3;0o;1;0a;1;0f;0;1b;0",
+    "Team": "Free Agent",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "derke",
+    "Name": "Derke",
+    "Code": "0;P;o;1;0t;1;0l;4;0o;2;0a;1;0f;0;1t;0;1l;1;1o;0;1a;1;1m;0;1f;0",
+    "Team": "Team Vitality",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "pancada",
+    "Name": "pANcada",
+    "Code": "0;c;1;s;1;P;c;4;h;0;f;0;s;0;0l;3;0o;2;0a;1;0f;0;1b;0",
+    "Team": "Free Agent",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "c0m",
+    "Name": "C0M",
+    "Code": "0;p;0;s;1;P;c;5;o;1;f;0;0t;1;0l;3;0o;2;0a;1;0f;0;1b;0;A;c;5;o;1;0t;1;0l;3;0o;2;0a;1;0f;0;1b;0;S;s;0.823;o;1",
+    "Team": "FURIA",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "nozwerr",
+    "Name": "nzr",
+    "Code": "0;P;c;5;h;0;0l;3;0o;1;0a;1;0f;0;1b;0",
+    "Team": "MIBR",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "tarik",
+    "Name": "tarik",
+    "Code": "0;s;1;P;o;1;d;1;f;0;0b;0;1b;0;S;d;0",
+    "Team": "Sentinels",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "tuyz",
+    "Name": "tuyz",
+    "Code": "0;s;1;P;h;0;f;0;m;1;0l;3;0o;2;0a;1;0f;0;1b;0",
+    "Team": "Free Agent",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "cauanzin",
+    "Name": "cauanzin",
+    "Code": "0;s;1;P;h;0;m;1;0l;3;0o;2;0a;1;0f;0;1b;0;S;c;0;o;1",
+    "Team": "Free Agent",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "zander",
+    "Name": "Zander",
+    "Code": "0;P;h;0;0l;5;0o;0;0a;1;0f;0;1b;0",
+    "Team": "Shopify Rebellion Black",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "sugarz3ro",
+    "Name": "SugarZ3ro",
+    "Code": "0;P;c;1;o;1;0t;1;0l;2;0o;2;0a;1;0f;0;1b;0",
+    "Team": "ZETA DIVISION",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "smoggy",
+    "Name": "Smoggy",
+    "Code": "0;p;0;s;1;P;o;0.3;f;0;0l;3;0o;2;0a;1;0f;0;1b;0;A;o;0.3;d;1;0b;0;1b;0",
+    "Team": "Edward Gaming",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "nagzet",
+    "Name": "NagZet",
+    "Code": "0;P;c;1;h;0;0l;5;0o;0;0a;1;0f;0;1b;0",
+    "Team": "KRÜ Spark",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "nats",
+    "Name": "nAts",
+    "Code": "0;P;c;1;o;1;0t;1;0l;2;0o;2;0a;1;0f;0;1b;0",
+    "Team": "Team Liquid",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "derrek",
+    "Name": "derrek",
+    "Code": "0;P;c;1;o;1;0t;1;0l;3;0a;1;0f;0;1b;0",
+    "Team": "QoR",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "laz",
+    "Name": "Laz",
+    "Code": "0;p;0;c;1;s;1;P;o;1;f;0;0t;1;0l;3;0a;1;0f;0;1b;0;A;c;7;h;0;d;1;z;3;m;1;0t;3;0l;2;0o;0;0a;0.5;0f;0;1b;0;S;s;0.5;o;1",
+    "Team": "ZETA DIVISION",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "ethos",
+    "Name": "ethos",
+    "Code": "0;P;c;5;h;0;0t;6;0l;1;0a;1;0f;0;1b;0",
+    "Team": "Content Creator",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "zyppan",
+    "Name": "Zyppan",
+    "Code": "0;P;h;0;0l;4;0o;2;0a;1;0f;0;1b;0",
+    "Team": "CGN Esports",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "dgzin",
+    "Name": "dgzin",
+    "Code": "0;p;0;s;1;P;c;4;o;0.05;f;0;0l;3;0v;3;0g;1;0o;1;0a;1;0f;0;1b;0;A;o;1;d;1;0b;0;1b;0;S;s;1.81;o;1",
+    "Team": "Evil Geniuses",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "buzz",
+    "Name": "BuZz",
+    "Code": "0;p;0;s;1;P;h;0;f;0;0l;2;0o;2;0a;1;0f;0;1b;0;A;o;1;d;1;0b;0;1b;0",
+    "Team": "T1",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "keznit",
+    "Name": "keznit",
+    "Code": "0;p;0;c;1;P;c;5;h;0;0l;2;0o;1;0a;1;0f;0;1b;0",
+    "Team": "Team Envy",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "babybay",
+    "Name": "babybay",
+    "Code": "0;P;c;5;h;0;0t;1;0l;3;0a;1;0f;0;1t;0;1l;0;1o;0;1a;0;1m;0;1f;0",
+    "Team": "G2 Esports",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "d4v41",
+    "Name": "d4v41",
+    "Code": "0;P;c;8;o;1;d;1;b;1;z;1;0t;1;0l;1;0o;0;0a;1;0f;0;1b;0",
+    "Team": "Free Agent",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "sayf",
+    "Name": "Sayf",
+    "Code": "0;P;c;7;h;0;d;1;z;3;0b;0;1b;0",
+    "Team": "Free Agent",
+    "TeamChecked": "2026-11-04"
+  },
+  {
+    "Id": "shyy",
+    "Name": "Shyy",
+    "Code": "0;P;c;8;u;000000FF;h;0;b;1;0l;4;0o;0;0a;1;0f;0;1b;0",
+    "Team": "FURIA",
+    "TeamChecked": "2026-11-04"
+  }
+]

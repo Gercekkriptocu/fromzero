@@ -1,0 +1,60 @@
+# ID|Name|Official page|Category|Signed download recipe or empty|Hardware terms|Compatibility / distribution
+nvidia-app|NVIDIA App|https://www.nvidia.com/en-us/software/nvidia-app/|Anakart / GPU|nvidia|NVIDIA,VEN_10DE|Desteklenen NVIDIA ekran kartları için sürücü ve uygulama yönetimi.
+amd-adrenalin|AMD Auto-Detect / Adrenalin|https://www.amd.com/en/support/download/drivers.html|Anakart / GPU|amd|AMD,VEN_1002,VEN_1022|Desteklenen AMD Radeon / yonga seti ve Windows sürümü gerekir.
+intel-dsa|Intel Driver & Support Assistant|https://www.intel.com/content/www/us/en/support/detect.html|Yonga / bileşen|intel|Intel,VEN_8086|Intel'in desteklediği ürünleri kontrol eder; tüm OEM özelleştirmelerini kapsamaz.
+dell-command|Dell Command Update|https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=61r17|Bilgisayar|dell-command|Dell,Alienware|Desteklenen Dell iş bilgisayarları için. BIOS ve firmware kendi üretici akışında kurulur.
+dell-supportassist|Dell SupportAssist|https://www.dell.com/en-us/lp/dt/support-assist|Bilgisayar||Dell,Alienware|Desteklenen Dell ev bilgisayarları için. Kurulum üreticinin resmi sayfasından başlatılır.
+hp-hpia|HP Image Assistant|https://ftp.ext.hp.com/pub/caps-softpaq/cmit/HPIA.html|Bilgisayar|hp-image-assistant|HP,Hewlett-Packard|Desteklenen HP iş bilgisayarları içindir; tüm tüketici modellerini desteklemez.
+hp-cmsl|HP Client Management Script Library|https://www.hp.com/us-en/solutions/client-management-solutions/download.html|Bilgisayar||HP,Hewlett-Packard|Kurumsal HP model ve SoftPaq yönetimi. Yönetim betikleri FromZero tarafından çalıştırılmaz.
+hp-hpsa|HP Support Assistant|https://support.hp.com/us-en/help/hp-support-assistant|Bilgisayar||HP,Hewlett-Packard|HP tüketici bilgisayarları için destek ve güncellemeler. ARM cihazlarda desteklenmez.
+lenovo-vantage|Lenovo Vantage|https://www.lenovo.com/us/en/software/vantage/|Bilgisayar||Lenovo,ThinkPad,IdeaPad,Legion|Desteklenen Lenovo tüketici modelleri. Üreticinin Store dağıtımı kullanılır.
+lenovo-commercial|Lenovo Commercial Vantage|https://docs.lenovocdrt.com/guides/lcv/|Bilgisayar||Lenovo,ThinkPad,ThinkCentre|Lenovo iş bilgisayarları için güncel araç; Store veya kurumsal paket.
+lenovo-system-update|Lenovo System Update (eski araç)|https://support.lenovo.com/us/en/solutions/ht037099|Bilgisayar|lenovo-system-update|Lenovo,ThinkPad,ThinkCentre|Bakım 31 Ekim 2026'da biter, destek 31 Mart 2027'de sona erer. Commercial Vantage önerilir.
+asus-myasus|MyASUS|https://www.asus.com/support/faq/1038301/|Bilgisayar||ASUS,ASUSTeK,ROG|Desteklenen ASUS bilgisayarları; Microsoft Store ve ASUS sistem arabirimi gerekir.
+asus-driverhub|ASUS DriverHub|https://www.asus.com/support/faq/1053934/|Anakart / GPU||ASUS,ASUSTeK|Yalnız desteklenen ASUS anakartları için otomatik sürücü algılama. Model listesi üreticide kontrol edilir.
+asus-armoury|ASUS Armoury Crate|https://www.asus.com/supportonly/armoury%20crate/helpdesk_download/|Çevre birimleri||ASUS,ASUSTeK,ROG|Desteklenen ASUS / ROG ürünleri. Üretici kurulumu sistem bileşenleri ekleyebilir.
+msi-center|MSI Center|https://www.msi.com/Landing/MSI-Center|Bilgisayar||MSI,Micro-Star|Desteklenen MSI modelleri; Live Update modülü modele göre değişir.
+gigabyte-control|GIGABYTE Control Center|https://www.gigabyte.com/Consumer/Software/GIGABYTE-Control-Center/global/|Anakart / GPU||Gigabyte,AORUS|Desteklenen GIGABYTE ürünleri; eski modeller farklı yardımcı araç kullanabilir.
+acer-sense|AcerSense|https://community.acer.com/en/kb/articles/17640-acersense-software|Bilgisayar||Acer,Predator|Acer model destek sayfası ve işletim sistemi uyumluluğu kontrol edilmelidir.
+samsung-update|Samsung Update|https://www.samsung.com/us/support/answer/ANS00083923/|Bilgisayar||Samsung|Desteklenen Galaxy Book / Samsung PC modelleri; Store dağıtımı.
+surface-packages|Microsoft Surface uygulaması|https://www.microsoft.com/en-us/download/details.aspx?id=105302|Bilgisayar||Surface|Surface uygulaması; Windows 11 22631 ve sonrası, x64 / ARM64. Üreticinin MSIX / Store dağıtımı kullanılır.
+lg-update|LG Update|https://www.lg.com/us/support/software-firmware-drivers|Bilgisayar||LG,LG Electronics|LG gram modeline uygun LG Update aracı üretici sayfasından seçilir.
+huawei-manager|Huawei PC Manager|https://consumer.huawei.com/en/support/pc-manager/|Bilgisayar||Huawei,MateBook|Desteklenen Huawei bilgisayarları için sürücü ve donanım yönetimi.
+intel-graphics|Intel Graphics Software|https://www.intel.com/content/www/us/en/products/docs/discrete-gpus/arc/software/overview.html|Anakart / GPU||Intel,VEN_8086|Desteklenen Intel grafik donanımı ve güncel grafik sürücüsü gerekir.
+logi-options|Logi Options+|https://www.logitech.com/en-us/software/logi-options-plus.html|Çevre birimleri|logi-options|Logitech,VID_046D|Desteklenen Logitech klavye / fare modellerinde profil ve firmware yönetimi; genel sürücü tarayıcısı değildir.
+logi-ghub|Logitech G HUB|https://www.logitechg.com/en-us/innovation/g-hub.html|Çevre birimleri|logi-ghub|Logitech,VID_046D|Desteklenen Logitech G ürünleri için profil ve firmware yönetimi.
+razer-synapse|Razer Synapse|https://www.razer.com/synapse-4|Çevre birimleri||Razer,VID_1532|Desteklenen Razer ürünleri ve Synapse sürümü üretici tarafından belirlenir.
+corsair-icue|Corsair iCUE|https://www.corsair.com/us/en/s/downloads|Çevre birimleri|corsair-icue|Corsair,VID_1B1C|Desteklenen Corsair cihazlarında profil ve firmware yönetimi. Firmware işlemini üreticinin kendi aracı yapar.
+steelseries-gg|SteelSeries GG|https://steelseries.com/gg|Çevre birimleri|steelseries-gg|SteelSeries,VID_1038|Engine modülü desteklenen SteelSeries ürünleri içindir; diğer modüller isteğe bağlıdır.
+hyperx-ngenuity|HyperX NGENUITY|https://hyperx.com/pages/ngenuity|Çevre birimleri||HyperX|Sürüm ve desteklenen HyperX cihazları üreticinin model listesine bağlıdır.
+coolermaster-masterplus|Cooler Master MasterPlus+|https://masterplus.coolermaster.com/|Çevre birimleri||Cooler Master|Desteklenen Cooler Master çevre birimleri ve kontrolcüleri.
+glorious-core|Glorious CORE|https://www.gloriousgaming.com/pages/software|Çevre birimleri||Glorious|Desteklenen Glorious ürünlerinde profil ve firmware yönetimi.
+elgato-tools|Elgato Stream Deck / Camera Hub|https://www.elgato.com/us/en/s/downloads|USB / görüntü / dock||Elgato,VID_0FD9|Modeline uygun Stream Deck, Camera Hub veya Wave Link üretici sayfasından seçilir.
+wacom-center|Wacom Center / sürücü|https://www.wacom.com/en-us/support/product-support/drivers|Çevre birimleri||Wacom,VID_056A|Tablet modeline ve Windows sürümüne uygun Wacom paketi seçilmelidir.
+huion-driver|HuionTablet|https://www.huion.com/download/|Çevre birimleri||Huion|Modeline uygun tablet sürücüsü seçilmelidir; model uyumluluğu otomatik varsayılmaz.
+xppen-driver|XPPen sürücü merkezi|https://www.xp-pen.com/download|Çevre birimleri||XP-PEN,XPPen|Tablet modeli ve Windows sürümü üretici sayfasında seçilir.
+samsung-magician|Samsung Magician 9|https://semiconductor.samsung.com/consumer-storage/support/tools/|Depolama|samsung-magician|Samsung|Desteklenen Samsung depolama aygıtları. Disk firmware işlemlerini üreticinin kendi aracı yönetir.
+sandisk-dashboard|SanDisk Dashboard|https://support-en.sandisk.com/app/products/downloads|Depolama||SanDisk,WDC,Western Digital|Desteklenen SanDisk / WD modelleri ve güncel destek durumu üreticide kontrol edilir.
+kingston-ssd|Kingston SSD Manager|https://www.kingston.com/en/support/technical/ssdmanager|Depolama||Kingston|Desteklenen Kingston SSD modelleri; araç mimarisi ve sürümü model bazlı seçilir.
+crucial-executive|Crucial Storage Executive|https://www.crucial.com/support/storage-executive|Depolama||Crucial,Micron|Desteklenen Crucial SSD'ler; üreticinin kurucu / arşiv dağıtımı kullanılır.
+seagate-seatools|Seagate SeaTools|https://www.seagate.com/support/downloads/seatools/|Depolama||Seagate|Disk tanılama ve desteklenen model işlemleri. Genel Windows sürücü güncelleyicisi değildir.
+solidigm-toolkit|Solidigm Storage Tool|https://www.solidigm.com/support-page/drivers-downloads/ka-00085.html|Depolama||Solidigm|Solidigm ürün listesine uygun araç ve firmware seçilmelidir.
+skhynix-drive|SK hynix Drive Manager|https://ssd.skhynix.com/download/|Depolama||SK hynix|Desteklenen SK hynix tüketici SSD modelleri için disk yönetimi.
+kioxia-utility|Kioxia SSD Utility|https://personal.kioxia.com/en-emea/support/download.html|Depolama||Kioxia|Desteklenen Kioxia SSD modelleri; arayüz ve firmware uyumluluğu üreticide kontrol edilir.
+adata-toolbox|ADATA SSD Toolbox|https://www.adata.com/en/support/downloads/|Depolama||ADATA,XPG|Desteklenen ADATA SSD modelleri için sağlık ve firmware araçları.
+transcend-scope|Transcend SSD Scope|https://www.transcend-info.com/Support/Software-10|Depolama||Transcend|Desteklenen Transcend SSD'ler için disk yönetimi.
+creative-command|Creative Sound Blaster Command|https://support.creative.com/|Ses||Creative,Sound Blaster|Ses kartı modeline uygun sürücü ve kontrol paneli seçilir.
+focusrite-control|Focusrite Control|https://downloads.focusrite.com/|Ses||Focusrite,Scarlett,Clarett|Ses arabirimi modeline ve nesline uygun Control / Control 2 seçilmelidir.
+presonus-control|PreSonus Universal Control|https://www.presonus.com/pages/universal-control|Ses||PreSonus|Desteklenen PreSonus ses arabirimleri ve mixerler için sürücü / firmware yönetimi.
+ua-connect|Universal Audio UA Connect|https://www.uaudio.com/downloads/ua-connect|Ses||Universal Audio,Apollo|Volt ve desteklenen UA ürünleri; Apollo için farklı paket gerekebilir.
+displaylink-manager|DisplayLink Windows sürücü|https://www.synaptics.com/products/displaylink-graphics/downloads/windows|USB / görüntü / dock||DisplayLink,VID_17E9|DisplayLink yongalı USB görüntü adaptörleri ve docklar için; tüm USB-C dockları kapsamaz.
+caldigit-tools|CalDigit sürücü / firmware|https://www.caldigit.com/download/|USB / görüntü / dock||CalDigit|Dock modeline ve Windows sürümüne uygun paket seçilir.
+thrustmaster-control|Thrustmaster sürücü / firmware|https://support.thrustmaster.com/en/|Çevre birimleri||Thrustmaster|Direksiyon veya kontrolcü modeline uygun sürücü ve firmware paketi seçilir.
+fanatec-control|Fanatec Control Panel|https://www.fanatec.com/us/en/s/downloads|Çevre birimleri||Fanatec|Desteklenen Fanatec direksiyon ve pedal modelleri; firmware üretici akışında kurulur.
+moza-pithouse|MOZA Pit House|https://support.mozaracing.com/en/support/solutions/articles/70000627795-moza-pit-house-downloads|Çevre birimleri||MOZA|Desteklenen MOZA Racing ürünleri için sürücü, profil ve firmware yönetimi.
+simagic-simpro|SIMAGIC SimPro Manager|https://simagic.com/pages/download-center|Çevre birimleri||Simagic|Desteklenen SIMAGIC ürünleri için profil ve firmware araçları.
+8bitdo-upgrade|8BitDo Firmware Updater|https://support.8bitdo.com/firmware-updater.html|Çevre birimleri||8BitDo|Desteklenen 8BitDo kontrolcüleri için üreticinin model bazlı firmware aracı.
+
+
+
+

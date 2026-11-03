@@ -1,0 +1,840 @@
+[
+  {
+    "Id": "app-firefox",
+    "Name": "Firefox",
+    "Version": "158.0.1",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Firefox 158.0.1",
+      "Url": "https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=tr",
+      "Publisher": "Mozilla Corporation",
+      "Hosts": [
+        "mozilla.org",
+        "mozilla.net"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-firefox",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://product-details.mozilla.org/1.0/firefox_versions.json",
+    "Category": "Tarayıcı",
+    "SourceChecked": null,
+    "NeedsUpdate": true
+  },
+  {
+    "Id": "app-vscode",
+    "Name": "Visual Studio Code",
+    "Version": "1.143.1",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Visual Studio Code 1.143.1",
+      "Url": "https://vscode.download.prss.microsoft.com/dbazure/download/stable/e646868227c3e3a9e3f24277c8c7220be42c0be7/VSCodeUserSetup-x64-1.143.1.exe",
+      "Publisher": "Microsoft Corporation",
+      "Hosts": [
+        "microsoft.com",
+        "visualstudio.com",
+        "vscode-cdn.net"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-vscode",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "7cb4c13a1b20c8bba749604a28198585fc45c64a01e5c819c300a42079696519",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://update.code.visualstudio.com/api/update/win32-x64-user/stable/latest",
+    "Category": "Geliştirme",
+    "SourceChecked": null,
+    "NeedsUpdate": true
+  },
+  {
+    "Id": "app-chrome",
+    "Name": "Google Chrome",
+    "Version": "156.0.8078.48",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Google Chrome 156.0.8078.48",
+      "Url": "https://dl.google.com/chrome/install/ChromeStandaloneSetup64.exe",
+      "Publisher": "Google LLC",
+      "Hosts": [
+        "google.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-chrome",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://versionhistory.googleapis.com/v1/chrome/platforms/win64/channels/stable/versions/all/releases?filter=endtime=none&order_by=version%20desc",
+    "Category": "Tarayıcı",
+    "SourceChecked": null,
+    "NeedsUpdate": true
+  },
+  {
+    "Id": "app-edge",
+    "Name": "Microsoft Edge",
+    "Version": "156.0.4314.50",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Microsoft Edge 156.0.4314.50",
+      "Url": "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/43a4cadd-6bb0-4325-83ba-ce03006a0b00/MicrosoftEdgeEnterpriseX64.msi",
+      "Publisher": "Microsoft Corporation",
+      "Hosts": [
+        "microsoft.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-edge",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "F7BC427C4D26AEFE12BD492A24959CC6CA328AEA2851614637D7133CAE329071",
+      "Extension": ".msi",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://edgeupdates.microsoft.com/api/products?view=enterprise",
+    "Category": "Tarayıcı",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-vlc",
+    "Name": "VLC",
+    "Version": "3.0.24",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "VLC 3.0.24",
+      "Url": "https://mirror.verinomi.com/videolan/vlc/3.0.24/win64/vlc-3.0.24-win64.exe",
+      "Publisher": "VideoLAN",
+      "Hosts": [
+        "videolan.org",
+        "mirror.verinomi.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-vlc",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://update.videolan.org/vlc/status-win-x64",
+    "Category": "Medya",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-thunderbird",
+    "Name": "Thunderbird",
+    "Version": "158.0.1",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Thunderbird 158.0.1",
+      "Url": "https://download.mozilla.org/?product=thunderbird-latest-ssl&os=win64&lang=tr",
+      "Publisher": "Mozilla Corporation",
+      "Hosts": [
+        "mozilla.org",
+        "mozilla.net",
+        "thunderbird.net"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-thunderbird",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://product-details.mozilla.org/1.0/thunderbird_versions.json",
+    "Category": "Üretkenlik",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-node-lts",
+    "Name": "Node.js LTS",
+    "Version": "v24.22.1",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Node.js LTS v24.22.1",
+      "Url": "https://nodejs.org/dist/v24.22.1/node-v24.22.1-x64.msi",
+      "Publisher": "OpenJS Foundation",
+      "Hosts": [
+        "nodejs.org"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-node-lts",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "3bda4baf1ee709b33cf920dd633106ddb23951e322bff9c03ec9f64ab8981b01",
+      "Extension": ".msi",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://nodejs.org/dist/index.json",
+    "Category": "Geliştirme",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-node-current",
+    "Name": "Node.js Current",
+    "Version": "v26.12.1",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Node.js Current v26.12.1",
+      "Url": "https://nodejs.org/dist/v26.12.1/node-v26.12.1-x64.msi",
+      "Publisher": "OpenJS Foundation",
+      "Hosts": [
+        "nodejs.org"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-node-current",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "f32a2844504ed8d73449ddb480385f69cb436bc9409a89e2049ae83447078457",
+      "Extension": ".msi",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://nodejs.org/dist/index.json",
+    "Category": "Geliştirme",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-vivaldi",
+    "Name": "Vivaldi",
+    "Version": "8.2.4133.94",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Vivaldi 8.2.4133.94",
+      "Url": "https://downloads.vivaldi.com/stable-auto/Vivaldi.8.2.4133.94.x64.exe",
+      "Publisher": "Vivaldi Technologies",
+      "Hosts": [
+        "vivaldi.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-vivaldi",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://update.vivaldi.com/update/1.0/public/appcast.x64.xml",
+    "Category": "Tarayıcı",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-7zip",
+    "Name": "7-Zip",
+    "Version": "26.05",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "7-Zip 26.05",
+      "Url": "https://github.com/ip7z/7zip/releases/download/26.05/7z2605-x64.exe",
+      "Publisher": "Igor Pavlov",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-7zip",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "fd99e86f57d8f429ef5ed045bf98315af962e2309b0f1ba87a147a44c71647d0",
+      "Extension": ".exe",
+      "PublisherHashOnly": true,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/ip7z/7zip/releases/latest",
+    "Category": "Araçlar",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-git",
+    "Name": "Git",
+    "Version": "v2.56.0.4",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Git v2.56.0.4",
+      "Url": "https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-64-bit.exe",
+      "Publisher": "Johannes Schindelin",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-git",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "4961a4a8cc778d8b6e00a5819e5fe4d078b754555aff7aedc2d77a5d74c2de80",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/git-for-windows/git/releases/latest",
+    "Category": "Geliştirme",
+    "SourceChecked": null,
+    "NeedsUpdate": true
+  },
+  {
+    "Id": "app-notepad",
+    "Name": "Notepad++",
+    "Version": "v8.9.8.1",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Notepad++ v8.9.8.1",
+      "Url": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.8.1/npp.8.9.8.1.Installer.x64.exe",
+      "Publisher": "Notepad++",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-notepad",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "26f3bcced788fadbac4e7e577b430ea2ce6060cf3bcad993ef4612ecd7d743da",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/notepad-plus-plus/notepad-plus-plus/releases/latest",
+    "Category": "Geliştirme",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-obs",
+    "Name": "OBS Studio",
+    "Version": "33.0.0",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "OBS Studio 33.0.0",
+      "Url": "https://github.com/obsproject/obs-studio/releases/download/33.0.0/OBS-Studio-33.0.0-Windows-x64-Installer.exe",
+      "Publisher": "OBS Project",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-obs",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "3bf55dae6d9db651505828090de74540296c742ed2a94a28cf055cb6ddc6bed3",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/obsproject/obs-studio/releases/latest",
+    "Category": "Medya",
+    "SourceChecked": null,
+    "NeedsUpdate": true
+  },
+  {
+    "Id": "app-powertoys",
+    "Name": "Microsoft PowerToys",
+    "Version": "v0.102.2933.0",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Microsoft PowerToys v0.102.2933.0",
+      "Url": "https://github.com/microsoft/PowerToys/releases/download/v0.102.2933.0/PowerToysUserSetup-0.102.2933.0-x64.exe",
+      "Publisher": "Microsoft Corporation",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-powertoys",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "ec0fd364ae1689a5e8fbefb46bad5c274c7bf0fbe9e828e14c88b44432ada816",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/microsoft/PowerToys/releases/latest",
+    "Category": "Araçlar",
+    "SourceChecked": null,
+    "NeedsUpdate": true
+  },
+  {
+    "Id": "app-brave",
+    "Name": "Brave",
+    "Version": "v1.98.60",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Brave v1.98.60",
+      "Url": "https://github.com/brave/brave-browser/releases/download/v1.98.60/BraveBrowserStandaloneSetup.exe",
+      "Publisher": "Brave Software",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-brave",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "12fd52d35ae9ac3e639bc319b35bfa54f9bdb2528269eecf8f7630b7b0d45466",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/brave/brave-browser/releases/latest",
+    "Category": "Tarayıcı",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-powershell",
+    "Name": "PowerShell 7",
+    "Version": "v7.6.9",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "PowerShell 7 v7.6.9",
+      "Url": "https://github.com/PowerShell/PowerShell/releases/download/v7.6.9/PowerShell-7.6.9-win-x64.msi",
+      "Publisher": "Microsoft Corporation",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-powershell",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "50d33c7494aaf82b987cfd4de3f232d04f91fdd4c0deeca8a669cced3e7cf8f9",
+      "Extension": ".msi",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/PowerShell/PowerShell/releases/latest",
+    "Category": "Geliştirme",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-sharex",
+    "Name": "ShareX",
+    "Version": "v21.0.0",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "ShareX v21.0.0",
+      "Url": "https://github.com/ShareX/ShareX/releases/download/v21.0.0/ShareX-21.0.0-setup-x64.exe",
+      "Publisher": "ShareX",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-sharex",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "f213aca04d30e0e2dc7c43bc79acae8622be291cee6014a90962ed87ea5f10cc",
+      "Extension": ".exe",
+      "PublisherHashOnly": true,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/ShareX/ShareX/releases/latest",
+    "Category": "Medya",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-audacity",
+    "Name": "Audacity",
+    "Version": "Audacity-4.0.1",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Audacity Audacity-4.0.1",
+      "Url": "https://github.com/audacity/audacity/releases/download/Audacity-4.0.1/audacity-win-4.0.1-x86_64.msi",
+      "Publisher": "MuseCY",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-audacity",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "efb652bf04168f5d4893f28b7cefaaf5ef385d9251544540ac774e3bf54793a3",
+      "Extension": ".msi",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/Audacity/audacity/releases/latest",
+    "Category": "Medya",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-handbrake",
+    "Name": "HandBrake",
+    "Version": "1.11.2",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "HandBrake 1.11.2",
+      "Url": "https://github.com/HandBrake/HandBrake/releases/download/1.11.2/HandBrake-1.11.2-x86_64-Win_GUI.exe",
+      "Publisher": "Open Source Developer, Scott Rae",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-handbrake",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "6becb8e5a041941d5f2fd6fe83c66fc15b2b16190e2e79f5ad47eb4cd18df8cd",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/HandBrake/HandBrake/releases/latest",
+    "Category": "Medya",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-rufus",
+    "Name": "Rufus",
+    "Version": "v4.15",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Rufus v4.15",
+      "Url": "https://github.com/pbatard/rufus/releases/download/v4.15/rufus-4.15.exe",
+      "Publisher": "Akeo Consulting",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-rufus",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "84c8a437f8af89257524478489e5c85f1edf25f761d299e2bcde46ac0afbe106",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/pbatard/rufus/releases/latest",
+    "Category": "Araçlar",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-winmerge",
+    "Name": "WinMerge",
+    "Version": "v2.16.58.2",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "WinMerge v2.16.58.2",
+      "Url": "https://github.com/WinMerge/winmerge/releases/download/v2.16.58.2/WinMerge-2.16.58.2-x64-Setup.exe",
+      "Publisher": "Takashi Sawanaka",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-winmerge",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "26f794838bc4e545d7b9f36dc8beeb5a65a12bd4627fa3b4fe87068abef925b0",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/WinMerge/winmerge/releases/latest",
+    "Category": "Geliştirme",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-keepassxc",
+    "Name": "KeePassXC",
+    "Version": "2.8.0",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "KeePassXC 2.8.0",
+      "Url": "https://github.com/keepassxreboot/keepassxc/releases/download/2.8.0/KeePassXC-2.8.0-x64.msi",
+      "Publisher": "DroidMonkey Apps",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-keepassxc",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "4f105af5ba780428718c8be5614cf95deceed5cb3b474a9bd624c5df81cec6e5",
+      "Extension": ".msi",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/KeePassXReboot/keepassxc/releases/latest",
+    "Category": "Araçlar",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-mpchc",
+    "Name": "MPC-HC",
+    "Version": "2.8.4",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "MPC-HC 2.8.4",
+      "Url": "https://github.com/clsid2/mpc-hc/releases/download/2.8.4/MPC-HC.2.8.4.x64.exe",
+      "Publisher": "MPC-HC",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-mpchc",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "8340eb8847006ee1efe154e3172e324565f05659439e31579ce9dff9bb6816b8",
+      "Extension": ".exe",
+      "PublisherHashOnly": true,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/clsid2/mpc-hc/releases/latest",
+    "Category": "Medya",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-rustdesk",
+    "Name": "RustDesk",
+    "Version": "1.5.0",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "RustDesk 1.5.0",
+      "Url": "https://github.com/rustdesk/rustdesk/releases/download/1.5.0/rustdesk-1.5.0-x86_64.msi",
+      "Publisher": "Purslane",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-rustdesk",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "624fe792ab1d76b35134dab84bff97a6bcd14043ffd090a2c6a2800f77580495",
+      "Extension": ".msi",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/rustdesk/rustdesk/releases/latest",
+    "Category": "Araçlar",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-localsend",
+    "Name": "LocalSend",
+    "Version": "v1.18.2",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "LocalSend v1.18.2",
+      "Url": "https://github.com/localsend/localsend/releases/download/v1.18.2/LocalSend-1.18.2-windows-x86-64.exe",
+      "Publisher": "Tien Do Nam",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-localsend",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "122783e6abb4b0a1f1603d896f46a03aeda3004479ebd3175cab4ddac6b60919",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/localsend/localsend/releases/latest",
+    "Category": "Araçlar",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-screentogif",
+    "Name": "ScreenToGif",
+    "Version": "2.43.2",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "ScreenToGif 2.43.2",
+      "Url": "https://github.com/NickeManarin/ScreenToGif/releases/download/2.43.2/ScreenToGif.2.43.2.Setup.x64.msi",
+      "Publisher": "N-Tech",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-screentogif",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "b494e929ac250d0e09cf2803cd172cc5580d9c35df179b022b451304a06df4a7",
+      "Extension": ".msi",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/NickeManarin/ScreenToGif/releases/latest",
+    "Category": "Medya",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-dbeaver",
+    "Name": "DBeaver Community",
+    "Version": "26.2.3",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "DBeaver Community 26.2.3",
+      "Url": "https://github.com/dbeaver/dbeaver/releases/download/26.2.3/dbeaver-ce-26.2.3-windows-x86_64.exe",
+      "Publisher": "DBeaver",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-dbeaver",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "49d0c6d4ee0ba5acecfb48b9a4d2bd8d5734730154d5b974d8990205edb8e927",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/dbeaver/dbeaver/releases/latest",
+    "Category": "Geliştirme",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-heidisql",
+    "Name": "HeidiSQL",
+    "Version": "v12.22",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "HeidiSQL v12.22",
+      "Url": "https://github.com/HeidiSQL/HeidiSQL/releases/download/v12.22/HeidiSQL_12.22.0.7382_Setup.exe",
+      "Publisher": "Ansgar Becker",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-heidisql",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "468055814dcedc057821f2692d28cfdde181332265240538b9acb320cae49904",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/HeidiSQL/HeidiSQL/releases/latest",
+    "Category": "Geliştirme",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-joplin",
+    "Name": "Joplin",
+    "Version": "v3.7.21",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Joplin v3.7.21",
+      "Url": "https://github.com/laurent22/joplin/releases/download/v3.7.21/Joplin-Setup-3.7.21.exe",
+      "Publisher": "Joplin",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-joplin",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "4222536c69360a30a566627b35c2e1cd8d38d0c79735ebde4e39edbcddd750cd",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/laurent22/joplin/releases/latest",
+    "Category": "Üretkenlik",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  },
+  {
+    "Id": "app-obsidian",
+    "Name": "Obsidian",
+    "Version": "v1.14.5",
+    "Installed": [],
+    "State": "Kayıt kontrolü gerekli",
+    "Recipe": {
+      "Name": "Obsidian v1.14.5",
+      "Url": "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.14.5/Obsidian-1.14.5.exe",
+      "Publisher": "Dynalist",
+      "Hosts": [
+        "github.com",
+        "githubusercontent.com"
+      ],
+      "ResolvePattern": "",
+      "Id": "app-obsidian",
+      "DriverTool": false,
+      "ExpectedSha512": "",
+      "ExpectedSha256": "4b95aa855062fb253439c392a32b536c3f9f22ac7fad04f1a6cbf176ecbcfa2a",
+      "Extension": ".exe",
+      "PublisherHashOnly": false,
+      "CatalogSigned": false
+    },
+    "Source": "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest",
+    "Category": "Üretkenlik",
+    "SourceChecked": null,
+    "NeedsUpdate": false
+  }
+]
+

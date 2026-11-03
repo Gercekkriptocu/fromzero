@@ -1,0 +1,8 @@
+Ascent Mid screenshot: Riot Games, VALORANT official maps gallery.
+https://playvalorant.com/en-us/maps/#ascent
+https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/233a1c700d77c90abe1334332fea71e4941e1812-914x514.jpg?accountingTag=VAL
+
+Crosshair settings: player pages in the ProSettings VALORANT crosshair database, Top ordering, filtered to players with complete share profiles, collected 2026-11-03.
+https://prosettings.net/tools/valorant-crosshair-database/
+
+Team and affiliation labels: the Team field on each of the 50 ProSettings player profiles, checked 2026-11-04. An organization affiliation can include creators or former competitors.
