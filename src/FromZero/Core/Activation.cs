@@ -3,11 +3,16 @@ using System.Text.RegularExpressions;
 
 namespace FromZero;
 
-public record ActivationProduct(string Id,string Kind,string Name,string Description,int Status,string PartialKey,long GraceMinutes,string Channel);
+public record ActivationProduct(string Id,string Kind,string Name,string Description,int Status,string PartialKey,long GraceMinutes,string Channel,bool Addon=false);
+public record OfficeInstallation(string Path,string Version,string Architecture,string[] Products,string Source,string OsppScript,string SubscriptionScript,string[] Applications);
+public record SubscriptionLicense(string Product,string State);
 public record ActivationRegistryValue(string Name,string Value);
 public record ActivationSnapshot(DateTimeOffset Checked,List<ActivationProduct> Products,List<ActivationRegistryValue> Registry,
- List<string> OfficeScripts,List<string> SubscriptionScripts,bool OfficeInstalled,int RemainingRearms,List<string> Warnings);
-public record ActivationResult(string Method,int ExitCode,string Output,ActivationSnapshot? After,string? VerificationError);
+ List<string> OfficeScripts,List<string> SubscriptionScripts,bool OfficeInstalled,int RemainingRearms,List<string> Warnings,
+ List<OfficeInstallation>? OfficeInstallations=null,List<SubscriptionLicense>? Subscriptions=null);
+public record ActivationResult(string Method,int ExitCode,string Output,ActivationSnapshot? After,string? VerificationError,
+ ActivationVerification Verification=ActivationVerification.Unverified);
+public enum ActivationVerification { Verified,AlreadyLicensed,PartiallyVerified,Unverified,Failed,ManualCheck }
 public enum ActivationMethod { WindowsLicense,OfficeLicense,WindowsHwid,OfficeOhook,RemoveOhook,WindowsRearm }
 
 public static class ActivationPolicy
@@ -31,6 +36,54 @@ public static class ActivationPolicy
   4=>"Non-genuine grace period",5=>"Notification",6=>"Extended grace period",_=>"Unknown"
  };
  public static bool UsesExternalEngine(ActivationMethod method)=>method is ActivationMethod.WindowsHwid or ActivationMethod.OfficeOhook or ActivationMethod.RemoveOhook;
+ public static ActivationVerification Verify(ActivationMethod method,int exitCode,ActivationSnapshot? before,ActivationSnapshot? after)
+ {
+  if(exitCode!=0)return ActivationVerification.Failed;
+  if(after==null)return ActivationVerification.Unverified;
+  if(method is ActivationMethod.OfficeOhook or ActivationMethod.RemoveOhook or ActivationMethod.WindowsRearm)return ActivationVerification.ManualCheck;
+  var kind=method==ActivationMethod.OfficeLicense?"Office":"Windows";
+  var products=after.Products.Where(p=>p.Kind==kind&&!p.Addon).ToArray();
+  if(products.Length==0||products.All(p=>p.Status!=1))return ActivationVerification.Unverified;
+  if(products.Any(p=>p.Status!=1))return ActivationVerification.PartiallyVerified;
+  var prior=before?.Products.Where(p=>p.Kind==kind&&!p.Addon).ToArray()??[];
+  return products.All(p=>prior.Any(old=>old.Id==p.Id&&old.Status==1))?
+   ActivationVerification.AlreadyLicensed:ActivationVerification.Verified;
+ }
+ public static string VerificationMessage(ActivationVerification result)=>result switch{
+  ActivationVerification.Verified=>"Activation verified by the licensing provider.",
+  ActivationVerification.AlreadyLicensed=>"The detected license was already active before this operation.",
+  ActivationVerification.PartiallyVerified=>"Some products are licensed. Other detected products still need attention.",
+  ActivationVerification.ManualCheck=>"The command finished. Verify the result in the product's Account or Activation screen.",
+  ActivationVerification.Failed=>"The activation command reported a failure.",
+  _=>"Activation could not be verified. Review the license status and command output."
+ };
+ public static List<SubscriptionLicense> ParseSubscriptions(string output)
+ {
+  if(output.Length>300_000)return [];
+  var licenses=new List<SubscriptionLicense>();
+  string product="",state="";
+  void Add(){if(product.Length>0&&state.Length>0)licenses.Add(new(product,state));product="";state="";}
+  foreach(var line in output.Replace("\r","").Split('\n')){
+   var match=Regex.Match(line,@"^\s*(Product|License\s*State|LicenseState)\s*:\s*(.{1,150}?)\s*$",
+    RegexOptions.IgnoreCase,TimeSpan.FromSeconds(1));
+   if(!match.Success)continue;
+   if(match.Groups[1].Value.Equals("Product",StringComparison.OrdinalIgnoreCase)){
+    if(product.Length>0)Add();
+    product=match.Groups[2].Value;
+   }else state=match.Groups[2].Value;
+   if(product.Length>0&&state.Length>0)Add();
+  }
+  return licenses.Distinct().ToList();
+ }
+ public static string OfficeProductName(string product)
+ {
+  if(product.StartsWith("O365",StringComparison.OrdinalIgnoreCase))return "Microsoft 365";
+  var app=product.StartsWith("Visio",StringComparison.OrdinalIgnoreCase)?"Visio":
+   product.StartsWith("Project",StringComparison.OrdinalIgnoreCase)?"Project":"Office";
+  foreach(var year in new[]{"2024","2021","2019","2016"})
+   if(product.Contains(year,StringComparison.Ordinal))return app+(product.EndsWith("Volume",StringComparison.OrdinalIgnoreCase)&&(year is "2024" or "2021")?" LTSC ":" ")+year;
+  return product;
+ }
  public static string EngineArguments(ActivationMethod method)=>method switch{
   ActivationMethod.WindowsHwid=>"/HWID /HWID-NoEditionChange -el",
   ActivationMethod.OfficeOhook=>"/Ohook -el",

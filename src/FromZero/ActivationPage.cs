@@ -34,8 +34,8 @@ public partial class MainWindow
    "Last licensing check: "+snapshot.Checked.ToLocalTime().ToString("g"),12,"#B9CBC1"));
   if(snapshot?.Warnings.Count>0)Page.Children.Add(PreparationExpander("Inventory warnings",T(string.Join("\n",snapshot.Warnings),12,"#EBC078")));
   if(activationResult is { } result){
-   var color=result.ExitCode==0?"#B9E2A7":"#EBC078";
-   var message=result.ExitCode==0?"Command finished. Review the current license status.":"The activation command reported a failure.";
+   var color=result.Verification is ActivationVerification.Verified or ActivationVerification.AlreadyLicensed?"#B9E2A7":"#EBC078";
+   var message=ActivationPolicy.VerificationMessage(result.Verification);
    Page.Children.Add(Card(Stack(T(result.Method,18,"#B9E2A7",true),T(message,13,color),
     result.VerificationError==null?T("License status was checked again after the operation.",12,"#B9CBC1"):
      T("Post-operation verification unavailable: "+result.VerificationError,12,"#EBC078"),
@@ -66,7 +66,7 @@ public partial class MainWindow
   }
   var windows=activationTab=="windows";
   var kind=windows?"Windows":"Office";
-  var products=snapshot?.Products.Where(p=>p.Kind==kind).ToArray()??[];
+  var products=snapshot?.Products.Where(p=>p.Kind==kind&&(!windows||!p.Addon)).ToArray()??[];
   var records=new ResponsiveTilePanel{MaxColumns=2,MinimumTileWidth=300,Gap=12};
   foreach(var product in products){
    var grace=product.GraceMinutes>0?"Grace remaining (minutes): "+product.GraceMinutes:"";
@@ -91,7 +91,21 @@ public partial class MainWindow
     Row(ActivationAction(ActivationPolicy.Title(ActivationMethod.WindowsRearm),()=>ActivateAsync(ActivationMethod.WindowsRearm),snapshot is{RemainingRearms:>0})))));
   }
   else{
+   var installations=snapshot?.OfficeInstallations??[];
+   foreach(var installation in installations){
+    var names=installation.Products.Select(ActivationPolicy.OfficeProductName).Distinct().ToArray();
+    var label=names.Length>0?string.Join(" · ",names):"Detected Office installation";
+    Page.Children.Add(Card(Stack(T(label,18,"#B9E2A7",true),
+     T(installation.Source+" · "+installation.Version+" · "+installation.Architecture,12,"#B9CBC1"),
+     T(string.Join(" · ",installation.Applications.Select(System.IO.Path.GetFileNameWithoutExtension)),12,"#B9CBC1"),
+     T(installation.Path,11,"#9AAFAE"))));
+   }
+   foreach(var license in snapshot?.Subscriptions??[]){
+    Page.Children.Add(Card(Stack(T(license.Product,17,"#B9E2A7",true),
+     T("Microsoft 365 license state: "+license.State,15,license.State.Equals("Licensed",StringComparison.OrdinalIgnoreCase)?"#B9E2A7":"#EBC078"))));
+   }
    Page.Children.Add(Card(Stack(T("Office / Microsoft 365",19,"#B9E2A7",true),
+    T("Detects Microsoft 365, Office LTSC 2024 / 2021, Office 2019 / 2016, Project and Visio in x86 and x64 installations.",12,"#B9CBC1"),
     T(ActivationDescription(ActivationMethod.OfficeLicense),13,"#B9CBC1"),
     Row(ActivationAction(ActivationPolicy.Title(ActivationMethod.OfficeLicense),()=>ActivateAsync(ActivationMethod.OfficeLicense),snapshot?.OfficeScripts.Count>0)))));
    Page.Children.Add(Card(Stack(T("Ohook",19,"#B9E2A7",true),T(ActivationDescription(ActivationMethod.OfficeOhook),13,"#B9CBC1"),
@@ -99,8 +113,6 @@ public partial class MainWindow
      ActivationAction(ActivationPolicy.Title(ActivationMethod.RemoveOhook),()=>ActivateAsync(ActivationMethod.RemoveOhook),snapshot?.OfficeInstalled==true)))));
    Page.Children.Add(T("Confirm the final Office status in File → Account after reopening Office.",12,"#B9CBC1"));
   }
-  Page.Children.Add(PreparationExpander("Activation engine information",T("Microsoft Activation Scripts "+ActivationPolicy.EngineVersion+
-   "\nGPL-3.0\n"+ActivationPolicy.EngineUrl+"\nSHA-256\n"+ActivationPolicy.EngineSha256,12,"#B9CBC1")));
  }
 
  private Button ActivationAction(string title,Func<Task> action,bool enabled)
@@ -129,7 +141,7 @@ public partial class MainWindow
   activationResult=await activationService.ExecuteAsync(method);
   activationSnapshot=activationResult.After;
   activationDetails="";
-  operationCompletion=Locale.Text(activationResult.ExitCode==0?"Activation command finished; verify the license status.":"Activation command failed; review the operation output.");
+  operationCompletion=Locale.Text(ActivationPolicy.VerificationMessage(activationResult.Verification));
   Navigate("activation");
  }
 

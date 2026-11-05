@@ -14,7 +14,7 @@ public partial class MainWindow
   System.Windows.Automation.AutomationProperties.SetName(sizes,"Text scale");
   sizes.SelectionChanged+=(_,_)=>{if(sizes.SelectedIndex>=0)UiTheme.SetTextScale(new[]{1d,1.15,1.3}[sizes.SelectedIndex]);};
   Page.Children.Add(Card(Stack(T("Text scale",19,"#B9E2A7",true),T("Choose a reading size. The retro font and language preference remain available.",13,"#B9CBC1"),Row(sizes))));
-  var version=typeof(MainWindow).Assembly.GetName().Version??new Version(0,19,0);
+  var version=typeof(MainWindow).Assembly.GetName().Version??new Version(0,19,1);
   async Task CheckPackage(bool candidate)
   {
    var folder=candidate?PickFolder("Select an extracted FromZero update bundle"):AppContext.BaseDirectory;

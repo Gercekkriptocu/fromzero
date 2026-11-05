@@ -8,7 +8,7 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>FromZero</AssemblyName>
     <RootNamespace>FromZero</RootNamespace>
-    <Version>0.19.0</Version>
+    <Version>0.19.1</Version>
     <ApplicationIcon>Assets\FromZero.ico</ApplicationIcon>
     <Description>Windows kurtarma ve bakım istasyonu</Description>
     <ApplicationManifest>app.manifest</ApplicationManifest>

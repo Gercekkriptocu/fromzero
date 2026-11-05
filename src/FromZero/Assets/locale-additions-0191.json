@@ -1,0 +1,20 @@
+{
+  "Aktivasyon, lisans sağlayıcısının bildirdiği durumla doğrulandı.": "Activation verified by the licensing provider.",
+  "Algılanan lisans bu işlemden önce zaten etkin durumdaydı.": "The detected license was already active before this operation.",
+  "Bazı ürünler lisanslı. Diğer algılanan ürünler hâlâ kontrol gerektiriyor.": "Some products are licensed. Other detected products still need attention.",
+  "Komut tamamlandı. Sonucu ürünün Hesap veya Aktivasyon ekranında doğrula.": "The command finished. Verify the result in the product's Account or Activation screen.",
+  "Aktivasyon doğrulanamadı. Lisans durumunu ve komut çıktısını incele.": "Activation could not be verified. Review the license status and command output.",
+  "Algılanan Office kurulumu": "Detected Office installation",
+  "Microsoft 365 lisans durumu:": "Microsoft 365 license state:",
+  "Microsoft 365, Office LTSC 2024 / 2021, Office 2019 / 2016, Project ve Visio'nun x86 ve x64 kurulumlarını algılar.": "Detects Microsoft 365, Office LTSC 2024 / 2021, Office 2019 / 2016, Project and Visio in x86 and x64 installations.",
+  "Abonelik durumu okunamadı.": "Subscription status could not be read.",
+  "Abonelik lisans durumu döndürülmedi. Son durumu Office Hesap ekranından kontrol et.": "No subscription license state was returned. Check Office Account for the final status.",
+  "Abonelik durumu okunamadı:": "Subscription status could not be read:",
+  "Office lisans betiği korumalı kurulum klasörlerinin dışında bulunuyor.": "The Office licensing script is outside protected installation folders.",
+  "Abonelik": "Subscription",
+  "Click-to-Run": "Click-to-Run",
+  "Kayıtlı Office": "Registered Office",
+  "Yerel dosyalar": "Local files",
+  "Uygulama yolları": "App Paths",
+  "Lisanslı değil": "Unlicensed"
+}

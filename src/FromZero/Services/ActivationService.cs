@@ -5,7 +5,8 @@ namespace FromZero;
 
 public sealed class ActivationService
 {
- internal const string InventoryScript="""
+ internal static string InventoryScript=>OfficeDiscovery.Script+"\n"+InventoryBody;
+ private const string InventoryBody="""
  $warnings=New-Object 'System.Collections.Generic.List[string]';
  $windowsId='55c92734-d682-4d71-983e-d6ec3f16059f';
  $products=@();
@@ -15,7 +16,7 @@ public sealed class ActivationService
   } | ForEach-Object {
    [pscustomobject]@{Id=[string]$_.ID;Kind=if($_.ApplicationID -eq $windowsId){'Windows'}else{'Office'};
     Name=[string]$_.Name;Description=[string]$_.Description;Status=[int]$_.LicenseStatus;
-    PartialKey=[string]$_.PartialProductKey;GraceMinutes=[long]$_.GracePeriodRemaining;Channel=[string]$_.ProductKeyChannel}
+    PartialKey=[string]$_.PartialProductKey;GraceMinutes=[long]$_.GracePeriodRemaining;Channel=[string]$_.ProductKeyChannel;Addon=([bool]$_.LicenseDependsOn -or [bool]$_.LicenseIsAddon)}
   });
  }catch{$warnings.Add('Windows licensing inventory unavailable: '+$_.Exception.Message)};
  try{
@@ -37,24 +38,13 @@ public sealed class ActivationService
    if($null -ne $key.$name){$registry+=[pscustomobject]@{Name=$name;Value=[string]$key.$name}};
   }
  }catch{$warnings.Add('Licensing configuration unavailable: '+$_.Exception.Message)};
- $roots=@($env:ProgramW6432,$env:ProgramFiles,${env:ProgramFiles(x86)}) | Where-Object {$_} | Select-Object -Unique;
- $office=@();$subscription=@();$installed=$false;
- foreach($root in $roots){
-  foreach($version in @('Office14','Office15','Office16')){
-   foreach($relative in @("Microsoft Office\$version","Microsoft Office\root\$version")){
-    $folder=Join-Path $root $relative;
-    $script=Join-Path $folder 'OSPP.VBS';
-    if(Test-Path -LiteralPath $script -PathType Leaf){$office+=$script;$installed=$true};
-    $script=Join-Path $folder 'vnextdiag.ps1';
-    if(Test-Path -LiteralPath $script -PathType Leaf){$subscription+=$script;$installed=$true};
-    if(Test-Path -LiteralPath (Join-Path $folder 'WINWORD.EXE')){$installed=$true};
-   }
-  }
- }
- if(Test-Path -LiteralPath 'HKLM:\SOFTWARE\Microsoft\Office\ClickToRun\Configuration'){$installed=$true};
+ $installations=@(Get-OfficeInstallations);
+ $office=@($installations | ForEach-Object {$_.OsppScript} | Where-Object {$_} | Select-Object -Unique);
+ $subscription=@($installations | ForEach-Object {$_.SubscriptionScript} | Where-Object {$_} | Select-Object -Unique);
+ $installed=$installations.Count -gt 0 -or @($products | Where-Object {$_.Kind -eq 'Office'}).Count -gt 0;
  [pscustomobject]@{Checked=[DateTimeOffset]::Now.ToString('o');Products=@($products | Sort-Object Kind,Id -Unique);
   Registry=@($registry);OfficeScripts=@($office | Select-Object -Unique);SubscriptionScripts=@($subscription | Select-Object -Unique);
-  OfficeInstalled=$installed;RemainingRearms=$remaining;Warnings=@($warnings)} | ConvertTo-Json -Depth 5
+  OfficeInstalled=$installed;RemainingRearms=$remaining;Warnings=@($warnings);OfficeInstallations=@($installations)} | ConvertTo-Json -Depth 5
  """;
 
  private const string NativeHelpers="""
@@ -75,24 +65,39 @@ public sealed class ActivationService
  }
  """;
 
- public Task<ActivationSnapshot> InspectAsync(CancellationToken token=default)=>Commands.JsonAsync<ActivationSnapshot>(InventoryScript,90,token);
+ public async Task<ActivationSnapshot> InspectAsync(CancellationToken token=default)
+ {
+  var snapshot=await Commands.JsonAsync<ActivationSnapshot>(InventoryScript,90,token);
+  var subscriptions=new List<SubscriptionLicense>();
+  foreach(var script in snapshot.SubscriptionScripts){
+   try{
+    var result=await ReadOfficeDetailsAsync(script,token);
+    if(result.Success){
+     var parsed=ActivationPolicy.ParseSubscriptions(result.Output);
+     subscriptions.AddRange(parsed);
+     if(parsed.Count==0)snapshot.Warnings.Add("No subscription license state was returned. Check Office Account for the final status.");
+    }else snapshot.Warnings.Add("Subscription status could not be read.");
+   }catch(Exception ex)when(ex is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException or TimeoutException){
+    snapshot.Warnings.Add("Subscription status could not be read: "+ex.Message);
+   }
+  }
+  return snapshot with{Subscriptions=subscriptions.Distinct().ToList()};
+ }
 
  internal static string OperationScript(ActivationMethod method)
  {
   _=ActivationPolicy.Title(method);
   if(ActivationPolicy.UsesExternalEngine(method))return EngineScript(method);
-  if(method==ActivationMethod.OfficeLicense)return NativeHelpers+"\n"+"""
+  if(method==ActivationMethod.OfficeLicense)return NativeHelpers+"\n"+OfficeDiscovery.Script+"\n"+"""
    $roots=@($env:ProgramW6432,$env:ProgramFiles,${env:ProgramFiles(x86)}) | Where-Object {$_} | Select-Object -Unique;
-   $found=@();
-   foreach($root in $roots){
-    foreach($version in @('Office14','Office15','Office16')){
-     foreach($relative in @("Microsoft Office\$version\OSPP.VBS","Microsoft Office\root\$version\OSPP.VBS")){
-      $path=Join-Path $root $relative;if(Test-Path -LiteralPath $path -PathType Leaf){$found+=$path};
-     }
-    }
-   }
+   $found=@(Get-OfficeInstallations | ForEach-Object {$_.OsppScript} | Where-Object {$_} | Select-Object -Unique);
    if($found.Count -eq 0){throw 'No volume-licensed Office activation script was found.'};
-   foreach($script in ($found | Select-Object -Unique)){Run-LicenseScript $script '/act'};
+   foreach($script in $found){
+    $protected=$false;
+    foreach($root in $roots){if($script.StartsWith($root.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase)){$protected=$true}};
+    if(-not $protected){throw 'The Office licensing script is outside protected installation folders.'};
+    Run-LicenseScript $script '/act';
+   }
    """;
   var argument=method==ActivationMethod.WindowsRearm?"/rearm":"/ato";
   return NativeHelpers+"\n"+@"Run-LicenseScript (Join-Path $env:SystemRoot 'System32\slmgr.vbs') "+PackageSafety.QuotePs(argument);
@@ -145,6 +150,7 @@ public sealed class ActivationService
 
  public async Task<ActivationResult> ExecuteAsync(ActivationMethod method)
  {
+  var before=await InspectAsync();
   if(method is ActivationMethod.OfficeOhook or ActivationMethod.RemoveOhook){
    foreach(var name in new[]{"WINWORD","EXCEL","POWERPNT","OUTLOOK","MSACCESS","ONENOTE","VISIO","WINPROJ","MSPUB","lync"}){
     var processes=Process.GetProcessesByName(name);
@@ -168,9 +174,17 @@ public sealed class ActivationService
   ActivationSnapshot? after=null;string? failure=null;
   try{after=await InspectAsync();}
   catch(Exception ex)when(ex is InvalidOperationException or IOException or System.Text.Json.JsonException or TimeoutException){failure=ex.Message;}
+  var verification=ActivationPolicy.Verify(method,result.ExitCode,before,after);
+  if(verification==ActivationVerification.Unverified&&after!=null&&(method is ActivationMethod.WindowsLicense or ActivationMethod.WindowsHwid or ActivationMethod.OfficeLicense)){
+   await Task.Delay(1500);
+   try{
+    after=await InspectAsync();
+    verification=ActivationPolicy.Verify(method,result.ExitCode,before,after);
+   }catch(Exception ex)when(ex is InvalidOperationException or IOException or System.Text.Json.JsonException or TimeoutException){failure=ex.Message;}
+  }
   Journal.Write(ActivationPolicy.Title(method),"Execution result: "+result.ExitCode+
-   "; licensed Windows records: "+(after?.Products.Count(p=>p.Kind=="Windows"&&p.Status==1).ToString()??"unknown"),result.Success);
-  return new(ActivationPolicy.Title(method),result.ExitCode,ActivationPolicy.CleanOutput(result.Output),after,failure);
+   "; verification: "+verification,result.Success);
+  return new(ActivationPolicy.Title(method),result.ExitCode,ActivationPolicy.CleanOutput(result.Output),after,failure,verification);
  }
 
  public async Task<string> DetailsAsync(ActivationSnapshot snapshot)
@@ -178,22 +192,26 @@ public sealed class ActivationService
   var sections=new List<string>();
   var windows=Path.Combine(Environment.SystemDirectory,"slmgr.vbs");
   sections.Add((await Commands.PsAsync(NativeHelpers+"\nRun-LicenseScript "+PackageSafety.QuotePs(windows)+" '/dlv'")).Output);
-  var roots=new[]{Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
-   Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86)}.Where(p=>p.Length>0).ToArray();
   foreach(var script in snapshot.OfficeScripts.Concat(snapshot.SubscriptionScripts).Distinct(StringComparer.OrdinalIgnoreCase)){
-   var path=Path.GetFullPath(script);
-   if(!roots.Any(root=>path.StartsWith(Path.Combine(root,"Microsoft Office")+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase)))
-    throw new InvalidDataException("Unexpected Office licensing path.");
-   PackageSafety.RejectReparsePoints(Path.GetDirectoryName(path)!,path);
-   var name=Path.GetFileName(path);
-   CommandResult result;
-   if(name.Equals("OSPP.VBS",StringComparison.OrdinalIgnoreCase))
-    result=await Commands.PsAsync(NativeHelpers+"\nRun-LicenseScript "+PackageSafety.QuotePs(path)+" '/dstatusall'");
-   else if(name.Equals("vnextdiag.ps1",StringComparison.OrdinalIgnoreCase))
-    result=await Commands.PsAsync("& "+PackageSafety.QuotePs(path)+" -action list");
-   else throw new InvalidDataException("Unknown Office licensing component.");
-   sections.Add(name+"\n"+result.Output);
+   var result=await ReadOfficeDetailsAsync(script);
+   sections.Add(Path.GetFileName(script)+"\n"+result.Output);
   }
   return ActivationPolicy.CleanOutput(string.Join("\n\n",sections));
  }
+ private static Task<CommandResult> ReadOfficeDetailsAsync(string script,CancellationToken token=default)
+ {
+  var path=Path.GetFullPath(script);
+  var roots=new[]{Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+   Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86)}.Where(p=>p.Length>0);
+  if(!roots.Any(root=>path.StartsWith(root.TrimEnd(Path.DirectorySeparatorChar)+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase)))
+   throw new InvalidDataException("Unexpected Office licensing path.");
+  PackageSafety.RejectReparsePoints(Path.GetDirectoryName(path)!,path);
+  var name=Path.GetFileName(path);
+  if(name.Equals("OSPP.VBS",StringComparison.OrdinalIgnoreCase))
+   return Commands.PsAsync(NativeHelpers+"\nRun-LicenseScript "+PackageSafety.QuotePs(path)+" '/dstatusall'",90,token);
+  if(name.Equals("vnextdiag.ps1",StringComparison.OrdinalIgnoreCase))
+   return Commands.PsAsync("& "+PackageSafety.QuotePs(path)+" -action list",90,token);
+  throw new InvalidDataException("Unknown Office licensing component.");
+ }
+
 }

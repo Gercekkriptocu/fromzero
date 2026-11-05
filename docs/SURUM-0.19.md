@@ -1,4 +1,12 @@
-# FromZero 0.19.0
+# FromZero 0.19.1
+
+- Aktivasyon motoru bilgi bölümü kaldırıldı.
+- Komutun sıfır çıkış kodu tek başına başarılı etkinleştirme sayılmaz. Windows ve yerel Office lisans durumu işlem öncesi ve sonrası karşılaştırılır; zaten etkin, doğrulanan, kısmen doğrulanan ve doğrulanamayan sonuçlar ayrılır. Windows eklenti lisansları ana sistem lisansı sayılmaz.
+- Microsoft 365, Office LTSC 2024 / 2021, Office 2019 / 2016, Project ve Visio'nun x86 / x64 Click-to-Run, kayıtlı ve yerel kurulumları taranır. Word bulunmasa da Excel veya bağımsız Visio / Project algılanır. Kurulum sürümü ve mimarisi gösterilir.
+- Microsoft 365 abonelik durumu, varsa Microsoft'un kurulu vNextDiag aracıyla salt okunur olarak alınır. Hesap e-postası ve kiracı kimliği özet kayıtlara eklenmez. Durum alınamıyorsa etkinleştirildi denmez.
+- Ohook işlemi gerçek abonelik doğrulaması değildir; sonucu Office Hesap ekranında ayrıca kontrol edilmesi gereken işlem olarak gösterilir. Güncel Office algılaması tüm kurulumlarda etkinleştirme garantisi anlamına gelmez.
+
+## 0.19.0
 
 More tools menüsüne uygulama içi Activator ekranı eklendi. Windows, Office / Microsoft 365 ve Analiz sekmeleri uygulamanın İngilizce ve Türkçe dil tercihini kullanır.
 
@@ -16,4 +24,5 @@ Microsoft ve MAS araçlarının yerel çıktıları işletim sisteminin veya ara
 
 - [Microsoft Windows lisans komutları](https://learn.microsoft.com/en-us/windows-server/get-started/activation-slmgr-vbs-options)
 - [Microsoft Office lisans araçları](https://learn.microsoft.com/en-us/office/volume-license-activation/tools-to-manage-volume-activation-of-office)
+- [Microsoft 365 vNextDiag lisans tanılaması](https://learn.microsoft.com/en-us/microsoft-365-apps/licensing-activation/vnextdiag)
 - [MAS 3.12 kaynak kodu ve GPL-3.0 lisansı](https://github.com/massgravel/Microsoft-Activation-Scripts/tree/6401d2f36975dc07bcb6d22ea823a8498a75ec01)
