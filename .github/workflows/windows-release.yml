@@ -54,5 +54,7 @@ jobs:
           if ($version -notin @($env:GITHUB_REF_NAME.TrimStart('v'),($env:GITHUB_REF_NAME.TrimStart('v') + '.0'))) {
             throw "Setup version $version does not match $env:GITHUB_REF_NAME."
           }
-          gh release create $env:GITHUB_REF_NAME dist/FromZero-Setup-win-x64.exe dist/FromZero-Setup-win-x64.exe.sha256 --verify-tag --title "FromZero $env:GITHUB_REF_NAME" --notes-file docs/SURUM-0.18.md
+          $parts = $version.Split('.')
+          $notes = 'docs/SURUM-' + $parts[0] + '.' + $parts[1] + '.md'
+          gh release create $env:GITHUB_REF_NAME dist/FromZero-Setup-win-x64.exe dist/FromZero-Setup-win-x64.exe.sha256 --verify-tag --title "FromZero $env:GITHUB_REF_NAME" --notes-file $notes
           if ($LASTEXITCODE -ne 0) { throw 'Release publication failed.' }

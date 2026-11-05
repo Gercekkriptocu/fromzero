@@ -14,6 +14,6 @@ public static class WorldStations
   new("history","ARCHIVE","Kayıt arşivi","#A99877","#615844",8),
   new("cleanup","ZERO CLEAN","Temizlik şirketi","#9BC89C","#416C58",9)
  ];
- public static WorldStation ForPage(string page)=>All.FirstOrDefault(s=>s.Page==(page is "crosshairs" or "valorant-crosshairs" or "benchmark"?"gaming":page=="memory"?"performance":page=="workspace"?"history":page))??All[0];
+ public static WorldStation ForPage(string page)=>All.FirstOrDefault(s=>s.Page==(page is "crosshairs" or "valorant-crosshairs" or "benchmark"?"gaming":page=="memory"?"performance":page is "workspace" or "activation"?"history":page))??All[0];
  public static double Door(int sector)=>249+170*sector;
 }

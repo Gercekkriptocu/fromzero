@@ -33,6 +33,10 @@ if ($publisherCertificate) {
 Copy-Item -LiteralPath (Join-Path $projectRoot 'docs\KULLANIM.md') -Destination (Join-Path $outputRoot 'KULLANIM.md') -Force
 Copy-Item -LiteralPath (Join-Path $projectRoot 'docs\GELISIM-0.15.md') -Destination (Join-Path $outputRoot 'GELISIM-0.15.md') -Force
 Copy-Item -LiteralPath (Join-Path $projectRoot 'docs\SURUM-0.16.md') -Destination (Join-Path $outputRoot 'SURUM-0.16.md') -Force
+$releaseVersion = (Get-Item -LiteralPath (Join-Path $outputRoot 'FromZero.exe')).VersionInfo.ProductVersion.Split('.')
+$releaseNotesName = 'SURUM-' + $releaseVersion[0] + '.' + $releaseVersion[1] + '.md'
+$releaseNotesPath = Join-Path $projectRoot ('docs\' + $releaseNotesName)
+if (Test-Path -LiteralPath $releaseNotesPath) { Copy-Item -LiteralPath $releaseNotesPath -Destination (Join-Path $outputRoot $releaseNotesName) -Force }
 Copy-Item -LiteralPath (Join-Path $projectRoot 'docs\AUTOMATIK-KURULUM.md') -Destination (Join-Path $outputRoot 'OTOMATIK-KURULUM.md') -Force
 Copy-Item -LiteralPath (Join-Path $projectRoot 'docs\HAZIRLIK-0.13.md') -Destination (Join-Path $outputRoot 'HAZIRLIK-0.13.md') -Force
 Copy-Item -LiteralPath (Join-Path $projectRoot 'src\FromZero\Assets\Fonts\OFL.txt') -Destination (Join-Path $outputRoot 'PixelifySans-OFL.txt') -Force

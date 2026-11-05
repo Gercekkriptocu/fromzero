@@ -57,12 +57,12 @@ public partial class MainWindow : Window
   Height = Math.Min(Height, SystemParameters.WorkArea.Height - 30);
   MachineLabel.Text = Environment.MachineName.ToUpperInvariant() + "  /  " + System.Runtime.InteropServices.RuntimeInformation.OSArchitecture.ToString().ToUpperInvariant();
   VersionLabel.Text="v"+typeof(MainWindow).Assembly.GetName().Version?.ToString(3)+" / ÖN İZLEME";
-  (string Key, string Icon, string Name)[] pages = [("overview","▣","Genel bakış"),("prepare","▶","Bilgisayarı hazırla"),("drivers","▦","Güncellemeler"),("network","⌁","Wi-Fi ve ağ"),("gaming","✚","Oyunlar"),("performance","▥","Performans"),("cleanup","◇","Temizlik"),("capsule","▤","Format kiti"),("startup","↗","Başlangıç"),("apps","▧","Uygulamalar"),("history","◷","Geçmiş"),("workspace","◉","Workspace")];
+  (string Key, string Icon, string Name)[] pages = [("overview","▣","Genel bakış"),("prepare","▶","Bilgisayarı hazırla"),("drivers","▦","Güncellemeler"),("network","⌁","Wi-Fi ve ağ"),("gaming","✚","Oyunlar"),("performance","▥","Performans"),("cleanup","◇","Temizlik"),("capsule","▤","Format kiti"),("startup","↗","Başlangıç"),("apps","▧","Uygulamalar"),("history","◷","Geçmiş"),("workspace","◉","Workspace"),("activation","◇","Activator")];
   var otherNavigation=new ContextMenu{Style=(Style)FindResource("NavigationMenu"),Placement=System.Windows.Controls.Primitives.PlacementMode.Right,HorizontalOffset=8};
   foreach (var p in pages) {
-   if(p.Key is "startup" or "apps" or "history" or "workspace"){
+   if(p.Key is "startup" or "apps" or "history" or "workspace" or "activation"){
    var entry=new MenuItem{Header=p.Name,FontFamily=UiTheme.Font,Style=(Style)FindResource("NavigationMenuItem")};
-    entry.Click+=(_,_)=>{if(!busy)Navigate(p.Key);};otherNavigation.Items.Add(entry);continue;
+    entry.Click+=async(_,_)=>{if(busy)return;Navigate(p.Key);if(p.Key=="activation"&&activationSnapshot==null)await RunAsync("Refresh license status",RefreshActivationAsync);};otherNavigation.Items.Add(entry);continue;
    }
    var item=new Grid();item.ColumnDefinitions.Add(new ColumnDefinition{Width=new GridLength(26)});item.ColumnDefinitions.Add(new ColumnDefinition());
    var icon=T(p.Icon,14,"#B9CBC1");icon.Margin=new Thickness(0);item.Children.Add(icon);var label=T(p.Name,14,"#D2DED6");label.Margin=new Thickness(0);label.TextWrapping=TextWrapping.NoWrap;label.TextTrimming=TextTrimming.CharacterEllipsis;Grid.SetColumn(label,1);item.Children.Add(label);
@@ -119,9 +119,9 @@ public partial class MainWindow : Window
   PageScroll.VerticalScrollBarVisibility=page=="overview"?ScrollBarVisibility.Hidden:ScrollBarVisibility.Auto;
   var station=WorldStations.ForPage(page);World.Travel(station.Sector);
   var navPage=page is "crosshairs" or "valorant-crosshairs" or "benchmark"?"gaming":page=="memory"?"performance":page;
-  OtherToolsButton.Background=B(navPage is "startup" or "apps" or "history" or "workspace"?"#2A403F":"#182B34");
+  OtherToolsButton.Background=B(navPage is "startup" or "apps" or "history" or "workspace" or "activation"?"#2A403F":"#182B34");
   foreach (var pair in nav) { pair.Value.Background = pair.Key == navPage ? B("#2A403F") : Brushes.Transparent; pair.Value.Foreground = pair.Key == navPage ? B("#B9E2A7") : B("#9AAFAE"); }
-  switch (page) { case "overview": Overview(); break; case "prepare": Preparation(); break; case "capsule": Capsule(); break; case "drivers": Drivers(); break; case "network": Network(); break; case "gaming": Gaming(); break; case "crosshairs": Crosshairs(); break; case "valorant-crosshairs": ValorantCrosshairCatalog(); break; case "benchmark": Benchmark(); break; case "performance": Performance(); break; case "memory": Memory(); break; case "cleanup": Cleaner(); break; case "startup": Startup(); break; case "apps": Apps(); break; case "history": History(); break; case "workspace": Workspace(); break; }
+  switch (page) { case "overview": Overview(); break; case "prepare": Preparation(); break; case "capsule": Capsule(); break; case "drivers": Drivers(); break; case "network": Network(); break; case "gaming": Gaming(); break; case "crosshairs": Crosshairs(); break; case "valorant-crosshairs": ValorantCrosshairCatalog(); break; case "benchmark": Benchmark(); break; case "performance": Performance(); break; case "memory": Memory(); break; case "cleanup": Cleaner(); break; case "startup": Startup(); break; case "apps": Apps(); break; case "history": History(); break; case "workspace": Workspace(); break; case "activation": Activation(); break; }
   UiTheme.ApplyTree(Page);
  }
  private void CapsuleNav(object sender, RoutedEventArgs e) { if (!busy) Navigate("capsule"); }
