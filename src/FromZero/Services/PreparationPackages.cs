@@ -118,9 +118,13 @@ public static class PreparationPackages
   if(extract.ExitCode is not(0 or 1168)||!File.Exists(executable))throw new IOException("HP aracı çıkartılamadı: "+extract.ExitCode);
   var publisher=await DriverService.SignatureAsync(executable);if(!publisher.Contains("HP Inc.",StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("HPImageAssistant yayıncısı doğrulanamadı.");return executable;
  }
- public static async Task<(int Code,string Path)> InstallAsync(string jobId,string id,VerifiedDownload download,IProgress<string> progress)
+ public static Task<(int Code,string Path)> InstallAsync(string jobId,string id,VerifiedDownload download,IProgress<string> progress)
+  =>InstallAsync(jobId,AppDownloads.Recipes.Single(r=>r.Id==id),Definition(id),download,progress);
+
+ internal static async Task<(int Code,string Path)> InstallAsync(string jobId,DownloadRecipe recipe,PreparationPackage definition,VerifiedDownload download,IProgress<string> progress)
  {
-  var definition=Definition(id);var recipe=AppDownloads.Recipes.Single(r=>r.Id==id);await AppDownloads.VerifyCachedAsync(recipe,download);
+  var id=recipe.Id;
+  await AppDownloads.VerifyCachedAsync(recipe,download);
   var stage=StageRoot(jobId);var file=Path.Combine(stage,id+"-"+Guid.NewGuid().ToString("N")+recipe.Extension);File.Copy(download.Path,file,false);
   using var locked=new FileStream(file,FileMode.Open,FileAccess.Read,FileShare.Read);
   var hash=Convert.ToHexString(await System.Security.Cryptography.SHA256.HashDataAsync(locked));if(hash!=download.Hash)throw new InvalidDataException("Kurulum dosyası aktarılırken değişmiş.");

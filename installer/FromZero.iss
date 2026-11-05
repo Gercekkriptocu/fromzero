@@ -12,10 +12,10 @@ AppVersion={#AppVersion}
 AppPublisher=FromZero
 AppPublisherURL=https://github.com/Gercekkriptocu/fromzero
 AppUpdatesURL=https://github.com/Gercekkriptocu/fromzero/releases/latest
-DefaultDirName={localappdata}\Programs\FromZero
+DefaultDirName={autopf}\FromZero
 DefaultGroupName=FromZero
 DisableProgramGroupPage=yes
-PrivilegesRequired=lowest
+PrivilegesRequired=admin
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 MinVersion=10.0.19044
@@ -52,4 +52,4 @@ Name: "{group}\FromZero"; Filename: "{app}\App\FromZero.exe"
 Name: "{autodesktop}\FromZero"; Filename: "{app}\App\FromZero.exe"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\App\FromZero.exe"; Description: "{cm:LaunchFromZero}"; Flags: nowait postinstall skipifsilent unchecked
+Filename: "{app}\App\FromZero.exe"; Description: "{cm:LaunchFromZero}"; Flags: nowait postinstall runascurrentuser skipifsilent unchecked

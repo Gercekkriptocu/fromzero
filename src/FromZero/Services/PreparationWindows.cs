@@ -1,36 +1,62 @@
 using System.IO;
 using System.Text.Json;
 namespace FromZero;
-public record PreparationWindowsResult(string Title,int Code,int HResult,bool Reboot,bool Installed);
+public record PreparationWindowsResult(string Title,int Code,int HResult,bool Reboot,bool Installed,string Key="");
 public static class PreparationWindows
 {
- public static string Script(bool drivers,string stopFile="")=>"$stopFile="+PackageSafety.QuotePs(stopFile)+";$progressFile="+PackageSafety.QuotePs(stopFile.Length>0?Path.Combine(Path.GetDirectoryName(stopFile)!,"windows-progress.txt"):"")+";"+"""
+ public static string Script(bool drivers,string stopFile="")=>BuildScript(drivers,stopFile,"");
+ public static string SelectionScript(IEnumerable<WindowsOffer> offers,string stopFile="")
+ {
+  var items=offers.DistinctBy(o=>o.Key).ToArray();
+  if(items.Length==0||items.Length>100||items.Any(o=>!o.QueueInstallable||!Guid.TryParse(o.Id,out _)||o.Revision<0))
+   throw new InvalidDataException("Invalid or unsupported Windows update selection.");
+  var identities=string.Join(",",items.Select(o=>"@{Id='"+Guid.Parse(o.Id)+"';Revision="+o.Revision+"}"));
+  return BuildScript(false,stopFile,identities);
+ }
+ private static string BuildScript(bool drivers,string stopFile,string identities)=>"$stopFile="+PackageSafety.QuotePs(stopFile)+";$progressFile="+PackageSafety.QuotePs(identities.Length==0&&stopFile.Length>0?Path.Combine(Path.GetDirectoryName(stopFile)!,"windows-progress.txt"):"")+";$wanted=@("+identities+");"+"""
  $session=New-Object -ComObject Microsoft.Update.Session;$session.ClientApplicationID='FromZero preparation';
  $installer=$session.CreateUpdateInstaller();
  if($installer.IsBusy){throw 'Başka bir Windows kurulumu sürüyor. Tamamlandıktan sonra tekrar dene.'};
- if($installer.RebootRequiredBeforeInstallation){[pscustomobject]@{Title='Önceki Windows işlemi yeniden başlatma bekliyor';Code=2;HResult=0;Reboot=$true;Installed=$false}|ConvertTo-Json;return};
+ if($installer.RebootRequiredBeforeInstallation){ConvertTo-Json -InputObject @([pscustomobject]@{Title='Önceki Windows işlemi yeniden başlatma bekliyor';Code=2;HResult=0;Reboot=$true;Installed=$false});return};
  $searcher=$session.CreateUpdateSearcher();$searcher.Online=$true;
- """+"$result=$searcher.Search(\"IsInstalled=0 and IsHidden=0 and Type='"+(drivers?"Driver":"Software")+"'\");$drivers=$"+(drivers?"true":"false")+";"+"""
- if([int]$result.ResultCode -ne 2){throw ('Windows taraması tam sonuç vermedi: '+$result.ResultCode)};
- $report=@();$ordered=@($result.Updates|Sort-Object @{Expression={if($drivers -and $_.DriverClass -eq 'Net'){0}elseif($drivers -and $_.DriverClass -eq 'System'){1}elseif($drivers -and $_.DriverClass -eq 'Display'){2}else{3}}});foreach($update in $ordered){
+ """+"$drivers=$"+(drivers?"true":"false")+"; $type='"+(drivers?"Driver":"Software")+"';"+"""
+ $report=@();
+ if($wanted.Count){$ordered=$wanted}else{
+  $result=$searcher.Search("IsInstalled=0 and IsHidden=0 and Type='"+$type+"'");
+  if([int]$result.ResultCode -ne 2){throw ('Windows taraması tam sonuç vermedi: '+$result.ResultCode)};
+  $ordered=@($result.Updates|Sort-Object @{Expression={if($drivers -and $_.DriverClass -eq 'Net'){0}elseif($drivers -and $_.DriverClass -eq 'System'){1}elseif($drivers -and $_.DriverClass -eq 'Display'){2}else{3}}});
+ };
+ foreach($candidate in $ordered){
   if($stopFile -and (Test-Path -LiteralPath $stopFile)){$report+=[pscustomobject]@{Title='Durdurma istendi';Code=5;HResult=0;Reboot=$false;Installed=$false};break};
-  $firmware=$update.Title -match 'Firmware|BIOS' -or ($drivers -and $update.DriverClass -eq 'Firmware');
-  $upgrade=@($update.Categories|Where-Object {$_.CategoryID -eq '3689BDC8-B205-4AF4-8D4A-A63924C5E9D5'}).Count -gt 0;
-  if($firmware -or $upgrade -or $update.InstallationBehavior.CanRequestUserInput -or (!$drivers -and ($update.BrowseOnly -or $update.Title -match 'Preview|Önizleme'))){continue};
+  $key='';$title=[string]$candidate.Title;
   try{
+   if($wanted.Count){
+    $key=$candidate.Id+':'+$candidate.Revision;$title=$key;
+    $match=$searcher.Search("IsInstalled=0 and IsHidden=0 and UpdateID='"+$candidate.Id+"' and RevisionNumber="+$candidate.Revision);
+    if([int]$match.ResultCode -ne 2 -or $match.Updates.Count -ne 1){throw 'Paket artık sunulmuyor; yeniden tarayın.'};
+    $update=$match.Updates.Item(0);$title=$update.Title;
+   }else{$update=$candidate};
+   $isDriver=[int]$update.Type -eq 2;
+   $firmware=$update.Title -match 'Firmware|BIOS' -or ($isDriver -and $update.DriverClass -eq 'Firmware');
+   $upgrade=@($update.Categories|Where-Object {$_.CategoryID -eq '3689BDC8-B205-4AF4-8D4A-A63924C5E9D5'}).Count -gt 0;
+   if($firmware -or $upgrade -or $update.InstallationBehavior.CanRequestUserInput -or (!$isDriver -and ($update.BrowseOnly -or $update.Title -match 'Preview|Önizleme'))){
+    if($wanted.Count){throw 'Paket otomatik kuruluma uygun değil.'};continue;
+   };
    if($progressFile){Set-Content -LiteralPath $progressFile -Encoding UTF8 -Value ('İndiriliyor: '+$update.Title)};
    if(!$update.EulaAccepted){$update.AcceptEula()};
    $collection=New-Object -ComObject Microsoft.Update.UpdateColl;[void]$collection.Add($update);
-   $downloader=$session.CreateUpdateDownloader();$downloader.Updates=$collection;$download=$downloader.Download();
-   if([int]$download.ResultCode -ne 2 -or !$update.IsDownloaded){throw ('İndirme başarısız: '+$download.ResultCode)};
+   if(!$update.IsDownloaded){
+    $downloader=$session.CreateUpdateDownloader();$downloader.Updates=$collection;$download=$downloader.Download();
+    if([int]$download.ResultCode -ne 2 -or !$update.IsDownloaded){throw ('İndirme başarısız: '+$download.ResultCode)};
+   };
    $installer=$session.CreateUpdateInstaller();$installer.Updates=$collection;$installer.AllowSourcePrompts=$false;$installer.ForceQuiet=$true;
    if($progressFile){Set-Content -LiteralPath $progressFile -Encoding UTF8 -Value ('Kuruluyor: '+$update.Title)};
    $resultInstall=$installer.Install();$item=$resultInstall.GetUpdateResult(0);
    $installed=$false;try{$verify=$searcher.Search("IsInstalled=1 and UpdateID='"+$update.Identity.UpdateID+"'");$installed=$verify.Updates.Count -gt 0}catch{};
    $restart=[bool]$resultInstall.RebootRequired;
-   $report+=[pscustomobject]@{Title=$update.Title;Code=[int]$item.ResultCode;HResult=[int]$item.HResult;Reboot=$restart;Installed=$installed};
+   $report+=[pscustomobject]@{Title=$title;Key=$key;Code=[int]$item.ResultCode;HResult=[int]$item.HResult;Reboot=$restart;Installed=$installed};
    if($restart){break};
-  }catch{$report+=[pscustomobject]@{Title=($update.Title+' / '+$_.Exception.Message);Code=4;HResult=[int]$_.Exception.HResult;Reboot=$false;Installed=$false}};
+  }catch{$report+=[pscustomobject]@{Title=($title+' / '+$_.Exception.Message);Key=$key;Code=4;HResult=[int]$_.Exception.HResult;Reboot=$false;Installed=$false}};
  };ConvertTo-Json -Depth 4 -InputObject @($report)
  """;
  public static async Task<PreparationOutcome> ApplyAsync(bool drivers,IProgress<string> progress,CancellationToken token,string stopFile="")

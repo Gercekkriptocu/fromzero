@@ -13,7 +13,7 @@ public static class AppDownloads
   new("Firefox","https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=tr","Mozilla Corporation",["mozilla.org","mozilla.net"],Id:"firefox"),
   new("Visual Studio Code","https://update.code.visualstudio.com/latest/win32-x64-user/stable","Microsoft Corporation",["visualstudio.com","microsoft.com","vscode-cdn.net"],Id:"vscode"),
   new("Steam","https://cdn.fastly.steamstatic.com/client/installer/SteamSetup.exe","Valve Corp.",["steamstatic.com","steampowered.com"],Id:"steam"),
-  new("NVIDIA App","https://www.nvidia.com/en-us/software/nvidia-app/","NVIDIA Corporation",["nvidia.com"],@"https://us\.download\.nvidia\.com/nvapp/client/[\d.]+/NVIDIA_app_v[\d.]+\.exe","nvidia",true),
+  new("NVIDIA App","https://www.nvidia.com/en-us/software/nvidia-app/","NVIDIA Corporation",["us.download.nvidia.com","www.nvidia.com"],@"https://us\.download\.nvidia\.com/nvapp/client/(?<version>\d+(?:\.\d+){1,3})/(?:x64/NVIDIA_app_v\k<version>_x64|NVIDIA_app_v\k<version>)\.exe(?=[\s""'<>?]|$)","nvidia",true),
   new("AMD Auto-Detect / Adrenalin kurulumu","https://www.amd.com/en/support/download/drivers.html","Advanced Micro Devices",["amd.com"],@"https://drivers\.amd\.com/drivers/installer/[^\s""'<>]+minimalsetup[^\s""'<>]+\.exe","amd",true),
   new("Intel Driver & Support Assistant","https://dsadata.intel.com/installer","Intel",["intel.com"],Id:"intel",DriverTool:true),
   new("DirectX ek oyun kütüphaneleri","https://download.microsoft.com/download/1/7/1/1718ccc4-6315-4d8e-9543-8e28a4e18c4c/dxwebsetup.exe","Microsoft Corporation",["microsoft.com"],Id:"directx"),

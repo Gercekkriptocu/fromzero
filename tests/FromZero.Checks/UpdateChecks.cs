@@ -25,6 +25,17 @@ internal static class UpdateChecks
   var script=WindowsUpdateCatalog.DownloadScript([offers]);check(script.Contains(".Download()")&&!script.Contains(".Install()"),"Batch update download does not install anything");
   var parsed=await Commands.PsAsync("$tokens=$null;$errors=$null;[void][System.Management.Automation.Language.Parser]::ParseInput("+PackageSafety.QuotePs(script)+",[ref]$tokens,[ref]$errors);if($errors.Count){throw (($errors | ForEach-Object Message)-join '; ')}");
   check(parsed.Success,"Windows download queue script parses without executing downloads");
+  var cached=offers with{Downloaded=true};
+  var software=offers with{Id=Guid.NewGuid().ToString(),Title="Windows security update",Kind="Software",Class=""};
+  var preview=software with{Id=Guid.NewGuid().ToString(),Title="Windows preview update"};
+  var feature=software with{Id=Guid.NewGuid().ToString(),FeatureUpgrade=true};
+  check(WindowsUpdateCatalog.MissingUpdates([cached,software,preview,feature,optional]).Select(o=>o.Key).ToHashSet().SetEquals([cached.Key,software.Key]),
+   "Select all missing includes cached drivers and regular Windows updates while excluding previews and upgrades");
+  var install=PreparationWindows.SelectionScript([cached,software]);
+  var installParsed=await Commands.PsAsync("$tokens=$null;$errors=$null;[void][System.Management.Automation.Language.Parser]::ParseInput("+PackageSafety.QuotePs(install)+",[ref]$tokens,[ref]$errors);if($errors.Count){throw (($errors | ForEach-Object Message)-join '; ')}");
+  check(installParsed.Success&&install.Contains(cached.Id)&&install.Contains(software.Id)&&install.Contains("if(!$update.IsDownloaded)")&&
+   install.Contains("$installer.Install()")&&Reject(()=>PreparationWindows.SelectionScript([feature])),
+   "Selected Windows install targets exact identities, reuses cache and rejects feature upgrades");
   check(WindowsUpdateCatalog.DownloadScript([offers],false).Contains("$allowLicense=$false")&&script.Contains("} catch { $report"),"Automatic update queue refuses new licenses and records each package failure");
   check(WindowsUpdateCatalog.ScanScript(true).Contains("IncludePotentiallySupersededUpdates=$true")&&WindowsUpdateCatalog.ScanScript(true).Contains("IsHidden=1")&&!WindowsUpdateCatalog.ScanScript(false).Contains("IsHidden=1"),"Expanded Windows scan explicitly includes hidden and superseded offers");
   check(AppDownloads.Recipes.Count(r=>r.Id.StartsWith("vc"))==12,"Visual C++ catalog covers six generations in x86 and x64");

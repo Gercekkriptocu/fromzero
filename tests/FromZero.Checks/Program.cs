@@ -114,6 +114,10 @@ try{
  Check(!AppDownloads.Allowed(new Uri("https://name:secret@nvidia.com/app.exe"),["nvidia.com"]),"Download rejects embedded credentials");
  var nvRecipe=AppDownloads.Recipes.Single(r=>r.Id=="nvidia");
  Check(AppDownloads.ExtractDownload("<a href='https://us.download.nvidia.com/nvapp/client/11.0.9.565/NVIDIA_app_v11.0.9.565.exe'>download</a>",nvRecipe).Host=="us.download.nvidia.com","NVIDIA download resolved from official page");
+ var nvArm="https://us.download.nvidia.com/nvapp/client/11.0.9.585/arm64/NVIDIA_app_v11.0.9.585_arm64.exe";
+ var nvX64="https://us.download.nvidia.com/nvapp/client/11.0.9.585/x64/NVIDIA_app_v11.0.9.585_x64.exe";
+ Check(AppDownloads.ExtractDownload($"<a href='{nvArm}'>ARM</a><a href='{nvX64}'>x64</a>",nvRecipe).AbsoluteUri==nvX64,
+  "NVIDIA's architecture-specific links resolve to the x64 installer when ARM64 appears first");
  Reject(()=>AppDownloads.ExtractDownload("<a href='https://evil.test/NVIDIA.exe'>bad</a>",nvRecipe),"Missing vendor download fails explicitly");
  var amdRecipe=AppDownloads.Recipes.Single(r=>r.Id=="amd");
  Check(AppDownloads.ExtractDownload("https://drivers.amd.com/drivers/installer/26.20/whql/amd-software-adrenalin-edition-26.10.1-minimalsetup-261018_web.exe",amdRecipe).Host=="drivers.amd.com","AMD minimal setup resolved from official page");
@@ -129,7 +133,7 @@ try{
  };
  var artifactsPath=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","artifacts"));Directory.CreateDirectory(artifactsPath);
  var startupArgument=Array.IndexOf(args,"--verify-startup");if(startupArgument>=0){if(startupArgument+1>=args.Length)throw new ArgumentException("Startup executable path required");await StartupChecks.RunProcesses(args[startupArgument+1],artifactsPath,Check);}
- var releaseArgument=Array.IndexOf(args,"--verify-release-integrity");if(releaseArgument>=0){if(releaseArgument+1>=args.Length)throw new ArgumentException("Release folder required");var release=await ReleaseIntegrity.InspectAsync(Path.GetFullPath(args[releaseArgument+1]),new(0,19,1));Check(release.IntegrityOk&&release.Files>=4&&release.Version=="0.19.1","Packaged release manifest verifies the published files");}
+ var releaseArgument=Array.IndexOf(args,"--verify-release-integrity");if(releaseArgument>=0){if(releaseArgument+1>=args.Length)throw new ArgumentException("Release folder required");var release=await ReleaseIntegrity.InspectAsync(Path.GetFullPath(args[releaseArgument+1]),new(0,19,2));Check(release.IntegrityOk&&release.Files>=4&&release.Version=="0.19.2","Packaged release manifest verifies the published files");}
  await File.WriteAllTextAsync(Path.Combine(artifactsPath,"inventory-verification.json"),System.Text.Json.JsonSerializer.Serialize(liveReport,LocalStore.Json));
  if(args.Contains("--verify-faceit-public")){var ranking=await FaceitCatalog.RefreshAsync();await File.WriteAllTextAsync(Path.Combine(artifactsPath,"faceit-public-0.15-verification.json"),System.Text.Json.JsonSerializer.Serialize(ranking,LocalStore.Json));Check(ranking.Entries.Count==10&&ranking.Entries.All(e=>e.Source==FaceitCatalog.PublicGlobalUrl),"Live public HTML FACEIT ranking refresh succeeds without API credentials");}
  if(args.Contains("--verify-updates")){

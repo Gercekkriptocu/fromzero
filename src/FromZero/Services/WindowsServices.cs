@@ -44,6 +44,9 @@ public static class Commands
  // The elevated shell receives only scripts assembled by the application, never user-entered commands.
  public static async Task<CommandResult> ElevatedAsync(string script)
  {
+  using var identity=System.Security.Principal.WindowsIdentity.GetCurrent();
+  if(new System.Security.Principal.WindowsPrincipal(identity).IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
+   return await InstallPsAsync(script);
   var resultPath = LocalStore.FilePath("operation-" + Guid.NewGuid().ToString("N") + ".json");
   var escaped = PackageSafety.QuotePs(resultPath);
   var wrapped = "$ErrorActionPreference='Stop'; $ProgressPreference='SilentlyContinue'; try { $r = & { " + script + " }; $out=[pscustomobject]@{ ExitCode=0; Output=($r | Out-String) } } catch { $out=[pscustomobject]@{ ExitCode=1; Output=$_.Exception.Message } }; $out | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath " + escaped + " -Encoding UTF8";

@@ -6,13 +6,15 @@ if ((Get-FileHash -LiteralPath $installerPath -Algorithm SHA256).Hash -ne $expec
 
 foreach ($language in @('en','tr')) {
  $target = Join-Path ([IO.Path]::GetTempPath()) ('FromZero-setup-check-' + [Guid]::NewGuid().ToString('N'))
- $argsList = @('/CURRENTUSER','/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/NOICONS',"/LANG=$language",('/DIR="' + $target + '"'))
+ $argsList = @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/NOICONS',"/LANG=$language",('/DIR="' + $target + '"'))
  try {
   $install = Start-Process -FilePath $installerPath -ArgumentList $argsList -WindowStyle Hidden -Wait -PassThru
   if ($install.ExitCode -ne 0) { throw "Setup failed in $language ($($install.ExitCode))." }
   $selected = (Get-Content -LiteralPath (Join-Path $target 'install-language.txt') -Raw).Trim()
   if ($selected -ne $language) { throw "Incorrect installer language marker: $selected." }
   $payload = Join-Path $target 'App'
+  $exeText = [Text.Encoding]::UTF8.GetString([IO.File]::ReadAllBytes((Join-Path $payload 'FromZero.exe')))
+  if (!$exeText.Contains('level="requireAdministrator"')) { throw 'The installed app is missing its administrator startup manifest.' }
   $manifest = Get-Content -LiteralPath (Join-Path $payload 'release-manifest.json') -Raw | ConvertFrom-Json
   if ($manifest.Runtime -ne 'win-x64' -or $manifest.Files.Count -lt 4) { throw 'Invalid installed payload.' }
   foreach ($file in $manifest.Files) {

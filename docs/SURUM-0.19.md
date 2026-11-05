@@ -1,4 +1,11 @@
-# FromZero 0.19.1
+# FromZero 0.19.2
+
+- Güncellemeler ekranı uygun eksikleri tek düğmeyle seçer. İndirilen Windows paketleri de kurulum kuyruğuna alınır.
+- Seçilen Windows paketleri, sürücüler ve desteklenen kurucular indirilip kurulur. Sürücü kurulumu öncesi yedek alınır. Paket doğrulama, elle kurulması gereken paketler ve yeniden başlatma durumları sonuçta ayrı gösterilir.
+- NVIDIA App'in yeni x64 indirme adresi desteklenir. Eski bağlantı biçimi de tanınır.
+- FromZero açılışta yönetici yetkisi alır. PowerShell işlemleri uygulamanın yetkisini kullanır. Yeni kurulumun varsayılan yolu Program Files klasörüdür.
+
+## 0.19.1
 
 - Aktivasyon motoru bilgi bölümü kaldırıldı.
 - Komutun sıfır çıkış kodu tek başına başarılı etkinleştirme sayılmaz. Windows ve yerel Office lisans durumu işlem öncesi ve sonrası karşılaştırılır; zaten etkin, doğrulanan, kısmen doğrulanan ve doğrulanamayan sonuçlar ayrılır. Windows eklenti lisansları ana sistem lisansı sayılmaz.

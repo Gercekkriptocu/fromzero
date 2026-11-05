@@ -1,11 +1,13 @@
 using System.IO;
 namespace FromZero;
 
-public record WindowsOffer(string Id,int Revision,string Title,string Kind,string Manufacturer,string Model,string Class,string Eula,bool Hidden,bool Downloaded,bool Optional,bool Superseded,long Bytes,string Version,string Date,bool EulaAccepted=false,string HardwareId="")
+public record WindowsOffer(string Id,int Revision,string Title,string Kind,string Manufacturer,string Model,string Class,string Eula,bool Hidden,bool Downloaded,bool Optional,bool Superseded,long Bytes,string Version,string Date,bool EulaAccepted=false,string HardwareId="",bool FeatureUpgrade=false,bool Interactive=false)
 {
  public bool Firmware=>new UpdateInfo(Id,Revision,Title,Manufacturer,Model,Eula,Class).IsFirmware;
  public bool SelectableDriver=>!Firmware&&!Hidden&&!Superseded&&Kind=="Driver";
  public bool AutoEligible=>SelectableDriver&&!Optional;
+ public bool QueueInstallable=>!Firmware&&!Hidden&&!Superseded&&!FeatureUpgrade&&!Interactive&&
+  (Kind=="Driver"||Kind=="Software"&&!Optional&&!System.Text.RegularExpressions.Regex.IsMatch(Title,"Preview|Önizleme",System.Text.RegularExpressions.RegexOptions.IgnoreCase));
  public string ReviewGroup=>Hidden||Superseded?"Archived":Firmware?"Manufacturer check required":Optional?"Optional":"Recommended";
  public string Key=>Id+":"+Revision;
 }
@@ -13,7 +15,12 @@ public record WindowsScan(DateTimeOffset Checked,List<WindowsOffer> Offers,List<
 public record WindowsDownloadResult(string Id,int Revision,string Title,int Code,int HResult,bool Downloaded);
 public static class WindowsUpdateCatalog
 {
- public static IEnumerable<WindowsOffer> RecommendedDrivers(IEnumerable<WindowsOffer> offers)=>offers.Where(i=>i.AutoEligible&&!i.Downloaded).GroupBy(i=>!string.IsNullOrWhiteSpace(i.HardwareId)?i.HardwareId:string.IsNullOrWhiteSpace(i.Model)?i.Id:i.Manufacturer+"/"+i.Model+"/"+i.Class,StringComparer.OrdinalIgnoreCase).Select(g=>g.OrderByDescending(i=>Version.TryParse(i.Version,out var v)?v:new Version()).ThenByDescending(i=>i.Date).First());
+ public static IEnumerable<WindowsOffer> RecommendedDrivers(IEnumerable<WindowsOffer> offers,bool includeDownloaded=false)=>offers.Where(i=>i.AutoEligible&&(includeDownloaded||!i.Downloaded)).GroupBy(i=>!string.IsNullOrWhiteSpace(i.HardwareId)?i.HardwareId:string.IsNullOrWhiteSpace(i.Model)?i.Id:i.Manufacturer+"/"+i.Model+"/"+i.Class,StringComparer.OrdinalIgnoreCase).Select(g=>g.OrderByDescending(i=>Version.TryParse(i.Version,out var v)?v:new Version()).ThenByDescending(i=>i.Date).First());
+ public static IEnumerable<WindowsOffer> MissingUpdates(IEnumerable<WindowsOffer> offers)
+ {
+  var eligible=offers.Where(offer=>offer.QueueInstallable).ToArray();
+  return eligible.Where(offer=>offer.Kind=="Software").Concat(RecommendedDrivers(eligible,true));
+ }
  public static bool MatchesDevice(WindowsOffer offer,DeviceInfo device)=>offer.Kind=="Driver"&&device.Present&&
   !string.IsNullOrWhiteSpace(offer.HardwareId)&&device.HardwareIds.Concat(device.CompatibleIds??[]).Contains(offer.HardwareId,StringComparer.OrdinalIgnoreCase);
  public static string ScanScript(bool extended)=>"""
@@ -32,6 +39,8 @@ public static class WindowsUpdateCatalog
    Kind=if($driver){'Driver'}else{'Software'};Manufacturer=if($driver){[string]$u.DriverManufacturer}else{''};
    HardwareId=if($driver){[string]$u.DriverHardwareID}else{''};Model=if($driver){[string]$u.DriverModel}else{''};Class=if($driver){[string]$u.DriverClass}else{''};
    Eula=[string]$u.EulaText;EulaAccepted=[bool]$u.EulaAccepted;Hidden=[bool]$u.IsHidden;Downloaded=[bool]$u.IsDownloaded;Optional=[bool]$u.BrowseOnly;
+   FeatureUpgrade=@($u.Categories | Where-Object {$_.CategoryID -eq '3689BDC8-B205-4AF4-8D4A-A63924C5E9D5'}).Count -gt 0;
+   Interactive=[bool]$u.InstallationBehavior.CanRequestUserInput;
    Superseded=$false;Bytes=[long]$u.MaxDownloadSize;
    Version=if($driver -and $u.Title -match '(\d+\.\d+\.\d+(?:\.\d+)?)'){$Matches[1]}else{''};Date=if($driver -and $u.DriverVerDate){$u.DriverVerDate.ToString('yyyy-MM-dd')}else{''}
   }

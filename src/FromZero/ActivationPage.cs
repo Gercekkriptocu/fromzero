@@ -136,8 +136,8 @@ public partial class MainWindow
  private async Task ActivateAsync(ActivationMethod method)
  {
   var title=ActivationPolicy.Title(method);
-  if(!Confirm(Locale.Text(ActivationDescription(method))+"\n\n"+Locale.Text("Windows will request administrator approval. Run this operation?"),Locale.Text(title)))return;
-  OperationTitle.Text=Locale.Text("Waiting for administrator approval and activation result…");
+  if(!Confirm(Locale.Text(ActivationDescription(method))+"\n\n"+Locale.Text("Run this operation?"),Locale.Text(title)))return;
+  OperationTitle.Text=Locale.Text("Waiting for activation result…");
   activationResult=await activationService.ExecuteAsync(method);
   activationSnapshot=activationResult.After;
   activationDetails="";
