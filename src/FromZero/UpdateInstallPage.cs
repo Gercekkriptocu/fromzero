@@ -7,6 +7,14 @@ public partial class MainWindow
 {
  private async Task InstallSelectedUpdatesAsync()
  {
+  var storage=UpdateStorage.Read();
+  if(!storage.Ready)
+  {
+   operationCompletion=Locale.Text("Free up space to update");
+   Journal.Write("Update installation",UpdateSpaceMessage(storage),false);
+   Navigate("drivers");
+   return;
+  }
   if(windowsSelection.Count+packageSelection.Count+catalogDriverQueue.Count==0)await SelectAllMissingUpdatesAsync();
   var offers=(windowsScan?.Offers??[]).Where(o=>windowsSelection.Contains(o.Key)).ToArray();
   var recipes=AppDownloads.Recipes.Where(r=>packageSelection.Contains(r.Id)).ToArray();
@@ -37,10 +45,18 @@ public partial class MainWindow
    if(allowed.Any(o=>o.Kind=="Driver"))
    {
     OperationTitle.Text=Locale.Text("Backing up drivers…");
-    try{await driverService.BackupAsync(Path.Combine(LocalStore.FilePath("Backups"),"Updates-"+operationId));}
-    catch(Exception ex) when(ex is not OperationCanceledException)
+    try
     {
-     results.Add(Locale.Text("Driver backup failed. Driver installations were skipped.")+" "+ex.Message);
+     var liveDevices=await inventory.DevicesAsync();
+     var liveDrivers=await inventory.DriversAsync();
+     var selectedDrivers=allowed.Where(offer=>offer.Kind=="Driver").ToArray();
+     var matching=liveDevices.Where(device=>selectedDrivers.Any(offer=>WindowsUpdateCatalog.MatchesDevice(offer,device)));
+     await driverService.BackupDevicesAsync(Path.Combine(LocalStore.FilePath("Backups"),"Updates-"+operationId),matching,liveDrivers);
+    }
+    catch(Exception ex) when(ex is not OperationCanceledException&&!UpdateStorage.IsDiskFull(ex))
+    {
+     Journal.Write("Update driver backup",ex.Message,false);
+     results.Add(Locale.Text("Driver backup failed. Driver installations were skipped."));
      allowed=allowed.Where(o=>o.Kind!="Driver").ToArray();
      attention=true;
     }
@@ -48,6 +64,7 @@ public partial class MainWindow
    foreach(var batch in allowed.Chunk(40))
    {
     token.ThrowIfCancellationRequested();
+    EnsureUpdateSpace();
     OperationTitle.Text=Locale.Text("Downloading and installing Windows updates and drivers…");
     var command=await Commands.ElevatedAsync(PreparationWindows.SelectionScript(batch,stopFile));
     if(!command.Success){results.Add(command.Output);attention=true;break;}
@@ -79,6 +96,7 @@ public partial class MainWindow
    foreach(var offer in restart?Array.Empty<WindowsOffer>():nativeDrivers.ToArray())
    {
     token.ThrowIfCancellationRequested();
+    EnsureUpdateSpace();
     try
     {
      var driverResult=await SilentDriverUpdates.InstallAsync(offer,progress,token);
@@ -99,12 +117,14 @@ public partial class MainWindow
 
    if(!restart&&catalogDriverQueue.Count>0)
    {
+    EnsureUpdateSpace();
     var catalogResult=await InstallCatalogQueueAsync(results,progress,token);
     restart=catalogResult.Restart;attention|=catalogResult.Attention;
    }
    foreach(var selected in restart?Array.Empty<DownloadRecipe>():recipes)
    {
     token.ThrowIfCancellationRequested();
+    EnsureUpdateSpace();
     try
     {
      var app=applicationScan?.Applications.FirstOrDefault(a=>a.Id==selected.Id);
@@ -117,7 +137,7 @@ public partial class MainWindow
      };
      var definition=UpdatePackageInstaller.Definition(recipe,runtime)??UpdatePackageInstaller.Definition(selected,runtime);
      if(selected.Id=="directx")definition=UpdatePackageInstaller.Definition(recipe,null);
-     var result=await ApplyUpdatePackageAsync(recipe,definition,app,runtime,operationId,progress,token);
+     var result=await ApplyUpdatePackageAsync(recipe,definition,app,runtime,progress,token);
      downloadStatus[selected.Id]=result.Status;
      results.Add(selected.Name+" · "+Locale.Text(result.Status));
      restart=result.Restart;
@@ -130,7 +150,7 @@ public partial class MainWindow
      }
      if(restart)break;
     }
-    catch(Exception ex) when(ex is not OperationCanceledException)
+    catch(Exception ex) when(ex is not OperationCanceledException&&!UpdateStorage.IsDiskFull(ex))
     {
      downloadStatus[selected.Id]="Installation could not be verified";
      results.Add(selected.Name+" · "+ex.Message);
@@ -143,6 +163,11 @@ public partial class MainWindow
    results.Add(Locale.Text("Stopped between updates. Remaining selections are kept."));
    attention=true;
   }
+  catch(IOException ex) when(UpdateStorage.IsDiskFull(ex))
+  {
+   results.Add(UpdateSpaceMessage(UpdateStorage.Read()));
+   attention=true;
+  }
   finally
   {
    if(File.Exists(stopFile))File.Delete(stopFile);
@@ -152,7 +177,6 @@ public partial class MainWindow
    foreach(var key in installedKeys)downloadStatus.Remove(key);
    windowsScan?.Offers.RemoveAll(o=>installedKeys.Contains(o.Key));
    if(installedKeys.Count>0)hardwareInventoryReady=false;
-   Navigate("drivers");
   }
   if(restart)results.Add(Locale.Text("Restart Windows and run the queue again for remaining updates."));
   var reportText=string.Join("\n",results);
@@ -160,11 +184,26 @@ public partial class MainWindow
   operationCompletion=Locale.Text(restart?"Restart required":attention?"Review update results":"Update installation finished");
   updateInstallationReport=reportText;
   updateInstallationStatus=operationCompletion;
+  updateInstallationNeedsAttention=attention||restart;
   Navigate("drivers");
  }
 
+ private static string UpdateSpaceMessage(UpdateStorage storage)
+ {
+  var drive=storage.Drive.TrimEnd(Path.DirectorySeparatorChar);
+  return storage.Ready
+   ?string.Format(Locale.Culture,Locale.Text("An update ran out of disk space. {0} now has {1} free. Free up more space and retry."),drive,SizeLabel(storage.AvailableBytes))
+   :string.Format(Locale.Culture,Locale.Text("{0} has {1} free. Free up at least {2} on this drive, then retry."),
+    drive,SizeLabel(storage.AvailableBytes),SizeLabel(UpdateStorage.MinimumBytes-storage.AvailableBytes));
+ }
+
+ private static void EnsureUpdateSpace()
+ {
+  if(!UpdateStorage.Read().Ready)throw new IOException("System drive is low on space.",unchecked((int)0x80070070));
+ }
+
  private static async Task<(string Status,bool Verified,bool Restart)> ApplyUpdatePackageAsync(DownloadRecipe recipe,
-  PreparationPackage? definition,ApplicationRelease? app,RuntimePackage? runtime,string operationId,IProgress<string> progress,CancellationToken token)
+  PreparationPackage? definition,ApplicationRelease? app,RuntimePackage? runtime,IProgress<string> progress,CancellationToken token)
  {
   if(definition!=null&&UpdatePackageInstaller.Present(recipe,definition,app,runtime))return("Already up to date",true,false);
   var download=await UpdatePackageInstaller.AcquireAsync(recipe,progress,token);
@@ -172,7 +211,18 @@ public partial class MainWindow
   if(UpdatePackageInstaller.AppIsRunning(definition)&&!await UpdatePackageInstaller.TryCloseForUpdateAsync(definition,token))
    return("Close the application, then run the queue again",false,false);
   token.ThrowIfCancellationRequested();
-  var install=await PreparationPackages.InstallAsync(operationId,recipe,definition,download,progress);
+  var stageId=Guid.NewGuid().ToString("N");
+  (int Code,string Path) install;
+  var keepStage=false;
+  try
+  {
+   install=await PreparationPackages.InstallAsync(stageId,recipe,definition,download,progress);
+   keepStage=install.Code is 3010 or 1641;
+  }
+  finally
+  {
+   if(!keepStage)PreparationPackages.RemoveUpdateStage(stageId);
+  }
   if(install.Code is 3010 or 1641)return("Restart required",false,true);
   if(install.Code==6&&recipe.Id=="app-obs")return("OBS files are in use. Close OBS, browsers and camera applications, then retry.",false,false);
   if(install.Code!=0)throw new IOException(Locale.Text("Installer exit code")+" "+install.Code);

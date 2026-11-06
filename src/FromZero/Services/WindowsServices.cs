@@ -107,10 +107,25 @@ public sealed class InventoryService
 public sealed class DriverService
 {
  public async Task BackupAsync(string destination)
+  =>await ExportDriverAsync(destination,"*");
+
+ public async Task BackupDevicesAsync(string destination,IEnumerable<DeviceInfo> devices,IEnumerable<DriverInfo> drivers)
  {
+  var deviceIds=devices.Where(device=>device.Present).Select(device=>device.Id).ToHashSet(StringComparer.OrdinalIgnoreCase);
+  var infs=drivers.Where(driver=>deviceIds.Contains(driver.DeviceId)&&
+   System.Text.RegularExpressions.Regex.IsMatch(driver.Inf,@"\Aoem[0-9]+\.inf\z",
+    System.Text.RegularExpressions.RegexOptions.IgnoreCase|System.Text.RegularExpressions.RegexOptions.CultureInvariant))
+   .Select(driver=>driver.Inf).Distinct(StringComparer.OrdinalIgnoreCase);
+  foreach(var inf in infs)
+   await ExportDriverAsync(Path.Combine(destination,inf),inf);
+ }
+
+ private static async Task ExportDriverAsync(string destination,string package)
+ {
+  destination=Path.GetFullPath(destination);
+  PackageSafety.RejectReparsePoints(Path.GetPathRoot(destination)!, destination);
   Directory.CreateDirectory(destination);
-  PackageSafety.RejectReparsePoints(destination, destination);
-  var result = await Commands.ElevatedAsync("& $env:SystemRoot\\System32\\pnputil.exe /export-driver '*' " + PackageSafety.QuotePs(destination) + "; if ($LASTEXITCODE -notin @(0,3010)) { throw ('PnPUtil kodu: ' + $LASTEXITCODE) }");
+  var result = await Commands.ElevatedAsync("& $env:SystemRoot\\System32\\pnputil.exe /export-driver " + PackageSafety.QuotePs(package) + " " + PackageSafety.QuotePs(destination) + "; if ($LASTEXITCODE -notin @(0,3010)) { throw ('PnPUtil kodu: ' + $LASTEXITCODE) }");
   Journal.Write("Sürücü yedeği", result.Output, result.Success);
   if (!result.Success) throw new InvalidOperationException(result.Output);
  }

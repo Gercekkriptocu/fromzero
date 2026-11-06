@@ -101,14 +101,32 @@ public static class PreparationPackages
   // The USB cannot supply hosts, commands, publisher rules or a target version for online updates.
   var pinned=recipe with{Hosts=hosts,ExpectedSha256=entry.Sha256,ExpectedSha512=""};AppDownloads.RegisterApp(pinned);SelectedReleases[entry.Id]=new(entry.Id,recipe.Name,entry.Version,[],"Çevrimdışı paket",pinned,"USB / üretici imzası","",null);return pinned;
  }
- public static string StageRoot(string jobId)
+ private static string StagePath(string jobId)
  {
   if(!Guid.TryParseExact(jobId,"N",out _))throw new InvalidDataException("Kurulum kimliği geçersiz.");
-  var root=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),"FromZero","Preparation",jobId);
+  return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),"FromZero","Preparation",jobId);
+ }
+ public static string StageRoot(string jobId)
+ {
+  var root=StagePath(jobId);
   Directory.CreateDirectory(root);PackageSafety.RejectReparsePoints(Path.GetPathRoot(root)!,root);
   var security=new DirectorySecurity();security.SetAccessRuleProtection(true,false);
   foreach(var sid in new[]{WellKnownSidType.BuiltinAdministratorsSid,WellKnownSidType.LocalSystemSid})security.AddAccessRule(new(new SecurityIdentifier(sid,null),FileSystemRights.FullControl,InheritanceFlags.ContainerInherit|InheritanceFlags.ObjectInherit,PropagationFlags.None,AccessControlType.Allow));
   security.SetOwner(new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid,null));new DirectoryInfo(root).SetAccessControl(security);return root;
+ }
+ internal static void RemoveUpdateStage(string stageId)
+ {
+  var root=StagePath(stageId);
+  try
+  {
+   if(!Directory.Exists(root))return;
+   PackageSafety.RejectReparsePoints(Path.GetPathRoot(root)!,root);
+   Directory.Delete(root,true);
+  }
+  catch(Exception ex) when(ex is IOException or UnauthorizedAccessException or InvalidDataException)
+  {
+   Journal.Write("Update staging cleanup",ex.Message,false);
+  }
  }
  public static async Task<string> ExtractHpiaAsync(string jobId,VerifiedDownload download)
  {

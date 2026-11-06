@@ -3058,5 +3058,10 @@
   "OBS dosyaları kullanılıyor. OBS, tarayıcı ve kamera uygulamalarını kapatıp tekrar dene.": "OBS files are in use. Close OBS, browsers and camera applications, then retry.",
   "Seçilen güncellemeler indirilsin ve kurulsun mu? Windows Update lisansları kabul edilir. Önce sürücüler yedeklenir. Seçilen açık uygulamalar normal şekilde kapatılmaya çalışılır. Devam etmeden önce açık çalışmalarını kaydet.": "Download and install the selected updates? Windows Update licenses will be accepted. Drivers are backed up first. Selected running applications will be asked to close. Save your work before continuing.",
   "Sürücü paketini indirmek için yeterli boş alan yok.": "Not enough free space to download the driver package.",
-  "Sürücü paketini çıkarmak ve kurulum alanına almak için yeterli boş alan yok.": "Not enough free space to extract and stage the driver package."
+  "Sürücü paketini çıkarmak ve kurulum alanına almak için yeterli boş alan yok.": "Not enough free space to extract and stage the driver package.",
+  "Güncellemek için disk alanı aç": "Free up space to update",
+  "{0} sürücüsünde {1} boş alan var. Bu sürücüde en az {2} daha alan açıp tekrar dene.": "{0} has {1} free. Free up at least {2} on this drive, then retry.",
+  "Güncelleme sırasında disk alanı tükendi. {0} sürücüsünde şu an {1} boş alan var. Daha fazla alan açıp tekrar dene.": "An update ran out of disk space. {0} now has {1} free. Free up more space and retry.",
+  "Windows depolama ayarlarını aç": "Open Windows storage settings",
+  "Boş alanı yeniden kontrol et": "Recheck free space"
 }

@@ -21,9 +21,11 @@ public static class CatalogDriverInstaller
  public static async Task<CatalogDriverInstallResult> InstallAsync(CatalogDriverReview review,IProgress<string> progress,CancellationToken token)
  {
   var inventory=new InventoryService();
-  var device=(await inventory.DevicesAsync()).SingleOrDefault(d=>d.Id.Equals(review.Device.Id,StringComparison.OrdinalIgnoreCase));
+  var devices=await inventory.DevicesAsync();
+  var device=devices.SingleOrDefault(d=>d.Id.Equals(review.Device.Id,StringComparison.OrdinalIgnoreCase));
   if(device==null)throw new InvalidDataException("Device is no longer connected");
-  var installed=(await inventory.DriversAsync()).FirstOrDefault(d=>d.DeviceId.Equals(device.Id,StringComparison.OrdinalIgnoreCase));
+  var liveDrivers=await inventory.DriversAsync();
+  var installed=liveDrivers.FirstOrDefault(d=>d.DeviceId.Equals(device.Id,StringComparison.OrdinalIgnoreCase));
   var match=DriverPackageMatching.Assess(review.Package,device,installed);
   if(!match.Installable)throw new InvalidDataException(match.Reason);
   var sourceInf=PackageSafety.ResolveInside(review.Folder,review.Package.Inf);
@@ -51,7 +53,9 @@ public static class CatalogDriverInstaller
   progress.Report("Checking signed driver package…");
   await service.CheckInfAsync(inf,[device]);
   progress.Report("Backing up drivers…");
-  await service.BackupAsync(Path.Combine(LocalStore.FilePath("Backups"),"Catalogue-"+DateTime.Now.ToString("yyyyMMdd-HHmmss-fff")));
+  var matching=devices.Where(current=>current.HardwareIds.Concat(current.CompatibleIds??[])
+   .Any(id=>review.Package.HardwareIds.Contains(id,StringComparer.OrdinalIgnoreCase)));
+  await service.BackupDevicesAsync(Path.Combine(LocalStore.FilePath("Backups"),"Catalogue-"+DateTime.Now.ToString("yyyyMMdd-HHmmss-fff")),matching,liveDrivers);
   token.ThrowIfCancellationRequested();
   progress.Report("Installing reviewed driver…");
   var command=await Commands.ElevatedAsync("$output=& "+PackageSafety.QuotePs(Path.Combine(Environment.SystemDirectory,"pnputil.exe"))+

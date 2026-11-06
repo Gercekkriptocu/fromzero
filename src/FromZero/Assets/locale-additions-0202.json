@@ -1,0 +1,7 @@
+{
+ "Güncellemek için disk alanı aç":"Free up space to update",
+ "{0} sürücüsünde {1} boş alan var. Bu sürücüde en az {2} daha alan açıp tekrar dene.":"{0} has {1} free. Free up at least {2} on this drive, then retry.",
+ "Güncelleme sırasında disk alanı tükendi. {0} sürücüsünde şu an {1} boş alan var. Daha fazla alan açıp tekrar dene.":"An update ran out of disk space. {0} now has {1} free. Free up more space and retry.",
+ "Windows depolama ayarlarını aç":"Open Windows storage settings",
+ "Boş alanı yeniden kontrol et":"Recheck free space"
+}

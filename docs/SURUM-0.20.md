@@ -1,4 +1,10 @@
-# FromZero 0.20.1
+# FromZero 0.20.2
+
+- Güncelleme kuyruğu Windows diskindeki boş alanı başlamadan ve kurulumlar arasında kontrol eder. Alan yetersizse Güncellemeler ekranında ne kadar yer açılması gerektiği ve Windows depolama ayarları gösterilir.
+- Güncelleme öncesinde yalnızca etkilenen cihazların etkin üçüncü taraf sürücü paketleri yedeklenir. Tam sürücü yedeği Format Kiti ve yedekleme araçlarında kullanılabilir.
+- Uygulama güncellemeleri geçici kurulum kopyalarını işlem sonunda temizler. Dikkat gerektiren kurulum sonuçları açık gösterilir.
+
+## 0.20.1
 
 - Güncelleme satırları cihazın veya uygulamanın adını gösterir. Kategori adı ikinci satırdadır. Ekran kartı ve ses sürücüsünün hangi cihaza ait olduğu görülebilir.
 - Kullanıcı girdisi isteyebilir işaretli sürücüler artık atlanmaz: Windows Update sessiz kurulumla indirme ve kurulumu dener. Başarısız sürücüler için aynı bilgisayara, aynı güncelleme kimliğiyle indirilen WUA önbelleği kullanılır; donanım, tam sürüm, mimari ve imzalı INF/katalog kontrolünden sonra PnPUtil kurulumu denenir. Windows'un etkinleştirdiği gerçek sürüm doğrulanır.

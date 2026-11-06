@@ -14,6 +14,7 @@ public partial class MainWindow
  private readonly HashSet<string> windowsSelection=new(),packageSelection=new();
  private readonly List<string> updateWarnings=[];
  private string updateInstallationReport="",updateInstallationStatus="";
+ private bool updateInstallationNeedsAttention;
  private readonly Dictionary<string,string> downloadStatus=new(StringComparer.OrdinalIgnoreCase);
  private bool extendedUpdateScan=true,legacyRuntimeScan=true;
  private bool automaticDownloads=ReadAutoDownload();
@@ -31,8 +32,20 @@ public partial class MainWindow
    Action("Select all missing updates",SelectAllMissingUpdatesAsync),Action("Download and update",InstallSelectedUpdatesAsync,true)),
    T(scanText,13,"#D2DED6"),queueSummary,
    T("Save your work before updating. Selected applications are asked to close. Package licences are accepted and Windows may require a restart.",11,"#9AAFAE"))));UpdateQueueSummary();
-  if(updateInstallationReport.Length>0)Page.Children.Add(Card(Stack(T(updateInstallationStatus,17,"#B9E2A7",true),
-   PreparationExpander("Installation results",T(updateInstallationReport,12,"#B9CBC1")))));
+  if(!manufacturer)
+  {
+   var storage=UpdateStorage.Read();
+   if(!storage.Ready)Page.Children.Add(Card(Stack(T("Free up space to update",17,"#EBC078",true),
+    T(UpdateSpaceMessage(storage),13,"#D2DED6"),
+    Row(Link("Open Windows storage settings","ms-settings:storagesense"),
+     Action("Recheck free space",()=>{Navigate("drivers");return Task.CompletedTask;})))));
+  }
+  if(updateInstallationReport.Length>0)
+  {
+   var report=PreparationExpander("Installation results",T(updateInstallationReport,12,"#B9CBC1"));
+   report.IsExpanded=updateInstallationNeedsAttention;
+   Page.Children.Add(Card(Stack(T(updateInstallationStatus,17,"#B9E2A7",true),report)));
+  }
   var tabs=Row();foreach(var (id,label) in new[]{("all","Results"),("hardware","Hardware"),("catalog","Driver finder"),("oem","Üretici araçları")}){var category=id;var button=Action(label,()=>{updateCategory=category;Navigate("drivers");return Task.CompletedTask;},updateCategory==id);tabs.Children.Add(button);}Page.Children.Add(tabs);
   if(updateCategory=="apps")Page.Children.Add(Row(Action("Yalnız uygulamaları tara",ScanApplicationsAsync,true)));
   if(!manufacturer){var settingsStart=Page.Children.Count;
