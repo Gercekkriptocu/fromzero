@@ -2,10 +2,11 @@ using System.IO;
 using System.Text.Json;
 namespace FromZero;
 public record PreparationWindowsResult(string Title,int Code,int HResult,bool Reboot,bool Installed,string Key="",bool DriverCacheReady=false,bool NoLongerOffered=false);
+public record WindowsQueueSnapshot(string Key,string Phase,PreparationWindowsResult[] Results);
 public static class PreparationWindows
 {
  public static string Script(bool drivers,string stopFile="")=>BuildScript(drivers,stopFile,"");
- public static string SelectionScript(IEnumerable<WindowsOffer> offers,string stopFile="")
+ public static string SelectionScript(IEnumerable<WindowsOffer> offers,string stopFile="",string queueFile="")
  {
   var items=offers.DistinctBy(o=>o.Key).ToArray();
   if(items.Length==0||items.Length>100||items.Any(o=>!o.QueueInstallable||!Guid.TryParse(o.Id,out _)||o.Revision<0))
@@ -13,9 +14,22 @@ public static class PreparationWindows
   var identities=string.Join(",",items.Select(o=>"@{Id='"+Guid.Parse(o.Id)+"';Key="+PackageSafety.QuotePs(o.Key)+
    ";Revision="+o.Revision+";Title="+PackageSafety.QuotePs(o.Title)+";Kind="+PackageSafety.QuotePs(o.Kind)+
    ";Hardware="+PackageSafety.QuotePs(o.HardwareId)+"}"));
-  return BuildScript(false,stopFile,identities);
+  return BuildScript(false,stopFile,identities,queueFile);
  }
- private static string BuildScript(bool drivers,string stopFile,string identities)=>"$stopFile="+PackageSafety.QuotePs(stopFile)+";$progressFile="+PackageSafety.QuotePs(identities.Length==0&&stopFile.Length>0?Path.Combine(Path.GetDirectoryName(stopFile)!,"windows-progress.txt"):"")+";$wanted=@("+identities+");"+"""
+ private static string BuildScript(bool drivers,string stopFile,string identities,string queueFile="")=>
+  "$stopFile="+PackageSafety.QuotePs(stopFile)+";$queueFile="+PackageSafety.QuotePs(queueFile)+
+  ";$progressFile="+PackageSafety.QuotePs(identities.Length==0&&stopFile.Length>0?Path.Combine(Path.GetDirectoryName(stopFile)!,"windows-progress.txt"):"")+
+  ";$wanted=@("+identities+");"+"""
+ function Publish-Queue($key,$phase,$results){
+  if(!$queueFile){return};
+  try{
+   $snapshot=[pscustomobject]@{Key=$key;Phase=$phase;Results=@($results)}|ConvertTo-Json -Compress -Depth 5;
+   $bytes=[Text.Encoding]::UTF8.GetBytes($snapshot);
+   $writer=[IO.File]::Open($queueFile,[IO.FileMode]::Create,[IO.FileAccess]::Write,[IO.FileShare]::ReadWrite);
+   try{$writer.Write($bytes,0,$bytes.Length)}finally{$writer.Dispose()};
+  }catch{};
+ };
+ Publish-Queue '' 'windows-check' @();
  $session=New-Object -ComObject Microsoft.Update.Session;$session.ClientApplicationID='FromZero preparation';
  $installer=$session.CreateUpdateInstaller();
  if($installer.IsBusy){throw 'Başka bir Windows kurulumu sürüyor. Tamamlandıktan sonra tekrar dene.'};
@@ -52,10 +66,12 @@ public static class PreparationWindows
    if($firmware -or $upgrade -or (!$isDriver -and ($update.InstallationBehavior.CanRequestUserInput -or $update.BrowseOnly -or $update.Title -match 'Preview|Önizleme'))){
     if($wanted.Count){throw 'Paket otomatik kuruluma uygun değil.'};continue;
    };
-   if($progressFile){Set-Content -LiteralPath $progressFile -Encoding UTF8 -Value ('İndiriliyor: '+$update.Title)};
+   Publish-Queue $key 'prepare' $report;
    if(!$update.EulaAccepted){$update.AcceptEula()};
    $collection=New-Object -ComObject Microsoft.Update.UpdateColl;[void]$collection.Add($update);
    if(!$update.IsDownloaded){
+    Publish-Queue $key 'download' $report;
+    if($progressFile){Set-Content -LiteralPath $progressFile -Encoding UTF8 -Value ('İndiriliyor: '+$update.Title)};
     $downloader=$session.CreateUpdateDownloader();$downloader.Updates=$collection;$download=$downloader.Download();
     if([int]$download.ResultCode -ne 2 -or !$update.IsDownloaded){
      $failedDownload=$download.GetUpdateResult(0);
@@ -64,13 +80,16 @@ public static class PreparationWindows
    };
    $driverCacheReady=$isDriver;
    $installer=$session.CreateUpdateInstaller();$installer.Updates=$collection;$installer.AllowSourcePrompts=$false;$installer.ForceQuiet=$true;
+   Publish-Queue $key 'install' $report;
    if($progressFile){Set-Content -LiteralPath $progressFile -Encoding UTF8 -Value ('Kuruluyor: '+$update.Title)};
    $resultInstall=$installer.Install();$item=$resultInstall.GetUpdateResult(0);
+   Publish-Queue $key 'verify' $report;
    $installed=$false;try{$verify=$searcher.Search("IsInstalled=1 and UpdateID='"+$update.Identity.UpdateID+"'");$installed=$verify.Updates.Count -gt 0}catch{};
    $restart=[bool]$resultInstall.RebootRequired;
    $report+=[pscustomobject]@{Title=$title;Key=$key;Code=[int]$item.ResultCode;HResult=[int]$item.HResult;Reboot=$restart;Installed=$installed;DriverCacheReady=$driverCacheReady};
    if($restart){break};
-  }catch{$report+=[pscustomobject]@{Title=($title+' / '+$_.Exception.Message);Key=$key;Code=4;HResult=[int]$_.Exception.HResult;Reboot=$false;Installed=$false;DriverCacheReady=$driverCacheReady}};
+  }catch{$report+=[pscustomobject]@{Title=($title+' / '+$_.Exception.Message);Key=$key;Code=4;HResult=[int]$_.Exception.HResult;Reboot=$false;Installed=$false;DriverCacheReady=$driverCacheReady}}
+  finally{Publish-Queue '' 'between' $report};
  };ConvertTo-Json -Depth 4 -InputObject @($report)
  """;
  public static async Task<PreparationOutcome> ApplyAsync(bool drivers,IProgress<string> progress,CancellationToken token,string stopFile="")

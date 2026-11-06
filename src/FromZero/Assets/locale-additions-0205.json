@@ -1,0 +1,22 @@
+{
+ "Güncelleme kuyruğu":"Update queue",
+ "Kuyrukta bekliyor":"Waiting in queue",
+ "Güncelleme kuyruğunu durdur":"Stop update queue",
+ "Güncelleme kuyruğu hazırlanıyor…":"Preparing the update queue…",
+ "İmzalı sürücüyle yeniden deneme bekliyor":"Waiting for the signed driver retry",
+ "Sırada başka paket yok":"No other package waiting",
+ "Sıradaki":"Up next",
+ "{0} / {1} paket işlendi":"{0} of {1} packages processed",
+ "Geçen süre":"Elapsed time",
+ "Durdurma istendi. Geçerli adımın bitmesi bekleniyor.":"Stop requested. Waiting for the current step.",
+ "Bu adımın tamamlanması hâlâ bekleniyor.":"Still waiting for this step to finish.",
+ "Sürücü yedeği alınamadığı için atlandı":"Skipped because driver backup failed",
+ "Seçilen Windows paketleri kontrol ediliyor…":"Checking the selected Windows packages…",
+ "İmzalı sürücüyle yeniden deneme hazırlanıyor…":"Preparing the signed driver retry…",
+ "Paket hazırlanıyor…":"Preparing package…",
+ "Paket indiriliyor…":"Downloading package…",
+ "Paket kuruluyor…":"Installing package…",
+ "Kurulan güncelleme doğrulanıyor…":"Verifying the installed update…",
+ "Sonraki paket bekleniyor…":"Waiting for the next package…",
+ "Kuyrukta kalan paketler":"Packages left in the queue"
+}

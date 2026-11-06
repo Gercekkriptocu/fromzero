@@ -1,6 +1,6 @@
 # FromZero
 
-Windows için piksel sanatından ilham alan yerel kurtarma, sürücü ve oyun hazırlık uygulaması. C# / .NET 10 / WPF. Sürüm **0.20.4 ön izleme**.
+Windows için piksel sanatından ilham alan yerel kurtarma, sürücü ve oyun hazırlık uygulaması. C# / .NET 10 / WPF. Sürüm **0.20.5 ön izleme**.
 
 ## İndir / Download
 

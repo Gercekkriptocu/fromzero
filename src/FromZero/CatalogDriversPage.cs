@@ -100,21 +100,30 @@ public partial class MainWindow
   finally{updateCancellation=null;CancelOperation.Visibility=Visibility.Collapsed;Navigate("drivers");}
  }
 
- private async Task<(bool Restart,bool Attention)> InstallCatalogQueueAsync(List<string> results,IProgress<string> progress,CancellationToken token)
+ private async Task<(bool Restart,bool Attention)> InstallCatalogQueueAsync(List<string> results,UpdateQueueView queue,CancellationToken token)
  {
   bool attention=false;
   foreach(var item in catalogDriverQueue.ToArray())
   {
    token.ThrowIfCancellationRequested();
+   var key="catalog:"+item.Key;
+   queue.Stage(key,"Preparing package…");
+   var progress=new Progress<string>(message=>queue.Detail(key,message));
    try
    {
     var result=await CatalogDriverInstaller.InstallAsync(item.Value,progress,token);
+    queue.Finish(key,result.Restart?"Restart required":result.Verified?"Installation verified":"Installation could not be verified",result.Verified);
     results.Add(item.Value.Device.Name+" · "+result.Detail);
     if(result.Verified)catalogDriverQueue.Remove(item.Key);
     attention|=!result.Verified;
     if(result.Restart)return(true,attention);
    }
-   catch(Exception ex) when(ex is not OperationCanceledException){results.Add(item.Value.Device.Name+" · "+ex.Message);attention=true;}
+   catch(Exception ex) when(ex is not OperationCanceledException)
+   {
+    queue.Finish(key,"Installation could not be verified");
+    results.Add(item.Value.Device.Name+" · "+ex.Message);
+    attention=true;
+   }
   }
   if(catalogDriverQueue.Count==0)hardwareInventoryReady=false;
   return(false,attention);
