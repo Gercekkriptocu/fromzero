@@ -63,6 +63,7 @@ public partial class MainWindow
 
  private async Task ScanHardwareUpdatesAsync()
  {
+  ShowUpdateScanAnimation(true);
   using var cancellation=new CancellationTokenSource();
   updateCancellation=cancellation;
   CancelOperation.Visibility=System.Windows.Visibility.Visible;
@@ -79,12 +80,13 @@ public partial class MainWindow
    try{windowsScan=await online;updateWarnings.AddRange(windowsScan.Warnings);}
    catch(Exception ex)when(ex is not OperationCanceledException){updateWarnings.Add("Windows Update unavailable: "+ex.Message);}
    foreach(var offer in WindowsUpdateCatalog.RecommendedDrivers(windowsScan?.Offers??[]))windowsSelection.Add(offer.Key);
+   ShowUpdateScanAnimation(false);
    if(automaticDownloads&&windowsScan!=null){
     windowsSelection.RemoveWhere(key=>windowsScan.Offers.FirstOrDefault(o=>o.Key==key)?.EulaAccepted!=true);
     await DownloadSelectionAsync(true,true);
    }
   }
-  finally{updateCancellation=null;CancelOperation.Visibility=System.Windows.Visibility.Collapsed;Navigate("drivers");}
+  finally{ShowUpdateScanAnimation(false);updateCancellation=null;CancelOperation.Visibility=System.Windows.Visibility.Collapsed;Navigate("drivers");}
  }
 
  private void RenderHardwareUpdates()
@@ -140,6 +142,7 @@ public partial class MainWindow
     var shown=matches.Where(o=>group.SelectedIndex<=0||o.ReviewGroup==category).ToArray();
     var actions=Row(Action("Device details",()=>{Detail(label,device.Id+"\n\n"+string.Join("\n",device.HardwareIds.Concat(device.CompatibleIds??[]).Distinct())+
      (driver==null?"":"\n\n"+driver.Provider+" / "+driver.Version+" / "+driver.Date+" / "+driver.Inf));return Task.CompletedTask;}));
+    actions.Children.Add(Action("Search driver catalogue",()=>SearchCatalogDeviceAsync(device)));
     var gpu=GpuSoftware.Vendor(device);
     var support=gpu switch{
      "NVIDIA"=>"https://www.nvidia.com/en-us/drivers/",

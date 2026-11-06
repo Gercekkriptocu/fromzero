@@ -51,7 +51,8 @@ public static class PackageSafety
  {
   var text = InfText(inf);
   text = Regex.Replace(text, @";[^\r\n]*", "");
-  return Regex.Matches(text, @"(?i)(?:PCI|USB|HID|ACPI|HDAUDIO|BTH|SD|ROOT|SWD)\\[A-Z0-9_&.\-\\]+")
+  return Regex.Matches(text, @"(?:PCI|USB|HID|ACPI|HDAUDIO|BTH|SD|ROOT|SWD)\\[A-Z0-9_&.\-\\]+",
+   RegexOptions.IgnoreCase|RegexOptions.CultureInvariant,TimeSpan.FromSeconds(2))
    .Select(m => m.Value.TrimEnd('\\')).ToHashSet(StringComparer.OrdinalIgnoreCase);
  }
  public static string? ReadCatalog(string inf)

@@ -17,18 +17,19 @@ public partial class MainWindow
  private bool extendedUpdateScan=true,legacyRuntimeScan=true;
  private bool automaticDownloads=ReadAutoDownload();
  private CancellationTokenSource? updateCancellation;
+ private void ShowUpdateScanAnimation(bool visible)=>UpdateScanOverlay.Visibility=visible?Visibility.Visible:Visibility.Collapsed;
  private static bool ReadAutoDownload(){try{return File.Exists(LocalStore.FilePath("auto-download.json"))&&JsonSerializer.Deserialize<bool>(File.ReadAllText(LocalStore.FilePath("auto-download.json")));}catch(Exception ex)when(ex is IOException or JsonException){return false;}}
  private void Drivers()
  {
   var manufacturer=updateCategory=="oem";
-  Header("GÜNCELLEME MERKEZİ",manufacturer?"Üretici desteği":"İhtiyacını bul. Kuyruğa ekle. Güncelle.",manufacturer?$"{OemSources.Tools.Count} araç • {OemSources.All.Count} destek sayfası • {AppDownloads.Recipes.Count(r=>r.DriverTool)} uygulama içi indirme":"Sürücü, uygulama ve oyun bileşenlerini tek yerden kontrol et.");
+  Header("GÜNCELLEME MERKEZİ",manufacturer?"Üretici desteği":"Your updates",manufacturer?$"{OemSources.Tools.Count} araç • {OemSources.All.Count} destek sayfası • {AppDownloads.Recipes.Count(r=>r.DriverTool)} uygulama içi indirme":"Scan your PC, review outdated versions and install your selections.");
   var summaries=new List<string>();if(windowsScan!=null)summaries.Add(windowsScan.Offers.Count+" Windows / sürücü teklifi");if(applicationScan!=null)summaries.Add(applicationScan.Applications.Count+" uygulama");if(runtimeScan!=null)summaries.Add(runtimeScan.Packages.Count+" .NET / SDK paketi");if(components!=null)summaries.Add(components.Components.Count+" oyun bileşeni");var scanText=summaries.Count==0?"Henüz tarama yapılmadı.":string.Join(" • ",summaries);
   queueSummary=T("",12,"#B9E2A7");
   if(manufacturer)Page.Children.Add(Row(Action("Seçilenleri indir",()=>DownloadSelectionAsync(false),true),queueSummary));
   else Page.Children.Add(Card(Stack(Row(Action("Güncellemeleri tara",ScanAllUpdatesAsync),
    Action("Select all missing updates",SelectAllMissingUpdatesAsync),Action("Download and install selected",InstallSelectedUpdatesAsync,true)),
    T(scanText,13,"#D2DED6"),queueSummary)));UpdateQueueSummary();
-  var tabs=Row();foreach(var (id,label) in new[]{("all","Genel"),("windows","Windows / sürücü"),("hardware","Hardware"),("apps","Uygulamalar"),("runtimes",".NET / SDK"),("games","Oyun bileşenleri"),("oem","Üretici araçları")}){var category=id;var button=Action(label,()=>{updateCategory=category;Navigate("drivers");return Task.CompletedTask;},updateCategory==id);tabs.Children.Add(button);}Page.Children.Add(tabs);
+  var tabs=Row();foreach(var (id,label) in new[]{("all","Results"),("hardware","Hardware"),("catalog","Driver finder"),("oem","Üretici araçları")}){var category=id;var button=Action(label,()=>{updateCategory=category;Navigate("drivers");return Task.CompletedTask;},updateCategory==id);tabs.Children.Add(button);}Page.Children.Add(tabs);
   if(updateCategory=="apps")Page.Children.Add(Row(Action("Yalnız uygulamaları tara",ScanApplicationsAsync,true)));
   if(!manufacturer){var settingsStart=Page.Children.Count;
   var auto=new CheckBox{Content="Taramadan sonra uygun sürücü, uygulama ve kurulu .NET güncellemelerini otomatik indir",IsChecked=automaticDownloads};
@@ -39,17 +40,21 @@ public partial class MainWindow
    var legacy=new CheckBox{Content=".NET 3.0 ve sonrası destek dışı sürüm hatlarını da incele",IsChecked=legacyRuntimeScan};legacy.Checked+=(_,_)=>legacyRuntimeScan=true;legacy.Unchecked+=(_,_)=>legacyRuntimeScan=false;
    Page.Children.Add(Stack(extended,legacy,T("Windows Update bu bilgisayara sunduğu paketleri döndürür. "+ApplicationSources.Count+" uygulama/sürüm hattı: 30 doğrudan üretici kaydı + 570 Scoop Extras topluluk manifesti. Scoop/WinGet kurulumu gerekmez; manifest betikleri çalıştırılmaz. Geniş katalog paketleri SHA-256 ve güvenilir Windows imzası gerektirir; imzasızsa indirme reddedilir. .NET'in kararlı hatları ve SDK bantları ayrıca taranır. Metadata 15 dakika önbellekte tutulur; kaynak hataları ve kontrol zamanı gösterilir.",12,"#B9CBC1")));
   });
-  Page.Children.Add(Row(Action("Seçilenleri indir",()=>DownloadSelectionAsync(false)),Action("Seçimi boşalt",()=>{windowsSelection.Clear();packageSelection.Clear();Navigate("drivers");return Task.CompletedTask;}),Action("İndirme klasörü",()=>{var path=LocalStore.FilePath("Downloads");Directory.CreateDirectory(path);Commands.Open(path);return Task.CompletedTask;}),Link("Windows Update","ms-settings:windowsupdate")));
+  Advanced("Source views",()=>{
+   var views=Row();
+   foreach(var (id,label) in new[]{("windows","Windows / sürücü"),("apps","Uygulamalar"),("runtimes",".NET / SDK"),("games","Oyun bileşenleri")}){
+    var source=id;views.Children.Add(Action(label,()=>{updateCategory=source;Navigate("drivers");return Task.CompletedTask;}));
+   }
+   Page.Children.Add(views);
+  });
+  Page.Children.Add(Row(Action("Seçilenleri indir",()=>DownloadSelectionAsync(false)),Action("Seçimi boşalt",()=>{windowsSelection.Clear();packageSelection.Clear();catalogDriverQueue.Clear();Navigate("drivers");return Task.CompletedTask;}),Action("İndirme klasörü",()=>{var path=LocalStore.FilePath("Downloads");Directory.CreateDirectory(path);Commands.Open(path);return Task.CompletedTask;}),Link("Windows Update","ms-settings:windowsupdate")));
   GroupSince(settingsStart,"Tarama ve indirme seçenekleri");
   }
   if(updateWarnings.Count>0)Advanced(updateWarnings.Count+" kayıt kontrol edilemedi",()=>Page.Children.Add(T(string.Join("\n",updateWarnings),12,"#EBC078")));
   if(updateCategory is "apps" or "runtimes" or "windows"&&windowsScan==null&&runtimeScan==null&&applicationScan==null)Page.Children.Add(Card(T("Listeyi doldurmak için Tüm kaynakları tara düğmesini kullan. "+ApplicationSources.Count+" uygulama/sürüm hattı, Windows teklifleri ve .NET SDK bantları kontrol edilir.",14,"#B9CBC1")));
-  if(updateCategory=="all"){
-   var tiles=new ResponsiveTilePanel{MaxColumns=2,MinimumTileWidth=320};
-   foreach(var (id,title,description) in new[]{("windows","Windows / sürücüler",windowsScan==null?"Tarama bekliyor":windowsScan.Offers.Count+" donanıma uygun teklif"),("apps","Uygulamalar",applicationScan==null?"Üretici sürümlerini kontrol et":applicationScan.Applications.Count+" uygulama • "+applicationScan.Applications.Count(a=>a.NeedsUpdate)+" güncelleme"),("runtimes",".NET ve SDK",runtimeScan==null?"Çalışma ortamları ve geliştirme araçları":runtimeScan.Channels+" hat • "+runtimeScan.Packages.Count+" paket"),("games","Oyun bileşenleri","DirectX, XNA ve 12 Visual C++ kurucusu")}){var category=id;tiles.Children.Add(Card(Stack(T(title,20,"#B9E2A7",true),T(description,13,"#B9CBC1"),Row(Action("İncele →",()=>{updateCategory=category;Navigate("drivers");return Task.CompletedTask;})))));}
-   Page.Children.Add(tiles);
-  }
+  if(updateCategory=="all")RenderUnifiedUpdateResults();
   if(updateCategory=="hardware")RenderHardwareUpdates();
+  if(updateCategory=="catalog")RenderCatalogDrivers();
   if(windowsScan!=null&&updateCategory=="windows")RenderWindowsOffers();
   if(applicationScan!=null&&updateCategory=="apps")RenderApplicationOffers();
   if(runtimeScan!=null&&updateCategory=="runtimes")RenderRuntimeOffers();
@@ -65,7 +70,7 @@ public partial class MainWindow
    Page.Children.Add(Row(Action("Donanımı yeniden tara",ScanAsync),Action("Yerel INF seç",PickInfAsync),Action("Sürücüleri yedekle",BackupDriversAsync),Action("Kapsülden sürücü bul",FindCapsuleDriversAsync)));LegacyDrivers();
   });
  }
- private void UpdateQueueSummary(){if(queueSummary!=null){var windows=windowsScan?.Offers.Where(o=>windowsSelection.Contains(o.Key)).ToList()??[];queueSummary.Text=windows.Count+packageSelection.Count==0?"Paket seçilmedi.":$"{windows.Count+packageSelection.Count} paket seçili"+(windows.Count>0?" • Windows: "+SizeLabel(windows.Sum(o=>o.Bytes)):"");}}
+ private void UpdateQueueSummary(){if(queueSummary!=null){var windows=windowsScan?.Offers.Where(o=>windowsSelection.Contains(o.Key)).ToList()??[];var count=windows.Count+packageSelection.Count+catalogDriverQueue.Count;queueSummary.Text=Locale.Text(count==0?"Paket seçilmedi.":$"{count} paket seçili"+(windows.Count>0?" • Windows: "+SizeLabel(windows.Sum(o=>o.Bytes)):""));}}
  private void SelectRecommended(){if(windowsScan!=null)foreach(var offer in WindowsUpdateCatalog.RecommendedDrivers(windowsScan.Offers))windowsSelection.Add(offer.Key);SelectPackageUpdates();UpdateQueueSummary();}
  private void SelectPackageUpdates()
  {
@@ -78,7 +83,7 @@ public partial class MainWindow
   windowsSelection.Clear();packageSelection.Clear();
   foreach(var offer in WindowsUpdateCatalog.MissingUpdates(windowsScan?.Offers??[]))windowsSelection.Add(offer.Key);
   SelectPackageUpdates();
-  if(components!=null)foreach(var component in components.Components.Where(c=>!c.Present&&c.Recipe is "vc-x64" or "vc-x86"))
+  if(components!=null)foreach(var component in components.Components.Where(c=>!c.Present&&c.Recipe!=null&&AppDownloads.Recipes.Any(r=>r.Id==c.Recipe)))
    packageSelection.Add(component.Recipe!);
   Navigate("drivers");
  }
@@ -142,6 +147,7 @@ public partial class MainWindow
  }
  private async Task ScanApplicationsAsync()
  {
+  ShowUpdateScanAnimation(true);
   using var cancel=new CancellationTokenSource();updateCancellation=cancel;CancelOperation.Visibility=Visibility.Visible;
   try{
    software=await InstalledSoftware.ReadAsync();
@@ -150,11 +156,12 @@ public partial class MainWindow
    foreach(var app in result.Applications.Where(a=>a.NeedsUpdate))packageSelection.Add(app.Id);
    updateWarnings.RemoveAll(w=>w.StartsWith("Uygulama: ",StringComparison.Ordinal));updateWarnings.AddRange(result.Warnings.Select(w=>"Uygulama: "+w));
    Journal.Write("Uygulama sürüm taraması",$"{result.Applications.Count} kayıt; {result.Warnings.Count} kaynak uyarısı. İndirme başlatılmadı.",result.Warnings.Count==0);
-  }finally{updateCancellation=null;CancelOperation.Visibility=Visibility.Collapsed;updateCategory="apps";Navigate("drivers");}
+  }finally{ShowUpdateScanAnimation(false);updateCancellation=null;CancelOperation.Visibility=Visibility.Collapsed;updateCategory="apps";Navigate("drivers");}
  }
  private Task ScanAllUpdatesAsync()=>ScanAllUpdatesAsync(downloadAfterScan:true);
  private async Task ScanAllUpdatesAsync(bool downloadAfterScan)
  {
+  ShowUpdateScanAnimation(true);
   updateWarnings.Clear();windowsSelection.Clear();packageSelection.Clear();windowsScan=null;runtimeScan=null;applicationScan=null;hardwareInventoryReady=false;
   using var cancel=new CancellationTokenSource();updateCancellation=cancel;CancelOperation.Visibility=Visibility.Visible;
   try{
@@ -168,8 +175,9 @@ public partial class MainWindow
    if(windowsScan!=null){updates=windowsScan.Offers.Where(i=>i.Kind=="Driver"&&!i.Hidden&&!i.Superseded).Select(i=>new UpdateInfo(i.Id,i.Revision,i.Title,i.Manufacturer,i.Model,i.Eula,i.Class)).ToList();foreach(var offer in WindowsUpdateCatalog.RecommendedDrivers(windowsScan.Offers))windowsSelection.Add(offer.Key);}
    SelectRecommended();
    Journal.Write("Kapsamlı güncelleme taraması",$"{windowsScan?.Offers.Count??0} Windows teklifi; {runtimeScan?.Packages.Count??0} çalışma ortamı; {updateWarnings.Count} uyarı.",updateWarnings.Count==0);
+   ShowUpdateScanAnimation(false);
    if(automaticDownloads&&downloadAfterScan){windowsSelection.RemoveWhere(key=>windowsScan?.Offers.FirstOrDefault(o=>o.Key==key)?.EulaAccepted!=true);await DownloadSelectionAsync(true);}
-  }finally{updateCancellation=null;CancelOperation.Visibility=Visibility.Collapsed;Navigate("drivers");}
+  }finally{ShowUpdateScanAnimation(false);updateCancellation=null;CancelOperation.Visibility=Visibility.Collapsed;Navigate("drivers");}
  }
  private async Task DownloadSelectionAsync(bool automatic,bool driversOnly=false)
  {

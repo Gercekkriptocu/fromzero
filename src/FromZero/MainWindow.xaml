@@ -33,6 +33,14 @@
   </Border>
   <Grid Grid.Row="2" Margin="225,0,0,0"><Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled" Padding="30,22,30,18"><StackPanel x:Name="Page"/></ScrollViewer>
+   <Border x:Name="UpdateScanOverlay" Grid.Row="0" Visibility="Collapsed" Margin="22" CornerRadius="18" Background="#F2112028" BorderBrush="#344F52" BorderThickness="1">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="420" Margin="24">
+     <local:UpdateRadar HorizontalAlignment="Center"/>
+     <TextBlock Text="Checking your PC" FontSize="24" Foreground="{StaticResource Mint}" HorizontalAlignment="Center" Margin="0,18,0,12"/>
+     <TextBlock Text="{Binding Text, ElementName=OperationTitle}" FontSize="13" Foreground="{StaticResource Muted}" TextWrapping="Wrap" TextAlignment="Center" MinHeight="50"/>
+     <Button Content="Stop scan" Click="CancelCleanup" HorizontalAlignment="Center" Margin="0,16,0,0"/>
+    </StackPanel>
+   </Border>
    <Border Grid.Row="1" Background="#1B3035" BorderBrush="#496561" BorderThickness="0,1,0,0" Padding="18,12" x:Name="OperationPanel" Visibility="Collapsed"><DockPanel><Button DockPanel.Dock="Right" x:Name="CancelOperation" Content="Durdur" Click="CancelCleanup" Visibility="Collapsed" Margin="14,0,0,0"/><StackPanel><TextBlock x:Name="OperationTitle" Foreground="{StaticResource Mint}" FontSize="13"/><ProgressBar IsIndeterminate="True" Height="3" Margin="0,10,0,0"/></StackPanel></DockPanel></Border>
   </Grid>
   <Border Grid.Row="3" Background="#101B23" BorderBrush="{StaticResource Line}" BorderThickness="0,1,0,0"><Grid Margin="20,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock x:Name="StatusLabel" Text="HAZIR  /  Sistem değişiklikleri yalnızca seçtiğin işlemlerle uygulanır." VerticalAlignment="Center" FontFamily="{StaticResource RetroFont}" FontSize="11" Foreground="{StaticResource Muted}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Margin="0,0,16,0"/><TextBlock Grid.Column="1" Text="SAVE. RESTORE. RESPAWN." HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource RetroFont}" FontSize="10" Foreground="#68817F"/></Grid></Border>

@@ -7,12 +7,12 @@ public partial class MainWindow
 {
  private async Task InstallSelectedUpdatesAsync()
  {
-  if(windowsSelection.Count+packageSelection.Count==0)await SelectAllMissingUpdatesAsync();
+  if(windowsSelection.Count+packageSelection.Count+catalogDriverQueue.Count==0)await SelectAllMissingUpdatesAsync();
   var offers=(windowsScan?.Offers??[]).Where(o=>windowsSelection.Contains(o.Key)).ToArray();
   var recipes=AppDownloads.Recipes.Where(r=>packageSelection.Contains(r.Id)).ToArray();
-  if(offers.Length+recipes.Length==0){Detail("Update installation","No applicable updates were found.");return;}
+  if(offers.Length+recipes.Length+catalogDriverQueue.Count==0){Detail("Update installation","No applicable updates were found.");return;}
 
-  var plan=string.Join("\n",offers.Select(o=>o.Title).Concat(recipes.Select(r=>r.Name)));
+  var plan=string.Join("\n",offers.Select(o=>o.Title).Concat(recipes.Select(r=>r.Name)).Concat(catalogDriverQueue.Values.Select(r=>r.Device.Name+" · "+r.Candidate.Title)));
   if(!Confirm(Locale.Text("Download and install the selected updates? Windows Update licenses will be accepted. Drivers are backed up first. Save your work before continuing.")+
    "\n\n"+plan,Locale.Text("Update installation")))return;
 
@@ -72,6 +72,11 @@ public partial class MainWindow
     if(restart)break;
    }
 
+   if(!restart&&catalogDriverQueue.Count>0)
+   {
+    var catalogResult=await InstallCatalogQueueAsync(results,progress,token);
+    restart=catalogResult.Restart;attention|=catalogResult.Attention;
+   }
    foreach(var selected in restart?Array.Empty<DownloadRecipe>():recipes)
    {
     token.ThrowIfCancellationRequested();

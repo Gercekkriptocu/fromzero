@@ -1,0 +1,916 @@
+{
+  "method": "REA 6.8.0 static inspection plus offset-bound string extraction",
+  "target_execution_observed": false,
+  "imports": [
+    {
+      "evidence_id": "ev_35ba039116846ad4f065fbcd06406afceae580f1bafb7d01bf2ede7a30027c58",
+      "file": "C:\\Program Files (x86)\\IObit\\Driver Booster\\14.0.1\\DBDownloader.exe",
+      "sha256": "bff206f8444f4f08425e8bc8a79c5fb6369dcf47cd0a67384097764770a449b5",
+      "architecture": "x86",
+      "selected_imports": [
+        {
+          "library": "winhttp.dll",
+          "functions": [
+            "WinHttpCloseHandle",
+            "WinHttpGetIEProxyConfigForCurrentUser",
+            "WinHttpGetProxyForUrl",
+            "WinHttpOpen"
+          ]
+        }
+      ],
+      "source": "DBDownloader-exe-imports-rea.json"
+    },
+    {
+      "evidence_id": "ev_88f1916132a9fad669d9072077d253215de3bfd0d60d39cb29e7a7bb85e6c0d3",
+      "file": "C:\\Program Files (x86)\\IObit\\Driver Booster\\14.0.1\\DpInst\\x64\\dbinst.exe",
+      "sha256": "ff0cca201ce4056f182705649dbf0224ddf75217e260e9130c906016db149049",
+      "architecture": "x86_64",
+      "selected_imports": [
+        {
+          "library": "newdev.dll",
+          "functions": [
+            "UpdateDriverForPlugAndPlayDevicesW"
+          ]
+        }
+      ],
+      "source": "DpInst-x64-dbinst-exe-imports-rea.json"
+    },
+    {
+      "evidence_id": "ev_ad06f8b53368617f710b4abc104686a2e313476dc35fea003b2697e0376cf2af",
+      "file": "C:\\Program Files (x86)\\IObit\\Driver Booster\\14.0.1\\DpInst\\x64\\dpinst.exe",
+      "sha256": "ad3d6d0b4a473e7bcfa245164e5463f4c9cef55f8da86031af21ff80c15f3d37",
+      "architecture": "x86_64",
+      "selected_imports": [
+        {
+          "library": "SETUPAPI.dll",
+          "functions": [
+            "SetupDiSetDeviceRegistryPropertyW",
+            "SetupDiGetDeviceRegistryPropertyW",
+            "CM_Get_DevNode_Status",
+            "SetupDiOpenDevRegKey",
+            "SetupDiEnumDeviceInfo",
+            "pSetupSetGlobalFlags",
+            "SetupDefaultQueueCallbackW",
+            "pSetupGetGlobalFlags",
+            "SetupDiGetClassDevsW",
+            "SetupDiDestroyDeviceInfoList",
+            "SetupGetFieldCount",
+            "SetupGetIntField",
+            "SetupGetStringFieldW",
+            "SetupFindNextMatchLineW",
+            "SetupFindNextLine",
+            "SetupInstallServicesFromInfSectionW",
+            "SetupInstallFromInfSectionW",
+            "SetupPromptReboot",
+            "SetupDiGetDeviceInstanceIdW",
+            "SetupFindFirstLineW",
+            "SetupOpenAppendInfFileW",
+            "SetupGetLineCountW",
+            "SetupDiGetActualSectionToInstallW",
+            "SetupCloseInfFile",
+            "SetupOpenInfFileW",
+            "SetupDiGetSelectedDriverW",
+            "SetupCommitFileQueueW",
+            "SetupTermDefaultQueueCallback",
+            "SetupInitDefaultQueueCallbackEx",
+            "SetupQueueCopyW",
+            "CMP_WaitNoPendingInstallEvents",
+            "SetupCloseFileQueue",
+            "SetupOpenFileQueue",
+            "SetupDiGetDriverInfoDetailW",
+            "SetupDiSetClassInstallParamsW",
+            "SetupDiOpenDeviceInfoW",
+            "SetupDiSetSelectedDevice",
+            "SetupDiCreateDeviceInfoList",
+            "SetupDiGetDeviceInstallParamsW",
+            "SetupDiSetDeviceInstallParamsW",
+            "SetupDiBuildDriverInfoList",
+            "SetupInstallFilesFromInfSectionW",
+            "SetupDiCallClassInstaller",
+            "SetupDiClassNameFromGuidW",
+            "SetupDiOpenClassRegKey",
+            "CM_Enumerate_Classes",
+            "CM_Get_Device_ID_ListW",
+            "CM_Get_Device_ID_List_SizeW",
+            "CM_Locate_DevNodeW",
+            "CM_Query_And_Remove_SubTreeW",
+            "CM_Setup_DevNode",
+            "CM_Get_Device_IDW",
+            "SetupCopyOEMInfW",
+            "SetupGetTargetPathW"
+          ]
+        },
+        {
+          "library": "WINTRUST.dll",
+          "functions": [
+            "CryptCATAdminCalcHashFromFileHandle",
+            "WinVerifyTrust"
+          ]
+        },
+        {
+          "library": "CRYPT32.dll",
+          "functions": [
+            "CertFreeCTLContext",
+            "CertFreeCertificateContext",
+            "CertGetCTLContextProperty",
+            "CryptQueryObject"
+          ]
+        }
+      ],
+      "source": "DpInst-x64-dpinst-exe-imports-rea.json"
+    },
+    {
+      "evidence_id": "ev_bdf23ccbd7bd402a93bbfcfbbc3e76d704b6e90e6199542d7fde571b89263b5a",
+      "file": "C:\\Program Files (x86)\\IObit\\Driver Booster\\14.0.1\\DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "architecture": "x86",
+      "selected_imports": [
+        {
+          "library": "wininet.dll",
+          "functions": [
+            "InternetCheckConnectionW",
+            "InternetQueryOptionA"
+          ]
+        },
+        {
+          "library": "winhttp.dll",
+          "functions": [
+            "WinHttpCloseHandle",
+            "WinHttpGetIEProxyConfigForCurrentUser",
+            "WinHttpGetProxyForUrl",
+            "WinHttpOpen"
+          ]
+        },
+        {
+          "library": "Crypt32.dll",
+          "functions": [
+            "CertFreeCertificateContext",
+            "CertGetNameStringA",
+            "CryptVerifyMessageSignature"
+          ]
+        }
+      ],
+      "source": "DriverBooster-exe-imports-rea.json"
+    },
+    {
+      "evidence_id": "ev_aebef40acb4054c838eb4ef704f00034f86e13bfa612e69937e64a1a93f9aa3b",
+      "file": "C:\\Program Files (x86)\\IObit\\Driver Booster\\14.0.1\\DriverUpdate.exe",
+      "sha256": "5ba633ba780b5695fdde7f0d300619439da1b9ab2161b592ef313387f2225721",
+      "architecture": "x86",
+      "selected_imports": [
+        {
+          "library": "wininet.dll",
+          "functions": [
+            "InternetQueryOptionA"
+          ]
+        }
+      ],
+      "source": "DriverUpdate-exe-imports-rea.json"
+    },
+    {
+      "evidence_id": "ev_33033a247bca0a3e4d3e91c2a361f6c713040bf28ab0ee5cfbf0e9d77ed2f232",
+      "file": "C:\\Program Files (x86)\\IObit\\Driver Booster\\14.0.1\\DrvInstall\\DbzInst.dll",
+      "sha256": "78ff242f87457d7963bc512ae7ac2f2fc447fd6fcd1a540ee826a6e8062cb91e",
+      "architecture": "x86",
+      "selected_imports": [],
+      "source": "DrvInstall-DbzInst-dll-imports-rea.json"
+    },
+    {
+      "evidence_id": "ev_a4b691e9211bae3e020e00acc15e3a06cc14572f7dcf71036d85cd8feec6e9dd",
+      "file": "C:\\Program Files (x86)\\IObit\\Driver Booster\\14.0.1\\Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "architecture": "x86",
+      "selected_imports": [
+        {
+          "library": "winhttp.dll",
+          "functions": [
+            "WinHttpCloseHandle",
+            "WinHttpGetIEProxyConfigForCurrentUser",
+            "WinHttpGetProxyForUrl",
+            "WinHttpOpen"
+          ]
+        }
+      ],
+      "source": "scanner-imports-rea.json"
+    },
+    {
+      "evidence_id": "ev_8468814ff0f4b767fba0ad3a05867a296ffaa251f3b0dfb837338f3feb46ffe7",
+      "file": "C:\\Program Files (x86)\\IObit\\Driver Booster\\14.0.1\\ScanWinUpd.exe",
+      "sha256": "6c715c549ba1da0262e3405733d2f187c405910bcd59620b5d71ece8f9a4d8a3",
+      "architecture": "x86",
+      "selected_imports": [],
+      "source": "ScanWinUpd-exe-imports-rea.json"
+    }
+  ],
+  "exports": [
+    {
+      "evidence_id": "ev_500f999e18c1345ba5ce4c1433f4b01328eb90ad2b2bd28f9ab26c0797dd99a2",
+      "file": "C:\\Program Files (x86)\\IObit\\Driver Booster\\14.0.1\\Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "exports": [
+        {
+          "name": "FreeData",
+          "ordinal": 1,
+          "address": "0x4b4c24",
+          "forwarder": null
+        },
+        {
+          "name": "SetParams",
+          "ordinal": 2,
+          "address": "0x4b4a10",
+          "forwarder": null
+        },
+        {
+          "name": "UpdateScan",
+          "ordinal": 3,
+          "address": "0x4b4bb4",
+          "forwarder": null
+        },
+        {
+          "name": "StopScan",
+          "ordinal": 4,
+          "address": "0x4b4940",
+          "forwarder": null
+        },
+        {
+          "name": "StartScan",
+          "ordinal": 5,
+          "address": "0x4b4854",
+          "forwarder": null
+        },
+        {
+          "name": "KillScan",
+          "ordinal": 6,
+          "address": "0x4b46ec",
+          "forwarder": null
+        },
+        {
+          "name": "InitScan",
+          "ordinal": 7,
+          "address": "0x4b464c",
+          "forwarder": null
+        },
+        {
+          "name": "_TestBugreport",
+          "ordinal": 8,
+          "address": "0x4b43a8",
+          "forwarder": null
+        }
+      ]
+    },
+    {
+      "evidence_id": "ev_4e2cf1cc13746eb50c9be1431dc1d78a2f1ee84e8f87aefdf8f570f52594dfed",
+      "file": "C:\\Program Files (x86)\\IObit\\Driver Booster\\14.0.1\\DrvInstall\\DbzInst.dll",
+      "sha256": "78ff242f87457d7963bc512ae7ac2f2fc447fd6fcd1a540ee826a6e8062cb91e",
+      "exports": [
+        {
+          "name": "CreateInstall2",
+          "ordinal": 1,
+          "address": "0x4106c4",
+          "forwarder": null
+        },
+        {
+          "name": "Is7zValid",
+          "ordinal": 2,
+          "address": "0x410878",
+          "forwarder": null
+        },
+        {
+          "name": "SetOptions",
+          "ordinal": 3,
+          "address": "0x4097b8",
+          "forwarder": null
+        },
+        {
+          "name": "AbortInstall",
+          "ordinal": 4,
+          "address": "0x409760",
+          "forwarder": null
+        },
+        {
+          "name": "FreeInstall",
+          "ordinal": 5,
+          "address": "0x40974c",
+          "forwarder": null
+        },
+        {
+          "name": "InitInstall",
+          "ordinal": 6,
+          "address": "0x4095dc",
+          "forwarder": null
+        },
+        {
+          "name": "CreateInstall",
+          "ordinal": 7,
+          "address": "0x410560",
+          "forwarder": null
+        },
+        {
+          "name": "InstallDbz",
+          "ordinal": 8,
+          "address": "0x40e234",
+          "forwarder": null
+        }
+      ]
+    }
+  ],
+  "strings": [
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x22396d",
+      "encoding": "ascii",
+      "text": "SortDriverList$ActRec"
+    },
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x9160",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x91c8",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x9230",
+      "encoding": "utf-16-le",
+      "text": "https://s2.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x1351dc",
+      "encoding": "utf-16-le",
+      "text": "SetupDiEnumDeviceInfo"
+    },
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x135208",
+      "encoding": "utf-16-le",
+      "text": "SetupDiGetDeviceRegistryPropertyW"
+    },
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x1356e0",
+      "encoding": "utf-16-le",
+      "text": "CM_Get_DevNode_Status"
+    },
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x220f70",
+      "encoding": "utf-16-le",
+      "text": "DriverVersion"
+    },
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x220fc4",
+      "encoding": "utf-16-le",
+      "text": "DriverDateData"
+    },
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x228e38",
+      "encoding": "utf-16-le",
+      "text": "SRSetRestorePointW"
+    },
+    {
+      "file": "DriverBooster.exe",
+      "sha256": "8dce869c65b506da41ce3e90596a5a19862d00f6040d1c0b7a47e76d5aa351e2",
+      "offset": "0x3791d4",
+      "encoding": "utf-16-le",
+      "text": "DriverVersion"
+    },
+    {
+      "file": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "offset": "0xa60f1",
+      "encoding": "ascii",
+      "text": "SortDriverList$ActRec"
+    },
+    {
+      "file": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "offset": "0x2a94",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "offset": "0x2afc",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "offset": "0x2b64",
+      "encoding": "utf-16-le",
+      "text": "https://s2.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "offset": "0x9eb6c",
+      "encoding": "utf-16-le",
+      "text": "SetupDiEnumDeviceInfo"
+    },
+    {
+      "file": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "offset": "0x9eb98",
+      "encoding": "utf-16-le",
+      "text": "SetupDiGetDeviceRegistryPropertyW"
+    },
+    {
+      "file": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "offset": "0x9f070",
+      "encoding": "utf-16-le",
+      "text": "CM_Get_DevNode_Status"
+    },
+    {
+      "file": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "offset": "0xa1504",
+      "encoding": "utf-16-le",
+      "text": "DriverVersion"
+    },
+    {
+      "file": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "offset": "0xa1558",
+      "encoding": "utf-16-le",
+      "text": "DriverDateData"
+    },
+    {
+      "file": "ScanWinUpd.exe",
+      "sha256": "6c715c549ba1da0262e3405733d2f187c405910bcd59620b5d71ece8f9a4d8a3",
+      "offset": "0xb338",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "ScanWinUpd.exe",
+      "sha256": "6c715c549ba1da0262e3405733d2f187c405910bcd59620b5d71ece8f9a4d8a3",
+      "offset": "0xb3a0",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "ScanWinUpd.exe",
+      "sha256": "6c715c549ba1da0262e3405733d2f187c405910bcd59620b5d71ece8f9a4d8a3",
+      "offset": "0xb408",
+      "encoding": "utf-16-le",
+      "text": "https://s2.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "ScanWinUpd.exe",
+      "sha256": "6c715c549ba1da0262e3405733d2f187c405910bcd59620b5d71ece8f9a4d8a3",
+      "offset": "0x12bfc",
+      "encoding": "utf-16-le",
+      "text": "SetupDiEnumDeviceInfo"
+    },
+    {
+      "file": "ScanWinUpd.exe",
+      "sha256": "6c715c549ba1da0262e3405733d2f187c405910bcd59620b5d71ece8f9a4d8a3",
+      "offset": "0x12c28",
+      "encoding": "utf-16-le",
+      "text": "SetupDiGetDeviceRegistryPropertyW"
+    },
+    {
+      "file": "ScanWinUpd.exe",
+      "sha256": "6c715c549ba1da0262e3405733d2f187c405910bcd59620b5d71ece8f9a4d8a3",
+      "offset": "0x13100",
+      "encoding": "utf-16-le",
+      "text": "CM_Get_DevNode_Status"
+    },
+    {
+      "file": "ScanWinUpd.exe",
+      "sha256": "6c715c549ba1da0262e3405733d2f187c405910bcd59620b5d71ece8f9a4d8a3",
+      "offset": "0x15594",
+      "encoding": "utf-16-le",
+      "text": "DriverVersion"
+    },
+    {
+      "file": "ScanWinUpd.exe",
+      "sha256": "6c715c549ba1da0262e3405733d2f187c405910bcd59620b5d71ece8f9a4d8a3",
+      "offset": "0x155e8",
+      "encoding": "utf-16-le",
+      "text": "DriverDateData"
+    },
+    {
+      "file": "DriverUpdate.exe",
+      "sha256": "5ba633ba780b5695fdde7f0d300619439da1b9ab2161b592ef313387f2225721",
+      "offset": "0x3cf8",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "DriverUpdate.exe",
+      "sha256": "5ba633ba780b5695fdde7f0d300619439da1b9ab2161b592ef313387f2225721",
+      "offset": "0x3d60",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "DriverUpdate.exe",
+      "sha256": "5ba633ba780b5695fdde7f0d300619439da1b9ab2161b592ef313387f2225721",
+      "offset": "0x3dc8",
+      "encoding": "utf-16-le",
+      "text": "https://s2.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "DriverUpdate.exe",
+      "sha256": "5ba633ba780b5695fdde7f0d300619439da1b9ab2161b592ef313387f2225721",
+      "offset": "0x96d18",
+      "encoding": "utf-16-le",
+      "text": "SetupDiEnumDeviceInfo"
+    },
+    {
+      "file": "DriverUpdate.exe",
+      "sha256": "5ba633ba780b5695fdde7f0d300619439da1b9ab2161b592ef313387f2225721",
+      "offset": "0x96d44",
+      "encoding": "utf-16-le",
+      "text": "SetupDiGetDeviceRegistryPropertyW"
+    },
+    {
+      "file": "DriverUpdate.exe",
+      "sha256": "5ba633ba780b5695fdde7f0d300619439da1b9ab2161b592ef313387f2225721",
+      "offset": "0x9721c",
+      "encoding": "utf-16-le",
+      "text": "CM_Get_DevNode_Status"
+    },
+    {
+      "file": "DriverUpdate.exe",
+      "sha256": "5ba633ba780b5695fdde7f0d300619439da1b9ab2161b592ef313387f2225721",
+      "offset": "0x1203bc",
+      "encoding": "utf-16-le",
+      "text": "SRSetRestorePointW"
+    },
+    {
+      "file": "DBDownloader.exe",
+      "sha256": "bff206f8444f4f08425e8bc8a79c5fb6369dcf47cd0a67384097764770a449b5",
+      "offset": "0x2988",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "DBDownloader.exe",
+      "sha256": "bff206f8444f4f08425e8bc8a79c5fb6369dcf47cd0a67384097764770a449b5",
+      "offset": "0x29f0",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "DBDownloader.exe",
+      "sha256": "bff206f8444f4f08425e8bc8a79c5fb6369dcf47cd0a67384097764770a449b5",
+      "offset": "0x2a58",
+      "encoding": "utf-16-le",
+      "text": "https://s2.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0x2df351",
+      "encoding": "ascii",
+      "text": "SortDriverList$ActRec"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0x6c408",
+      "encoding": "utf-16-le",
+      "text": "SetupDiEnumDeviceInfo"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0x6c434",
+      "encoding": "utf-16-le",
+      "text": "SetupDiGetDeviceRegistryPropertyW"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0x6c7f0",
+      "encoding": "utf-16-le",
+      "text": "DriverVersion"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0xa2f6c",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0xa2fd4",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0xa303c",
+      "encoding": "utf-16-le",
+      "text": "https://s2.driverboosterscan.com/worker2.php"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0x2cce6c",
+      "encoding": "utf-16-le",
+      "text": "SetupDiEnumDeviceInfo"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0x2cce98",
+      "encoding": "utf-16-le",
+      "text": "SetupDiGetDeviceRegistryPropertyW"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0x2cd370",
+      "encoding": "utf-16-le",
+      "text": "CM_Get_DevNode_Status"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0x2cf8c0",
+      "encoding": "utf-16-le",
+      "text": "DriverVersion"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0x2cf914",
+      "encoding": "utf-16-le",
+      "text": "DriverDateData"
+    },
+    {
+      "file": "OfflineUpdater.exe",
+      "sha256": "89a5313e840158181a1ea7fac6c4a20b8adb56b1ce5ece2a4da8d09e88eb9058",
+      "offset": "0x2ee2bc",
+      "encoding": "utf-16-le",
+      "text": "SRSetRestorePointW"
+    },
+    {
+      "file": "Backup.exe",
+      "sha256": "beb5611c66db9046ad4de6490759db45c507ebb9972f5a81702bc701b17e20c3",
+      "offset": "0x6a500",
+      "encoding": "utf-16-le",
+      "text": "SetupDiEnumDeviceInfo"
+    },
+    {
+      "file": "Backup.exe",
+      "sha256": "beb5611c66db9046ad4de6490759db45c507ebb9972f5a81702bc701b17e20c3",
+      "offset": "0x6a52c",
+      "encoding": "utf-16-le",
+      "text": "SetupDiGetDeviceRegistryPropertyW"
+    },
+    {
+      "file": "Backup.exe",
+      "sha256": "beb5611c66db9046ad4de6490759db45c507ebb9972f5a81702bc701b17e20c3",
+      "offset": "0x6a8e8",
+      "encoding": "utf-16-le",
+      "text": "DriverVersion"
+    },
+    {
+      "file": "Backup.exe",
+      "sha256": "beb5611c66db9046ad4de6490759db45c507ebb9972f5a81702bc701b17e20c3",
+      "offset": "0x9919c",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker.php"
+    },
+    {
+      "file": "Backup.exe",
+      "sha256": "beb5611c66db9046ad4de6490759db45c507ebb9972f5a81702bc701b17e20c3",
+      "offset": "0x99200",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker.php"
+    },
+    {
+      "file": "Backup.exe",
+      "sha256": "beb5611c66db9046ad4de6490759db45c507ebb9972f5a81702bc701b17e20c3",
+      "offset": "0x99264",
+      "encoding": "utf-16-le",
+      "text": "https://s2.driverboosterscan.com/worker.php"
+    },
+    {
+      "file": "DrvInstall/DbzInst.dll",
+      "sha256": "78ff242f87457d7963bc512ae7ac2f2fc447fd6fcd1a540ee826a6e8062cb91e",
+      "offset": "0x3cd0",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker.php"
+    },
+    {
+      "file": "DrvInstall/DbzInst.dll",
+      "sha256": "78ff242f87457d7963bc512ae7ac2f2fc447fd6fcd1a540ee826a6e8062cb91e",
+      "offset": "0x3d34",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker.php"
+    },
+    {
+      "file": "DrvInstall/DbzInst.dll",
+      "sha256": "78ff242f87457d7963bc512ae7ac2f2fc447fd6fcd1a540ee826a6e8062cb91e",
+      "offset": "0x3d98",
+      "encoding": "utf-16-le",
+      "text": "https://s2.driverboosterscan.com/worker.php"
+    },
+    {
+      "file": "DrvInstall/DbzInst.dll",
+      "sha256": "78ff242f87457d7963bc512ae7ac2f2fc447fd6fcd1a540ee826a6e8062cb91e",
+      "offset": "0xf664",
+      "encoding": "utf-16-le",
+      "text": "NORMAL:   InvokeDpinstX"
+    },
+    {
+      "file": "DpInst/x64/dbinst.exe",
+      "sha256": "ff0cca201ce4056f182705649dbf0224ddf75217e260e9130c906016db149049",
+      "offset": "0x1a3c6",
+      "encoding": "ascii",
+      "text": "dmDriverVersion"
+    },
+    {
+      "file": "DpInst/x64/dbinst.exe",
+      "sha256": "ff0cca201ce4056f182705649dbf0224ddf75217e260e9130c906016db149049",
+      "offset": "0x38ab7c",
+      "encoding": "ascii",
+      "text": "UpdateDriverForPlugAndPlayDevicesW"
+    },
+    {
+      "file": "DpInst/x64/dbinst.exe",
+      "sha256": "ff0cca201ce4056f182705649dbf0224ddf75217e260e9130c906016db149049",
+      "offset": "0xf8ae6",
+      "encoding": "utf-16-le",
+      "text": "SetupDiEnumDeviceInfo"
+    },
+    {
+      "file": "DpInst/x64/dbinst.exe",
+      "sha256": "ff0cca201ce4056f182705649dbf0224ddf75217e260e9130c906016db149049",
+      "offset": "0xf8b12",
+      "encoding": "utf-16-le",
+      "text": "SetupDiGetDeviceRegistryPropertyW"
+    },
+    {
+      "file": "DpInst/x64/dbinst.exe",
+      "sha256": "ff0cca201ce4056f182705649dbf0224ddf75217e260e9130c906016db149049",
+      "offset": "0xf8ffc",
+      "encoding": "utf-16-le",
+      "text": "DriverVersion"
+    },
+    {
+      "file": "DpInst/x64/dpinst.exe",
+      "sha256": "ad3d6d0b4a473e7bcfa245164e5463f4c9cef55f8da86031af21ff80c15f3d37",
+      "offset": "0xecf0",
+      "encoding": "ascii",
+      "text": "UpdateDriverForPlugAndPlayDevicesW"
+    },
+    {
+      "file": "DpInst/x64/dpinst.exe",
+      "sha256": "ad3d6d0b4a473e7bcfa245164e5463f4c9cef55f8da86031af21ff80c15f3d37",
+      "offset": "0x7f3fa",
+      "encoding": "ascii",
+      "text": "SetupDiEnumDeviceInfo"
+    },
+    {
+      "file": "DpInst/x64/dpinst.exe",
+      "sha256": "ad3d6d0b4a473e7bcfa245164e5463f4c9cef55f8da86031af21ff80c15f3d37",
+      "offset": "0x7f42a",
+      "encoding": "ascii",
+      "text": "CM_Get_DevNode_Status"
+    },
+    {
+      "file": "DpInst/x64/dpinst.exe",
+      "sha256": "ad3d6d0b4a473e7bcfa245164e5463f4c9cef55f8da86031af21ff80c15f3d37",
+      "offset": "0x7f442",
+      "encoding": "ascii",
+      "text": "SetupDiGetDeviceRegistryPropertyW"
+    },
+    {
+      "file": "DpInst/x64/dpinst.exe",
+      "sha256": "ad3d6d0b4a473e7bcfa245164e5463f4c9cef55f8da86031af21ff80c15f3d37",
+      "offset": "0xabf8",
+      "encoding": "utf-16-le",
+      "text": "ENTER:  DriverPackageInstallW"
+    },
+    {
+      "file": "DpInst/x64/dpinst.exe",
+      "sha256": "ad3d6d0b4a473e7bcfa245164e5463f4c9cef55f8da86031af21ff80c15f3d37",
+      "offset": "0xac40",
+      "encoding": "utf-16-le",
+      "text": "RETURN: DriverPackageInstallW  (0x%X)"
+    },
+    {
+      "file": "Transform.exe",
+      "sha256": "0f424a2e40d85735969107ae8a81c2eb7cb33c97e44f7d32a880b2b2c105fc55",
+      "offset": "0xab7fc",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker.php"
+    },
+    {
+      "file": "Transform.exe",
+      "sha256": "0f424a2e40d85735969107ae8a81c2eb7cb33c97e44f7d32a880b2b2c105fc55",
+      "offset": "0xab860",
+      "encoding": "utf-16-le",
+      "text": "https://s1.driverboosterscan.com/worker.php"
+    },
+    {
+      "file": "Transform.exe",
+      "sha256": "0f424a2e40d85735969107ae8a81c2eb7cb33c97e44f7d32a880b2b2c105fc55",
+      "offset": "0xab8c4",
+      "encoding": "utf-16-le",
+      "text": "https://s2.driverboosterscan.com/worker.php"
+    }
+  ],
+  "unknowns": [
+    "server request/response schema",
+    "server-side matching and ranking",
+    "current database coverage",
+    "actual network requests",
+    "runtime successful driver installation and rollback"
+  ],
+  "focused_native_control_flow": [
+    {
+      "file": "scanner-export-bodies-rea.json",
+      "evidence_id": "ev_b760ebf8e13c17537c92c24df0f33c05075ce04a4b7cbc5f9f59d00363f1fff3",
+      "target": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "command": "pd 70 @ 0x4b464c; pd 65 @ 0x4b4854; pd 65 @ 0x4b4a10; iSj",
+      "artifact_changed": false,
+      "exit_code": 0
+    },
+    {
+      "file": "scanner-start-dispatch-rea.json",
+      "evidence_id": "ev_84ee4970ed431268b9354c60f72fd9a5950186477274fe67dd679d8682f8e61a",
+      "target": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "command": "aaa; pdf @ 0x4b3d58; axtj @ 0x403694; axtj @ 0x403764; afl~SortDriver",
+      "artifact_changed": false,
+      "exit_code": 0
+    },
+    {
+      "file": "scanner-worker-setup-rea.json",
+      "evidence_id": "ev_53a50545589878664d0af47ce03dadf4b38dbed5a0d01229bdba9a31f8e0bbe4",
+      "target": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "command": "af @ 0x4ae340; pdf @ 0x4ae340; pxw 160 @ 0x4ae1ac; af @ 0x4b14e0; pdf @ 0x4b14e0",
+      "artifact_changed": false,
+      "exit_code": 0
+    },
+    {
+      "file": "scanner-worker-recursive-rea.json",
+      "evidence_id": "ev_61cca6407d1a2cb89cc152bb96b4cdd91c2385b1762afaa7210d572796074a53",
+      "target": "Scanner.dll",
+      "sha256": "9ae8e026da0806198f56ba201a69765f90fa58a51086d29487641d77b3c66585",
+      "command": "af @ 0x4ae88c; pdr @ 0x4ae88c",
+      "artifact_changed": false,
+      "exit_code": 0
+    },
+    {
+      "file": "dbzinst-install-flow-rea.json",
+      "evidence_id": "ev_e8edb0e0391332ae9be447f3b3d0aeb0e81931640cb6ddae18542f894dc8a3ba",
+      "target": "DbzInst.dll",
+      "sha256": "78ff242f87457d7963bc512ae7ac2f2fc447fd6fcd1a540ee826a6e8062cb91e",
+      "command": "af @ 0x40e234; pdf @ 0x40e234; af @ 0x410878; pdf @ 0x410878",
+      "artifact_changed": false,
+      "exit_code": 0
+    },
+    {
+      "file": "dbzinst-launch-helper-rea.json",
+      "evidence_id": "ev_e361d5524e5b9472afa96034c34a4c9dc2f1a926ebc88ce8b8d9c096a04f670c",
+      "target": "DbzInst.dll",
+      "sha256": "78ff242f87457d7963bc512ae7ac2f2fc447fd6fcd1a540ee826a6e8062cb91e",
+      "command": "af @ 0x40c804; pdf @ 0x40c804",
+      "artifact_changed": false,
+      "exit_code": 0
+    },
+    {
+      "file": "dbzinst-launch-import-thunks-rea.json",
+      "evidence_id": "ev_b886d8c9c405ad126c5ab920828a182eb3951d9508af6eacd8a4d2a1c9110859",
+      "target": "DbzInst.dll",
+      "sha256": "78ff242f87457d7963bc512ae7ac2f2fc447fd6fcd1a540ee826a6e8062cb91e",
+      "command": "pd 2 @ 0x40141c; pd 2 @ 0x401444; pd 2 @ 0x401568; pd 2 @ 0x40140c",
+      "artifact_changed": false,
+      "exit_code": 0
+    }
+  ]
+}
