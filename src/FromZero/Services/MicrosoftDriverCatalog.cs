@@ -19,7 +19,7 @@ public record CatalogDriverDownload(string Folder,string[] InfFiles,string[] Sou
 public static class MicrosoftDriverCatalog
 {
  private const string CatalogHost="www.catalog.update.microsoft.com";
- private const long MaximumCabBytes=512L*1024*1024;
+ private const long MaximumCabBytes=2L*1024*1024*1024;
  private static readonly TimeSpan RegexTimeout=TimeSpan.FromSeconds(2);
  private const RegexOptions IgnoreCase=RegexOptions.IgnoreCase|RegexOptions.CultureInvariant;
 
@@ -60,7 +60,7 @@ public static class MicrosoftDriverCatalog
   .ToArray();
 
  internal static bool ValidHardwareId(string id)=>id.Length is >3 and <=250&&Regex.IsMatch(id,
-  @"^(?:PCI|USB|HID|ACPI|HDAUDIO|BTH|SD|ROOT|SWD)\\[A-Z0-9_&.\-\\]+$",IgnoreCase,RegexTimeout);
+  "^"+PackageSafety.HardwareIdPattern+"$",IgnoreCase,RegexTimeout);
 
  internal static List<CatalogDriverCandidate> ParseSearch(string html,string hardwareId)
  {
@@ -93,7 +93,7 @@ public static class MicrosoftDriverCatalog
   var expected=RuntimeInformation.OSArchitecture switch{Architecture.X64=>"AMD64",Architecture.Arm64=>"ARM64",_=>"X86"};
   if(!Regex.IsMatch(architecture,@"\b"+expected+@"\b",IgnoreCase,RegexTimeout))return null;
   var decoded=WebUtility.HtmlDecode(html);
-  var supported=Regex.Matches(decoded,@"(?:PCI|USB|HID|ACPI|HDAUDIO|BTH|SD|ROOT|SWD)\\[A-Z0-9_&.\-\\]+",IgnoreCase,RegexTimeout)
+  var supported=Regex.Matches(decoded,PackageSafety.HardwareIdPattern,IgnoreCase,RegexTimeout)
    .Select(match=>match.Value.TrimEnd('\\')).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
   var match=deviceIds.FirstOrDefault(id=>supported.Contains(id,StringComparer.OrdinalIgnoreCase));
   if(match==null)return null;
@@ -131,10 +131,13 @@ public static class MicrosoftDriverCatalog
     var cab=Path.Combine(folder,"package-"+index+".cab");
     progress?.Report("Downloading driver package "+(index+1)+" / "+packages.Count);
     total+=await DownloadCabAsync(client,package.Url,cab,package.Hash,progress,token);
-    if(total>1024L*1024*1024)throw new InvalidDataException("The driver download exceeds the total size limit.");
+    if(total>4L*1024*1024*1024)throw new InvalidDataException("The driver download exceeds the total size limit.");
     var paths=ValidateCabinet(cab,out var expandedBytes);
     expandedTotal+=expandedBytes;
-    if(expandedTotal>2L*1024*1024*1024)throw new InvalidDataException("The driver package expands beyond the total size limit.");
+    if(expandedTotal>4L*1024*1024*1024)throw new InvalidDataException("The driver package expands beyond the total size limit.");
+    var disk=new DriveInfo(Path.GetPathRoot(folder)!);
+    if(disk.AvailableFreeSpace<expandedBytes*2+256L*1024*1024)
+     throw new IOException("Not enough free space to extract and stage the driver package.");
     var destination=Path.Combine(folder,"contents-"+index);
     Directory.CreateDirectory(destination);
     foreach(var path in paths)PackageSafety.ResolveInside(destination,path);
@@ -216,7 +219,9 @@ public static class MicrosoftDriverCatalog
   if(!AllowedDownload(uri))throw new InvalidDataException("Untrusted driver package address.");
   using var response=await client.GetAsync(uri,HttpCompletionOption.ResponseHeadersRead,token);
   response.EnsureSuccessStatusCode();
-  if(response.Content.Headers.ContentLength>MaximumCabBytes)throw new InvalidDataException("The driver CAB exceeds the 512 MB limit.");
+  if(response.Content.Headers.ContentLength>MaximumCabBytes)throw new InvalidDataException("The driver CAB exceeds the 2 GB limit.");
+  if(response.Content.Headers.ContentLength is long planned&&new DriveInfo(Path.GetPathRoot(path)!).AvailableFreeSpace<planned+256L*1024*1024)
+   throw new IOException("Not enough free space to download the driver package.");
   await using var input=await response.Content.ReadAsStreamAsync(token);
   await using var output=new FileStream(path,FileMode.CreateNew,FileAccess.Write,FileShare.None,81920,true);
   using var hash=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
@@ -226,7 +231,7 @@ public static class MicrosoftDriverCatalog
   while((read=await input.ReadAsync(buffer,token))>0)
   {
    total+=read;
-   if(total>MaximumCabBytes)throw new InvalidDataException("The driver CAB exceeds the 512 MB limit.");
+   if(total>MaximumCabBytes)throw new InvalidDataException("The driver CAB exceeds the 2 GB limit.");
    hash.AppendData(buffer,0,read);
    await output.WriteAsync(buffer.AsMemory(0,read),token);
   }
@@ -237,7 +242,7 @@ public static class MicrosoftDriverCatalog
 
  internal static string[] ValidateCabinet(string path)=>ValidateCabinet(path,out _);
 
- private static string[] ValidateCabinet(string path,out long expandedBytes)
+ internal static string[] ValidateCabinet(string path,out long expandedBytes)
  {
   using var stream=File.OpenRead(path);
   using var reader=new BinaryReader(stream,Encoding.UTF8,true);
@@ -260,7 +265,7 @@ public static class MicrosoftDriverCatalog
    var entry=reader.ReadBytes(16);
    if(entry.Length!=16)throw new InvalidDataException("Truncated cabinet directory.");
    expandedBytes+=BinaryPrimitives.ReadUInt32LittleEndian(entry);
-   if(expandedBytes>2L*1024*1024*1024||BinaryPrimitives.ReadUInt16LittleEndian(entry.AsSpan(8))>=folders)
+   if(expandedBytes>4L*1024*1024*1024||BinaryPrimitives.ReadUInt16LittleEndian(entry.AsSpan(8))>=folders)
     throw new InvalidDataException("The cabinet expands beyond the size limit or spans volumes.");
    var bytes=new List<byte>();
    byte value;

@@ -37,6 +37,7 @@ public static class CatalogDriverInstaller
   foreach(var source in PackageSafety.EnumerateSafeFiles(review.Folder))
   {
    token.ThrowIfCancellationRequested();
+   if(Path.GetDirectoryName(source)!.Equals(review.Folder,StringComparison.OrdinalIgnoreCase))continue;
    var target=PackageSafety.ResolveInside(stage,Path.GetRelativePath(review.Folder,source));
    Directory.CreateDirectory(Path.GetDirectoryName(target)!);
    File.Copy(source,target,false);

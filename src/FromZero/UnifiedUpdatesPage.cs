@@ -13,11 +13,15 @@ public partial class MainWindow
   var result=new List<UpdateRow>();
   foreach(var offer in windowsScan?.Offers.Where(o=>!o.Hidden&&!o.Superseded&&!o.Firmware)??[])
   {
-   var matching=drivers.Where(driver=>devices.Any(device=>device.Id==driver.DeviceId&&WindowsUpdateCatalog.MatchesDevice(offer,device)));
-   result.Add(new(offer.Key,offer.Title,offer.Kind=="Driver"?"Drivers":"Windows",
+   var matchedDevices=devices.Where(device=>WindowsUpdateCatalog.MatchesDevice(offer,device)).ToArray();
+   var deviceNames=matchedDevices.Select(device=>device.Name).Where(name=>name.Length>0).Distinct().ToArray();
+   var name=offer.Kind=="Driver"&&deviceNames.Length>0?string.Join(" · ",deviceNames):
+    offer.Kind=="Driver"&&!string.IsNullOrWhiteSpace(offer.Model)?offer.Model:offer.Title;
+   var matching=drivers.Where(driver=>matchedDevices.Any(device=>device.Id==driver.DeviceId));
+   result.Add(new(offer.Key,name,offer.Kind=="Driver"?"Drivers":"Windows",
     offer.Kind=="Driver"?InstalledVersions(matching):Locale.Text("Pending Windows update"),
     string.IsNullOrWhiteSpace(offer.Version)?offer.Title:offer.Version,"Outdated",
-    downloadStatus.GetValueOrDefault(offer.Key,offer.Downloaded?"Downloaded · ready to install":offer.Optional?"Optional update":"Update available"),
+    offer.Title+"\n"+downloadStatus.GetValueOrDefault(offer.Key,offer.Downloaded?"Downloaded · ready to install":offer.Optional?"Optional update":"Update available"),
     offer.QueueInstallable,()=>windowsSelection.Contains(offer.Key),selected=>{if(selected)windowsSelection.Add(offer.Key);else windowsSelection.Remove(offer.Key);},
     ()=>{Detail(offer.Title,offer.Eula);return Task.CompletedTask;}));
   }
@@ -85,7 +89,8 @@ public partial class MainWindow
    page=Math.Clamp(page,0,Math.Max(0,(filtered.Length-1)/12));
    foreach(var row in filtered.Skip(page*12).Take(12))
    {
-    var selected=new CheckBox{Content=Locale.Text(row.Category),IsChecked=row.Selected(),IsEnabled=row.Selectable};
+    var selected=new CheckBox{Content=Stack(T(row.Name,17,"#B9E2A7",true),T(Locale.Text(row.Category),11,"#9AAFAE")),
+     IsChecked=row.Selected(),IsEnabled=row.Selectable,HorizontalContentAlignment=HorizontalAlignment.Stretch};
     selected.Checked+=(_,_)=>{row.Select(true);UpdateQueueSummary();};selected.Unchecked+=(_,_)=>{row.Select(false);UpdateQueueSummary();};
     var layout=new Grid();layout.ColumnDefinitions.Add(new ColumnDefinition());layout.ColumnDefinitions.Add(new ColumnDefinition{Width=GridLength.Auto});
     var text=Stack(AppIcons.Heading(row.Name,row.Icon,selected),

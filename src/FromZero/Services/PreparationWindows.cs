@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text.Json;
 namespace FromZero;
-public record PreparationWindowsResult(string Title,int Code,int HResult,bool Reboot,bool Installed,string Key="");
+public record PreparationWindowsResult(string Title,int Code,int HResult,bool Reboot,bool Installed,string Key="",bool DriverCacheReady=false);
 public static class PreparationWindows
 {
  public static string Script(bool drivers,string stopFile="")=>BuildScript(drivers,stopFile,"");
@@ -28,7 +28,7 @@ public static class PreparationWindows
  };
  foreach($candidate in $ordered){
   if($stopFile -and (Test-Path -LiteralPath $stopFile)){$report+=[pscustomobject]@{Title='Durdurma istendi';Code=5;HResult=0;Reboot=$false;Installed=$false};break};
-  $key='';$title=[string]$candidate.Title;
+  $key='';$title=[string]$candidate.Title;$driverCacheReady=$false;
   try{
    if($wanted.Count){
     $key=$candidate.Id+':'+$candidate.Revision;$title=$key;
@@ -39,7 +39,7 @@ public static class PreparationWindows
    $isDriver=[int]$update.Type -eq 2;
    $firmware=$update.Title -match 'Firmware|BIOS' -or ($isDriver -and $update.DriverClass -eq 'Firmware');
    $upgrade=@($update.Categories|Where-Object {$_.CategoryID -eq '3689BDC8-B205-4AF4-8D4A-A63924C5E9D5'}).Count -gt 0;
-   if($firmware -or $upgrade -or $update.InstallationBehavior.CanRequestUserInput -or (!$isDriver -and ($update.BrowseOnly -or $update.Title -match 'Preview|Önizleme'))){
+   if($firmware -or $upgrade -or (!$isDriver -and ($update.InstallationBehavior.CanRequestUserInput -or $update.BrowseOnly -or $update.Title -match 'Preview|Önizleme'))){
     if($wanted.Count){throw 'Paket otomatik kuruluma uygun değil.'};continue;
    };
    if($progressFile){Set-Content -LiteralPath $progressFile -Encoding UTF8 -Value ('İndiriliyor: '+$update.Title)};
@@ -47,16 +47,20 @@ public static class PreparationWindows
    $collection=New-Object -ComObject Microsoft.Update.UpdateColl;[void]$collection.Add($update);
    if(!$update.IsDownloaded){
     $downloader=$session.CreateUpdateDownloader();$downloader.Updates=$collection;$download=$downloader.Download();
-    if([int]$download.ResultCode -ne 2 -or !$update.IsDownloaded){throw ('İndirme başarısız: '+$download.ResultCode)};
+    if([int]$download.ResultCode -ne 2 -or !$update.IsDownloaded){
+     $failedDownload=$download.GetUpdateResult(0);
+     $report+=[pscustomobject]@{Title=$title;Key=$key;Code=[int]$failedDownload.ResultCode;HResult=[int]$failedDownload.HResult;Reboot=$false;Installed=$false};continue;
+    };
    };
+   $driverCacheReady=$isDriver;
    $installer=$session.CreateUpdateInstaller();$installer.Updates=$collection;$installer.AllowSourcePrompts=$false;$installer.ForceQuiet=$true;
    if($progressFile){Set-Content -LiteralPath $progressFile -Encoding UTF8 -Value ('Kuruluyor: '+$update.Title)};
    $resultInstall=$installer.Install();$item=$resultInstall.GetUpdateResult(0);
    $installed=$false;try{$verify=$searcher.Search("IsInstalled=1 and UpdateID='"+$update.Identity.UpdateID+"'");$installed=$verify.Updates.Count -gt 0}catch{};
    $restart=[bool]$resultInstall.RebootRequired;
-   $report+=[pscustomobject]@{Title=$title;Key=$key;Code=[int]$item.ResultCode;HResult=[int]$item.HResult;Reboot=$restart;Installed=$installed};
+   $report+=[pscustomobject]@{Title=$title;Key=$key;Code=[int]$item.ResultCode;HResult=[int]$item.HResult;Reboot=$restart;Installed=$installed;DriverCacheReady=$driverCacheReady};
    if($restart){break};
-  }catch{$report+=[pscustomobject]@{Title=($title+' / '+$_.Exception.Message);Key=$key;Code=4;HResult=[int]$_.Exception.HResult;Reboot=$false;Installed=$false}};
+  }catch{$report+=[pscustomobject]@{Title=($title+' / '+$_.Exception.Message);Key=$key;Code=4;HResult=[int]$_.Exception.HResult;Reboot=$false;Installed=$false;DriverCacheReady=$driverCacheReady}};
  };ConvertTo-Json -Depth 4 -InputObject @($report)
  """;
  public static async Task<PreparationOutcome> ApplyAsync(bool drivers,IProgress<string> progress,CancellationToken token,string stopFile="")

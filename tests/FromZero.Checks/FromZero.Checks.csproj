@@ -4,6 +4,9 @@
   <Compile Include="../../src/FromZero/Services/OfficeDiscovery.cs" Link="OfficeDiscovery.cs"/>
   <Compile Include="../../src/FromZero/Services/MicrosoftDriverCatalog.cs" Link="MicrosoftDriverCatalog.cs"/>
   <Compile Include="../../src/FromZero/Services/CatalogDriverInstaller.cs" Link="CatalogDriverInstaller.cs"/>
+  <Compile Include="../../src/FromZero/Services/SilentDriverUpdates.cs" Link="SilentDriverUpdates.cs"/>
+  <Compile Include="../../src/FromZero/Services/WindowsDriverPackageCache.cs" Link="WindowsDriverPackageCache.cs"/>
+  <Compile Include="../../src/FromZero/Services/UpdatePackageInstaller.cs" Link="UpdatePackageInstaller.cs"/>
   <Compile Include="../../src/FromZero/Services/ActivationService.cs" Link="ActivationService.cs"/>
   <Compile Include="../../src/FromZero/Models.cs" Link="Models.cs"/>
   <Compile Include="../../src/FromZero/Core/*.cs" Link="Core/%(Filename)%(Extension)"/>

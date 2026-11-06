@@ -13,6 +13,7 @@ public partial class MainWindow
  private TextBlock? queueSummary;
  private readonly HashSet<string> windowsSelection=new(),packageSelection=new();
  private readonly List<string> updateWarnings=[];
+ private string updateInstallationReport="",updateInstallationStatus="";
  private readonly Dictionary<string,string> downloadStatus=new(StringComparer.OrdinalIgnoreCase);
  private bool extendedUpdateScan=true,legacyRuntimeScan=true;
  private bool automaticDownloads=ReadAutoDownload();
@@ -27,8 +28,11 @@ public partial class MainWindow
   queueSummary=T("",12,"#B9E2A7");
   if(manufacturer)Page.Children.Add(Row(Action("Seçilenleri indir",()=>DownloadSelectionAsync(false),true),queueSummary));
   else Page.Children.Add(Card(Stack(Row(Action("Güncellemeleri tara",ScanAllUpdatesAsync),
-   Action("Select all missing updates",SelectAllMissingUpdatesAsync),Action("Download and install selected",InstallSelectedUpdatesAsync,true)),
-   T(scanText,13,"#D2DED6"),queueSummary)));UpdateQueueSummary();
+   Action("Select all missing updates",SelectAllMissingUpdatesAsync),Action("Download and update",InstallSelectedUpdatesAsync,true)),
+   T(scanText,13,"#D2DED6"),queueSummary,
+   T("Save your work before updating. Selected applications are asked to close. Package licences are accepted and Windows may require a restart.",11,"#9AAFAE"))));UpdateQueueSummary();
+  if(updateInstallationReport.Length>0)Page.Children.Add(Card(Stack(T(updateInstallationStatus,17,"#B9E2A7",true),
+   PreparationExpander("Installation results",T(updateInstallationReport,12,"#B9CBC1")))));
   var tabs=Row();foreach(var (id,label) in new[]{("all","Results"),("hardware","Hardware"),("catalog","Driver finder"),("oem","Üretici araçları")}){var category=id;var button=Action(label,()=>{updateCategory=category;Navigate("drivers");return Task.CompletedTask;},updateCategory==id);tabs.Children.Add(button);}Page.Children.Add(tabs);
   if(updateCategory=="apps")Page.Children.Add(Row(Action("Yalnız uygulamaları tara",ScanApplicationsAsync,true)));
   if(!manufacturer){var settingsStart=Page.Children.Count;

@@ -1,0 +1,15 @@
+{
+ "Sürücüler":"Drivers",
+ "İndirilen Windows sürücü paketi hazırlanıyor…":"Preparing the downloaded Windows driver package…",
+ "İndir ve güncelle":"Download and update",
+ "Güncellemeden önce açık çalışmalarını kaydet. Seçilen uygulamalar normal şekilde kapatılmaya çalışılır. Paket lisansları kabul edilir ve Windows yeniden başlatma isteyebilir.":"Save your work before updating. Selected applications are asked to close. Package licences are accepted and Windows may require a restart.",
+ "Kurulum sonuçları":"Installation results",
+ "İmzalı sürücü paketi bulunuyor":"Finding the signed driver package",
+ "Sunulan sürücünün aynı sürümü Microsoft kataloğunda bulunamadı.":"The exact offered driver package was not found in the Microsoft catalogue.",
+ "Doğrulanmış uyumlu bir sürücü paketi bulunamadı.":"No verified compatible driver package was found.",
+ "OBS dosyaları kullanılıyor. OBS, tarayıcı ve kamera uygulamalarını kapatıp tekrar dene.":"OBS files are in use. Close OBS, browsers and camera applications, then retry.",
+ "Güncelleme var":"Update available",
+ "Seçilen güncellemeler indirilsin ve kurulsun mu? Windows Update lisansları kabul edilir. Önce sürücüler yedeklenir. Seçilen açık uygulamalar normal şekilde kapatılmaya çalışılır. Devam etmeden önce açık çalışmalarını kaydet.":"Download and install the selected updates? Windows Update licenses will be accepted. Drivers are backed up first. Selected running applications will be asked to close. Save your work before continuing.",
+ "Sürücü paketini indirmek için yeterli boş alan yok.":"Not enough free space to download the driver package.",
+ "Sürücü paketini çıkarmak ve kurulum alanına almak için yeterli boş alan yok.":"Not enough free space to extract and stage the driver package."
+}

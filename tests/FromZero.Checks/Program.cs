@@ -20,6 +20,7 @@ try{
  WorkspaceUpgradeChecks.Run(Check);
  await ActivationChecks.Run(root,Check);
  DriverCatalogChecks.Run(Check);
+ SilentUpdateChecks.Run(Check);
  MicrosoftDriverCatalogChecks.Run(root,Check);
  await RoadmapChecks.Run(root,Check);
  await FpsChecks.Run(root,Check);
@@ -135,7 +136,7 @@ try{
  };
  var artifactsPath=Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,"..","..","..","..","..","artifacts"));Directory.CreateDirectory(artifactsPath);
  var startupArgument=Array.IndexOf(args,"--verify-startup");if(startupArgument>=0){if(startupArgument+1>=args.Length)throw new ArgumentException("Startup executable path required");await StartupChecks.RunProcesses(args[startupArgument+1],artifactsPath,Check);}
- var releaseArgument=Array.IndexOf(args,"--verify-release-integrity");if(releaseArgument>=0){if(releaseArgument+1>=args.Length)throw new ArgumentException("Release folder required");var release=await ReleaseIntegrity.InspectAsync(Path.GetFullPath(args[releaseArgument+1]),new(0,20,0));Check(release.IntegrityOk&&release.Files>=4&&release.Version=="0.20.0","Packaged release manifest verifies the published files");}
+ var releaseArgument=Array.IndexOf(args,"--verify-release-integrity");if(releaseArgument>=0){if(releaseArgument+1>=args.Length)throw new ArgumentException("Release folder required");var release=await ReleaseIntegrity.InspectAsync(Path.GetFullPath(args[releaseArgument+1]),new(0,20,1));Check(release.IntegrityOk&&release.Files>=4&&release.Version=="0.20.1","Packaged release manifest verifies the published files");}
  await File.WriteAllTextAsync(Path.Combine(artifactsPath,"inventory-verification.json"),System.Text.Json.JsonSerializer.Serialize(liveReport,LocalStore.Json));
  if(args.Contains("--verify-faceit-public")){var ranking=await FaceitCatalog.RefreshAsync();await File.WriteAllTextAsync(Path.Combine(artifactsPath,"faceit-public-0.15-verification.json"),System.Text.Json.JsonSerializer.Serialize(ranking,LocalStore.Json));Check(ranking.Entries.Count==10&&ranking.Entries.All(e=>e.Source==FaceitCatalog.PublicGlobalUrl),"Live public HTML FACEIT ranking refresh succeeds without API credentials");}
  if(args.Contains("--verify-updates")){

@@ -8,6 +8,9 @@ internal static class UpdateChecks
   check(WorldStations.ForPage("cleanup").Sign=="ZERO CLEAN"&&WorldStations.ForPage("gaming").Sign=="ARCADE","Cleaning and gaming have themed destinations");
   var offers=new WindowsOffer(Guid.NewGuid().ToString(),1,"NVIDIA Display 32.0.1.2","Driver","NVIDIA","GPU","Display","",false,false,false,false,123,"32.0.1.2","2026-10-20");
   check(offers.AutoEligible&&!((offers with{Hidden=true}).AutoEligible)&&!((offers with{Superseded=true}).AutoEligible),"Automatic driver selection excludes hidden and superseded packages");
+  check((offers with{Interactive=true}).QueueInstallable&&!(offers with{Interactive=true,Class="Firmware"}).QueueInstallable&&
+   !(offers with{Kind="Software",Interactive=true}).QueueInstallable,
+   "Driver metadata that can request input remains eligible while firmware and interactive software stay excluded");
   var recommended=WindowsUpdateCatalog.RecommendedDrivers([offers,offers with{Id=Guid.NewGuid().ToString(),Version="32.0.2.0"},offers with{Class="Firmware"}]).ToList();
   check(recommended.Count==1&&recommended[0].Version=="32.0.2.0","Automatic driver queue chooses one newest offered version per device model");
   var exact=offers with{HardwareId=@"PCI\VEN_10DE&DEV_1234"};
@@ -36,6 +39,17 @@ internal static class UpdateChecks
   check(installParsed.Success&&install.Contains(cached.Id)&&install.Contains(software.Id)&&install.Contains("if(!$update.IsDownloaded)")&&
    install.Contains("$installer.Install()")&&Reject(()=>PreparationWindows.SelectionScript([feature])),
    "Selected Windows install targets exact identities, reuses cache and rejects feature upgrades");
+  var interactive=exact with{Interactive=true};
+  var quiet=PreparationWindows.SelectionScript([interactive]);
+  check(quiet.Contains("$installer.ForceQuiet=$true")&&quiet.Contains("(!$isDriver -and ($update.InstallationBehavior.CanRequestUserInput")&&
+   !quiet.Contains("$upgrade -or $update.InstallationBehavior.CanRequestUserInput"),
+   "Interactive-capable drivers reach the Windows quiet installer instead of being skipped");
+  var exported=WindowsDriverPackageCache.ExportScript(interactive,Path.Combine(Path.GetTempPath(),"FromZero driver fixture"));
+  var exportParsed=await Commands.PsAsync("$tokens=$null;$errors=$null;[void][System.Management.Automation.Language.Parser]::ParseInput("+PackageSafety.QuotePs(exported)+",[ref]$tokens,[ref]$errors);if($errors.Count){throw (($errors | ForEach-Object Message)-join '; ')}");
+  check(exportParsed.Success&&exported.Contains(interactive.Id)&&exported.Contains("$update.CopyFromCache($path,$false)")&&
+   exported.Contains("DriverHardwareID -ine $hardware")&&!exported.Contains(".Install()")&&
+   Reject(()=>WindowsDriverPackageCache.ExportScript(interactive with{Class="Firmware"},Path.GetTempPath())),
+   "Native fallback exports the same PC's exact WUA identity with hardware and firmware checks, without installing in the export step");
   check(WindowsUpdateCatalog.DownloadScript([offers],false).Contains("$allowLicense=$false")&&script.Contains("} catch { $report"),"Automatic update queue refuses new licenses and records each package failure");
   check(WindowsUpdateCatalog.ScanScript(true).Contains("IncludePotentiallySupersededUpdates=$true")&&WindowsUpdateCatalog.ScanScript(true).Contains("IsHidden=1")&&!WindowsUpdateCatalog.ScanScript(false).Contains("IsHidden=1"),"Expanded Windows scan explicitly includes hidden and superseded offers");
   check(AppDownloads.Recipes.Count(r=>r.Id.StartsWith("vc"))==12,"Visual C++ catalog covers six generations in x86 and x64");

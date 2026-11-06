@@ -12,10 +12,6 @@ public partial class MainWindow
   var recipes=AppDownloads.Recipes.Where(r=>packageSelection.Contains(r.Id)).ToArray();
   if(offers.Length+recipes.Length+catalogDriverQueue.Count==0){Detail("Update installation","No applicable updates were found.");return;}
 
-  var plan=string.Join("\n",offers.Select(o=>o.Title).Concat(recipes.Select(r=>r.Name)).Concat(catalogDriverQueue.Values.Select(r=>r.Device.Name+" · "+r.Candidate.Title)));
-  if(!Confirm(Locale.Text("Download and install the selected updates? Windows Update licenses will be accepted. Drivers are backed up first. Save your work before continuing.")+
-   "\n\n"+plan,Locale.Text("Update installation")))return;
-
   using var cancellation=new CancellationTokenSource();
   var token=cancellation.Token;
   var operationId=Guid.NewGuid().ToString("N");
@@ -31,6 +27,7 @@ public partial class MainWindow
   bool restart=false,attention=false;
   try
   {
+   var nativeDrivers=new List<WindowsOffer>();
    var allowed=offers.Where(o=>o.QueueInstallable).OrderBy(o=>o.Kind=="Driver").ToArray();
    foreach(var offer in offers.Where(o=>!o.QueueInstallable))
    {
@@ -59,6 +56,13 @@ public partial class MainWindow
     foreach(var item in report.Where(r=>r.Code!=5))
     {
      var verified=item.Code==2&&item.Installed;
+     var driver=batch.FirstOrDefault(o=>o.Kind=="Driver"&&o.Key==item.Key);
+     if(!verified&&!item.Reboot&&item.Code!=2&&item.DriverCacheReady&&driver!=null)
+     {
+      nativeDrivers.Add(driver);
+      Journal.Write("Windows driver install fallback",item.Title+" / 0x"+unchecked((uint)item.HResult).ToString("X8"),false);
+      continue;
+     }
      var state=verified?"Installation verified":item.Code==2&&item.Reboot?"Restart required":"Installation could not be verified";
      if(!string.IsNullOrEmpty(item.Key))
      {
@@ -70,6 +74,27 @@ public partial class MainWindow
      attention|=!verified&&!item.Reboot;
     }
     if(restart)break;
+   }
+
+   foreach(var offer in restart?Array.Empty<WindowsOffer>():nativeDrivers.ToArray())
+   {
+    token.ThrowIfCancellationRequested();
+    try
+    {
+     var driverResult=await SilentDriverUpdates.InstallAsync(offer,progress,token);
+     restart=driverResult.Restart;
+     attention|=!driverResult.Verified&&!restart;
+     var state=driverResult.Verified?"Installation verified":restart?"Restart required":"Installation could not be verified";
+     downloadStatus[offer.Key]=state;
+     if(driverResult.Verified)installedKeys.Add(offer.Key);
+     results.Add(offer.Title+" · "+Locale.Text(state)+"\n"+driverResult.Detail);
+     if(restart)break;
+    }
+    catch(Exception ex) when(ex is not OperationCanceledException)
+    {
+     downloadStatus[offer.Key]="Installation could not be verified";
+     results.Add(offer.Title+" · "+ex.Message);attention=true;
+    }
    }
 
    if(!restart&&catalogDriverQueue.Count>0)
@@ -88,9 +113,9 @@ public partial class MainWindow
      {
       "app-chrome"=>AppDownloads.Recipes.Single(r=>r.Id=="prepare-chrome"),
       "directx"=>AppDownloads.Recipes.Single(r=>r.Id=="directx-offline"),
-      _=>selected
+      _=>UpdatePackageInstaller.InstallRecipe(selected)
      };
-     var definition=UpdatePackageInstaller.Definition(selected,runtime);
+     var definition=UpdatePackageInstaller.Definition(recipe,runtime)??UpdatePackageInstaller.Definition(selected,runtime);
      if(selected.Id=="directx")definition=UpdatePackageInstaller.Definition(recipe,null);
      var result=await ApplyUpdatePackageAsync(recipe,definition,app,runtime,operationId,progress,token);
      downloadStatus[selected.Id]=result.Status;
@@ -133,7 +158,9 @@ public partial class MainWindow
   var reportText=string.Join("\n",results);
   Journal.Write("Update installation",reportText,!attention&&!restart);
   operationCompletion=Locale.Text(restart?"Restart required":attention?"Review update results":"Update installation finished");
-  Detail(Locale.Text("Update installation"),reportText);
+  updateInstallationReport=reportText;
+  updateInstallationStatus=operationCompletion;
+  Navigate("drivers");
  }
 
  private static async Task<(string Status,bool Verified,bool Restart)> ApplyUpdatePackageAsync(DownloadRecipe recipe,
@@ -142,10 +169,12 @@ public partial class MainWindow
   if(definition!=null&&UpdatePackageInstaller.Present(recipe,definition,app,runtime))return("Already up to date",true,false);
   var download=await UpdatePackageInstaller.AcquireAsync(recipe,progress,token);
   if(definition==null)return("Downloaded · manual installation required",false,false);
-  if(UpdatePackageInstaller.AppIsRunning(definition))return("Close the application, then run the queue again",false,false);
+  if(UpdatePackageInstaller.AppIsRunning(definition)&&!await UpdatePackageInstaller.TryCloseForUpdateAsync(definition,token))
+   return("Close the application, then run the queue again",false,false);
   token.ThrowIfCancellationRequested();
   var install=await PreparationPackages.InstallAsync(operationId,recipe,definition,download,progress);
   if(install.Code is 3010 or 1641)return("Restart required",false,true);
+  if(install.Code==6&&recipe.Id=="app-obs")return("OBS files are in use. Close OBS, browsers and camera applications, then retry.",false,false);
   if(install.Code!=0)throw new IOException(Locale.Text("Installer exit code")+" "+install.Code);
   for(var attempt=0;attempt<5;attempt++)
   {

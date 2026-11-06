@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 namespace FromZero;
 public static class PackageSafety
 {
+ public const string HardwareIdPattern=@"(?:PCI|USB|HID|ACPI|HDAUDIO|BTH|BTHENUM|BTHLEDEVICE|SD|ROOT|SWD|SWC|SCSI|STORAGE|USBSTOR|DISPLAY|MONITOR|VMBUS|IDE)\\[A-Z0-9_&.\-\\{}]+";
  public static string InfText(string path)
  {
   if(new FileInfo(path).Length>8_000_000)throw new InvalidDataException("INF exceeds the size limit.");
@@ -51,7 +52,7 @@ public static class PackageSafety
  {
   var text = InfText(inf);
   text = Regex.Replace(text, @";[^\r\n]*", "");
-  return Regex.Matches(text, @"(?:PCI|USB|HID|ACPI|HDAUDIO|BTH|SD|ROOT|SWD)\\[A-Z0-9_&.\-\\]+",
+  return Regex.Matches(text,HardwareIdPattern,
    RegexOptions.IgnoreCase|RegexOptions.CultureInvariant,TimeSpan.FromSeconds(2))
    .Select(m => m.Value.TrimEnd('\\')).ToHashSet(StringComparer.OrdinalIgnoreCase);
  }

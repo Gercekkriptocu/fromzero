@@ -16,6 +16,10 @@ internal static class MicrosoftDriverCatalogChecks
   var architecture=RuntimeInformation.OSArchitecture switch{Architecture.X64=>"AMD64",Architecture.Arm64=>"ARM64",_=>"X86"};
   var details=$"<div id='archDiv'>Architecture: {architecture}</div><div id='classificationDiv'>Drivers</div><div>pci\\ven_10ec&amp;dev_8168&amp;subsys_337517aa&amp;rev_1b</div>";
   var candidate=MicrosoftDriverCatalog.ParseDetails(found[0],details,[hardwareId]);
+  var audioId=@"SWC\VEN_MSFT&AUDIO_EFFECTPACK_VOICECLARITY";
+  check(MicrosoftDriverCatalog.ValidHardwareId(audioId)&&MicrosoftDriverCatalog.ParseDetails(found[0],
+   $"<div id='archDiv'>Architecture: {architecture}</div><div>swc\\ven_msft&amp;audio_effectpack_voiceclarity</div>",[audioId])!=null,
+   "Microsoft audio processing software-component hardware IDs are searchable and match package metadata");
   check(candidate?.HardwareId==hardwareId&&candidate.Architecture==architecture&&
    MicrosoftDriverCatalog.ParseDetails(found[0],details,[@"PCI\VEN_10EC&DEV_9999"])==null&&
    MicrosoftDriverCatalog.ParseDetails(found[0],details.Replace(architecture,"WrongArchitecture"),[hardwareId])==null,

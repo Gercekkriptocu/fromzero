@@ -128,7 +128,9 @@ public static class PreparationPackages
   var stage=StageRoot(jobId);var file=Path.Combine(stage,id+"-"+Guid.NewGuid().ToString("N")+recipe.Extension);File.Copy(download.Path,file,false);
   using var locked=new FileStream(file,FileMode.Open,FileAccess.Read,FileShare.Read);
   var hash=Convert.ToHexString(await System.Security.Cryptography.SHA256.HashDataAsync(locked));if(hash!=download.Hash)throw new InvalidDataException("Kurulum dosyası aktarılırken değişmiş.");
-  var publisher=await DriverService.SignatureAsync(file);if(!publisher.Contains(recipe.Publisher,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Kurulum yayıncısı doğrulanamadı.");
+  var publisher=await DriverService.SignatureAsync(file);
+  if(string.IsNullOrWhiteSpace(publisher)||!recipe.CatalogSigned&&!publisher.Contains(recipe.Publisher,StringComparison.OrdinalIgnoreCase))
+   throw new InvalidDataException("Kurulum yayıncısı doğrulanamadı.");
   if(id is "directx-offline" or "vc2005-x64" or "vc2005-x86"){
    var directory=Path.Combine(stage,"Extract-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(directory);progress.Report(recipe.Name+" tam paketi çıkartılıyor…");
    var unpack=await Commands.InstallProcessAsync(file,["/Q","/C","/T:"+directory]);if(unpack.ExitCode!=0)throw new IOException("Microsoft paketi çıkartılamadı: "+unpack.ExitCode);
