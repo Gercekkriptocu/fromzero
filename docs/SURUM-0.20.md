@@ -1,4 +1,4 @@
-# FromZero 0.20.3
+# FromZero 0.20.4
 
 - FromZero açılışta yeni sürümleri kontrol eder. Güncellemeler veya Çalışma Alanı ekranındaki FromZero kartından güncellenip yeniden açılabilir. Standart x64 kurulumda yalnızca değişen dosyaların verileri indirilir, yerel dosyalar SHA-256 ile yeniden doğrulanır ve sürüm listesi gömülü yayın anahtarıyla doğrulanır.
 - Windows Update kuyruğu teklifleri yeniler. Aynı güncelleme ve donanım için yeni revizyon kullanılabilir. Artık sunulmayan paketler, paket adıyla bildirilir.

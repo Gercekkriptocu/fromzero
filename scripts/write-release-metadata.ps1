@@ -36,9 +36,13 @@ if ($Certificate -or $env:FROMZERO_UPDATE_PRIVATE_KEY) {
   if (!$Certificate) {
    $rsa.ImportFromPem($env:FROMZERO_UPDATE_PRIVATE_KEY)
    $publicPath = Join-Path $PSScriptRoot '../src/FromZero/Assets/release-update-public.pem'
-   if ($rsa.ExportSubjectPublicKeyInfoPem().Trim() -cne (Get-Content -LiteralPath $publicPath -Raw).Trim()) {
-    throw 'The release secret does not match the embedded update public key.'
-   }
+   $expected = [Security.Cryptography.RSA]::Create()
+   try {
+    $expected.ImportFromPem((Get-Content -LiteralPath $publicPath -Raw))
+    if ([Convert]::ToBase64String($rsa.ExportSubjectPublicKeyInfo()) -cne [Convert]::ToBase64String($expected.ExportSubjectPublicKeyInfo())) {
+     throw 'The release secret does not match the embedded update public key.'
+    }
+   } finally { $expected.Dispose() }
   }
   $signature = $rsa.SignData([IO.File]::ReadAllBytes($manifestPath),[Security.Cryptography.HashAlgorithmName]::SHA256,[Security.Cryptography.RSASignaturePadding]::Pss)
   [IO.File]::WriteAllBytes($signaturePath,$signature)
