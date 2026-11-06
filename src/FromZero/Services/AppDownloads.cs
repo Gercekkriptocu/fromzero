@@ -9,6 +9,7 @@ public record VerifiedDownload(string Name,string Path,string Publisher,string H
 public static class AppDownloads
 {
  private static readonly object CatalogGate=new();
+ private static readonly Lazy<HttpClient> Tls12Client=new(()=>Client(tls12:true));
  private static readonly List<DownloadRecipe> catalog = [
   new("Firefox","https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=tr","Mozilla Corporation",["mozilla.org","mozilla.net"],Id:"firefox"),
   new("Visual Studio Code","https://update.code.visualstudio.com/latest/win32-x64-user/stable","Microsoft Corporation",["visualstudio.com","microsoft.com","vscode-cdn.net"],Id:"vscode"),
@@ -65,13 +66,29 @@ public static class AppDownloads
   var url=matches.Select(m=>m.Value).Distinct().FirstOrDefault()??throw new InvalidDataException("Üreticinin güncel kurulum bağlantısı sayfada bulunamadı. Resmi sayfayı kullan veya daha sonra yeniden dene.");
   var uri=new Uri(url);if(!Allowed(uri,recipe.Hosts))throw new InvalidDataException("Üretici dışı indirme adresi reddedildi.");return uri;
  }
- private static HttpClient Client()
+ private static HttpClient Client(bool tls12=false)
  {
-  var client=new HttpClient(new HttpClientHandler{AllowAutoRedirect=false,AutomaticDecompression=DecompressionMethods.All}){Timeout=TimeSpan.FromMinutes(15)};
+  var handler=new HttpClientHandler{AllowAutoRedirect=false,AutomaticDecompression=DecompressionMethods.All};
+  if(tls12)handler.SslProtocols=System.Security.Authentication.SslProtocols.Tls12;
+  var client=new HttpClient(handler){Timeout=TimeSpan.FromMinutes(15)};
   client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) FromZero/0.5");
   return client;
  }
  private static async Task<HttpResponseMessage> GetAsync(HttpClient http,Uri uri,DownloadRecipe recipe,CancellationToken cancellation)
+ {
+  try{return await FollowAsync(http,uri,recipe,cancellation);}
+  catch(HttpRequestException first) when(first.HttpRequestError==HttpRequestError.SecureConnectionError)
+  {
+   // Retry TLS negotiation without relaxing certificate checks.
+   try{return await FollowAsync(Tls12Client.Value,uri,recipe,cancellation);}
+   catch(HttpRequestException retry) when(retry.HttpRequestError==HttpRequestError.SecureConnectionError)
+   {
+    Journal.Write("HTTPS download failed",uri.Host+"\n"+first+"\n"+retry,false);
+    throw new IOException(Locale.Text("A secure connection to the publisher could not be established. Check the Windows clock and HTTPS proxy, then retry.")+" ("+uri.Host+")",retry);
+   }
+  }
+ }
+ private static async Task<HttpResponseMessage> FollowAsync(HttpClient http,Uri uri,DownloadRecipe recipe,CancellationToken cancellation)
  {
   for(var redirects=0;redirects<10;redirects++){
    if(!Allowed(uri,recipe.Hosts))throw new InvalidDataException("İndirme resmi HTTPS alan adı dışına yönlendirildi.");

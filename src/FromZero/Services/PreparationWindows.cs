@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text.Json;
 namespace FromZero;
-public record PreparationWindowsResult(string Title,int Code,int HResult,bool Reboot,bool Installed,string Key="",bool DriverCacheReady=false);
+public record PreparationWindowsResult(string Title,int Code,int HResult,bool Reboot,bool Installed,string Key="",bool DriverCacheReady=false,bool NoLongerOffered=false);
 public static class PreparationWindows
 {
  public static string Script(bool drivers,string stopFile="")=>BuildScript(drivers,stopFile,"");
@@ -10,7 +10,9 @@ public static class PreparationWindows
   var items=offers.DistinctBy(o=>o.Key).ToArray();
   if(items.Length==0||items.Length>100||items.Any(o=>!o.QueueInstallable||!Guid.TryParse(o.Id,out _)||o.Revision<0))
    throw new InvalidDataException("Invalid or unsupported Windows update selection.");
-  var identities=string.Join(",",items.Select(o=>"@{Id='"+Guid.Parse(o.Id)+"';Revision="+o.Revision+"}"));
+  var identities=string.Join(",",items.Select(o=>"@{Id='"+Guid.Parse(o.Id)+"';Key="+PackageSafety.QuotePs(o.Key)+
+   ";Revision="+o.Revision+";Title="+PackageSafety.QuotePs(o.Title)+";Kind="+PackageSafety.QuotePs(o.Kind)+
+   ";Hardware="+PackageSafety.QuotePs(o.HardwareId)+"}"));
   return BuildScript(false,stopFile,identities);
  }
  private static string BuildScript(bool drivers,string stopFile,string identities)=>"$stopFile="+PackageSafety.QuotePs(stopFile)+";$progressFile="+PackageSafety.QuotePs(identities.Length==0&&stopFile.Length>0?Path.Combine(Path.GetDirectoryName(stopFile)!,"windows-progress.txt"):"")+";$wanted=@("+identities+");"+"""
@@ -21,7 +23,12 @@ public static class PreparationWindows
  $searcher=$session.CreateUpdateSearcher();$searcher.Online=$true;
  """+"$drivers=$"+(drivers?"true":"false")+"; $type='"+(drivers?"Driver":"Software")+"';"+"""
  $report=@();
- if($wanted.Count){$ordered=$wanted}else{
+ if($wanted.Count){
+  $current=$searcher.Search('IsInstalled=0 and IsHidden=0');
+  if([int]$current.ResultCode -ne 2){throw ('Windows taraması tam sonuç vermedi: '+$current.ResultCode)};
+  $byId=@{};foreach($u in $current.Updates){$byId[[string]$u.Identity.UpdateID]=$u};
+  $ordered=$wanted;
+ }else{
   $result=$searcher.Search("IsInstalled=0 and IsHidden=0 and Type='"+$type+"'");
   if([int]$result.ResultCode -ne 2){throw ('Windows taraması tam sonuç vermedi: '+$result.ResultCode)};
   $ordered=@($result.Updates|Sort-Object @{Expression={if($drivers -and $_.DriverClass -eq 'Net'){0}elseif($drivers -and $_.DriverClass -eq 'System'){1}elseif($drivers -and $_.DriverClass -eq 'Display'){2}else{3}}});
@@ -31,10 +38,13 @@ public static class PreparationWindows
   $key='';$title=[string]$candidate.Title;$driverCacheReady=$false;
   try{
    if($wanted.Count){
-    $key=$candidate.Id+':'+$candidate.Revision;$title=$key;
-    $match=$searcher.Search("IsInstalled=0 and IsHidden=0 and UpdateID='"+$candidate.Id+"' and RevisionNumber="+$candidate.Revision);
-    if([int]$match.ResultCode -ne 2 -or $match.Updates.Count -ne 1){throw 'Paket artık sunulmuyor; yeniden tarayın.'};
-    $update=$match.Updates.Item(0);$title=$update.Title;
+    $key=$candidate.Key;$update=$byId[$candidate.Id];
+    if(!$update -or [int]$update.Identity.RevisionNumber -ne $candidate.Revision -or
+       (([int]$update.Type -eq 2) -ne ($candidate.Kind -eq 'Driver')) -or
+       ($candidate.Kind -eq 'Driver' -and [string]$update.DriverHardwareID -ine $candidate.Hardware)){
+     $report+=[pscustomobject]@{Title=$title;Key=$key;Code=0;HResult=0;Reboot=$false;Installed=$false;NoLongerOffered=$true};continue;
+    };
+    $title=$update.Title;
    }else{$update=$candidate};
    $isDriver=[int]$update.Type -eq 2;
    $firmware=$update.Title -match 'Firmware|BIOS' -or ($isDriver -and $update.DriverClass -eq 'Firmware');

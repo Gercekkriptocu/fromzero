@@ -8,13 +8,14 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>FromZero</AssemblyName>
     <RootNamespace>FromZero</RootNamespace>
-    <Version>0.20.2</Version>
+    <Version>0.20.3</Version>
     <ApplicationIcon>Assets\FromZero.ico</ApplicationIcon>
     <Description>Windows kurtarma ve bakım istasyonu</Description>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
   <ItemGroup Condition="'$(FromZeroReleasePublicKey)' != ''"><EmbeddedResource Include="$(FromZeroReleasePublicKey)" LogicalName="FromZero.release-public-key.pem" /></ItemGroup>
+  <ItemGroup Condition="'$(FromZeroReleasePublicKey)' == ''"><EmbeddedResource Include="Assets\release-update-public.pem" LogicalName="FromZero.release-public-key.pem" /></ItemGroup>
   <ItemGroup><Resource Include="Assets\Fonts\PixelifySans.ttf" /></ItemGroup>
   <ItemGroup><Resource Include="Assets\FromZero.ico"/><Resource Include="Assets\FromZero.png"/><EmbeddedResource Include="Assets\locale-en.json" LogicalName="FromZero.locale-en.json"/></ItemGroup>
   <ItemGroup><EmbeddedResource Include="Assets\manufacturers.txt" LogicalName="FromZero.manufacturers.txt" /><EmbeddedResource Include="Assets\manufacturer-tools.txt" LogicalName="FromZero.manufacturer-tools.txt" /></ItemGroup>

@@ -34,8 +34,10 @@ jobs:
           "ISCC_EXE=$(Join-Path $compilerDir 'ISCC.exe')" >> $env:GITHUB_ENV
       - name: Build and test the installer
         shell: pwsh
+        env:
+          FROMZERO_UPDATE_PRIVATE_KEY: ${{ secrets.FROMZERO_UPDATE_PRIVATE_KEY }}
         run: |
-          ./scripts/build-setup.ps1 -Compiler $env:ISCC_EXE
+          ./scripts/build-setup.ps1 -Compiler $env:ISCC_EXE -UpdateAssets
           ./scripts/test-setup.ps1 -Installer ./dist/FromZero-Setup-win-x64.exe
       - uses: actions/upload-artifact@v4
         with:
@@ -43,6 +45,7 @@ jobs:
           path: |
             dist/FromZero-Setup-win-x64.exe
             dist/FromZero-Setup-win-x64.exe.sha256
+            dist/FromZero-update-win-x64.*
           if-no-files-found: error
       - name: Publish GitHub release
         if: startsWith(github.ref, 'refs/tags/v')
@@ -56,5 +59,5 @@ jobs:
           }
           $parts = $version.Split('.')
           $notes = 'docs/SURUM-' + $parts[0] + '.' + $parts[1] + '.md'
-          gh release create $env:GITHUB_REF_NAME dist/FromZero-Setup-win-x64.exe dist/FromZero-Setup-win-x64.exe.sha256 --verify-tag --title "FromZero $env:GITHUB_REF_NAME" --notes-file $notes
+          gh release create $env:GITHUB_REF_NAME dist/FromZero-Setup-win-x64.exe dist/FromZero-Setup-win-x64.exe.sha256 dist/FromZero-update-win-x64.json dist/FromZero-update-win-x64.sig dist/FromZero-update-win-x64.pack --verify-tag --title "FromZero $env:GITHUB_REF_NAME" --notes-file $notes
           if ($LASTEXITCODE -ne 0) { throw 'Release publication failed.' }

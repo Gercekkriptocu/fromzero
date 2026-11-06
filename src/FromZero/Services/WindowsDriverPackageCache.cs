@@ -12,9 +12,11 @@ public static class WindowsDriverPackageCache
    throw new InvalidDataException("Invalid driver cache selection.");
   return "$destination="+PackageSafety.QuotePs(destination)+";$hardware="+PackageSafety.QuotePs(offer.HardwareId)+";"+
    "$s=New-Object -ComObject Microsoft.Update.Session;$s.ClientApplicationID='FromZero signed driver fallback';"+
-   "$searcher=$s.CreateUpdateSearcher();$r=$searcher.Search(\"IsInstalled=0 and IsHidden=0 and Type='Driver' and UpdateID='"+id+"' and RevisionNumber="+offer.Revision+"\");"+"""
-   if([int]$r.ResultCode -ne 2 -or $r.Updates.Count -ne 1){throw 'The selected driver is no longer offered. Rescan updates.'};
-   $u=$r.Updates.Item(0);
+   "$wantedId='"+id+"';$wantedRevision="+offer.Revision+";"+"""
+   $searcher=$s.CreateUpdateSearcher();$r=$searcher.Search("IsInstalled=0 and IsHidden=0 and Type='Driver'");
+   $matches=@($r.Updates|Where-Object {$_.Identity.UpdateID -eq $wantedId -and $_.Identity.RevisionNumber -eq $wantedRevision});
+   if([int]$r.ResultCode -ne 2 -or $matches.Count -ne 1){throw 'The selected driver is no longer offered. Rescan updates.'};
+   $u=$matches[0];
    if($u.DriverClass -eq 'Firmware' -or $u.Title -match 'Firmware|BIOS' -or $u.DriverHardwareID -ine $hardware){throw 'Driver identity or hardware changed.'};
    if(!$u.EulaAccepted){$u.AcceptEula()};
    if(!$u.IsDownloaded){

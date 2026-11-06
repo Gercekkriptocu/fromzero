@@ -29,10 +29,17 @@ $files = @(Get-ChildItem -LiteralPath $rootFull -File -Recurse | Sort-Object Ful
 })
 $manifest = [ordered]@{Schema=1; Version=$version; Runtime=$Runtime; Files=$files}
 [IO.File]::WriteAllText($manifestPath, ($manifest | ConvertTo-Json -Depth 6), $encoding)
-if ($Certificate) {
- $rsa = [Security.Cryptography.X509Certificates.RSACertificateExtensions]::GetRSAPrivateKey($Certificate)
+if ($Certificate -or $env:FROMZERO_UPDATE_PRIVATE_KEY) {
+ $rsa = if ($Certificate) { [Security.Cryptography.X509Certificates.RSACertificateExtensions]::GetRSAPrivateKey($Certificate) } else { [Security.Cryptography.RSA]::Create() }
  if (!$rsa) { throw 'The selected certificate has no available RSA signing key.' }
  try {
+  if (!$Certificate) {
+   $rsa.ImportFromPem($env:FROMZERO_UPDATE_PRIVATE_KEY)
+   $publicPath = Join-Path $PSScriptRoot '../src/FromZero/Assets/release-update-public.pem'
+   if ($rsa.ExportSubjectPublicKeyInfoPem().Trim() -cne (Get-Content -LiteralPath $publicPath -Raw).Trim()) {
+    throw 'The release secret does not match the embedded update public key.'
+   }
+  }
   $signature = $rsa.SignData([IO.File]::ReadAllBytes($manifestPath),[Security.Cryptography.HashAlgorithmName]::SHA256,[Security.Cryptography.RSASignaturePadding]::Pss)
   [IO.File]::WriteAllBytes($signaturePath,$signature)
  } finally { $rsa.Dispose() }

@@ -1,7 +1,8 @@
 param(
  [string]$Compiler,
  [string]$SigningCertificateThumbprint,
- [string]$TimestampUrl
+ [string]$TimestampUrl,
+ [switch]$UpdateAssets
 )
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
@@ -23,6 +24,7 @@ try {
  & (Join-Path $PSScriptRoot 'publish.ps1') @publish
  $version = (Get-Item -LiteralPath (Join-Path $payload 'FromZero.exe')).VersionInfo.ProductVersion.Split('+')[0]
  if ($version -notmatch '^\d+\.\d+\.\d+$') { throw 'Unexpected FromZero package version.' }
+ if ($UpdateAssets) { & (Join-Path $PSScriptRoot 'write-update-assets.ps1') -Payload $payload -Output $dist }
  & $Compiler "/DPayloadDir=$payload" "/DAppVersion=$version" "/DSetupOutput=$stage" (Join-Path $root 'installer\FromZero.iss')
  if ($LASTEXITCODE -ne 0) { throw "Inno Setup exited with code $LASTEXITCODE." }
  $name = 'FromZero-Setup-win-x64.exe'

@@ -6,6 +6,7 @@
   <Compile Include="../../src/FromZero/Services/CatalogDriverInstaller.cs" Link="CatalogDriverInstaller.cs"/>
   <Compile Include="../../src/FromZero/Services/SilentDriverUpdates.cs" Link="SilentDriverUpdates.cs"/>
   <Compile Include="../../src/FromZero/Services/WindowsDriverPackageCache.cs" Link="WindowsDriverPackageCache.cs"/>
+  <Compile Include="../../src/FromZero/Services/SelfUpdateService.cs" Link="SelfUpdateService.cs"/>
   <Compile Include="../../src/FromZero/Services/UpdatePackageInstaller.cs" Link="UpdatePackageInstaller.cs"/>
   <Compile Include="../../src/FromZero/Services/ActivationService.cs" Link="ActivationService.cs"/>
   <Compile Include="../../src/FromZero/Models.cs" Link="Models.cs"/>

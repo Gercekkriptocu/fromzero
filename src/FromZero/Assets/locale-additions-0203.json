@@ -1,0 +1,23 @@
+{
+ "Windows Update teklifleri yenileniyor…":"Refreshing Windows Update offers…",
+ "Windows bu güncellemeyi artık sunmuyor":"Windows no longer offers this update",
+ "Üreticiyle güvenli bağlantı kurulamadı. Windows saatini ve HTTPS proxy ayarlarını kontrol edip yeniden dene.":"A secure connection to the publisher could not be established. Check the Windows clock and HTTPS proxy, then retry.",
+ "FromZero uygulama güncellemeleri":"FromZero app updates",
+ "Uygulama içi güncelleme standart Windows x64 kurulumunda kullanılabilir.":"In-app updates are available for the standard Windows x64 installation.",
+ "FromZero sürümleri":"FromZero releases",
+ "GitHub’da yeni sürümler otomatik kontrol edilir.":"Automatically checks GitHub for newer releases.",
+ "FromZero güncellemesini kontrol et":"Check for FromZero updates",
+ "FromZero’yu güncelle ve yeniden aç":"Update FromZero and restart",
+ "Yeni sürüm var":"New version available",
+ "FromZero güncellemesi kontrol ediliyor…":"Checking for a FromZero update…",
+ "FromZero güncel.":"FromZero is up to date.",
+ "FromZero güncellemeleri kontrol edilemedi. Tekrar dene.":"Could not check for FromZero updates. Try again.",
+ "FromZero’yu güncellemeden önce aktif oyun oturumunu bitir.":"Finish the active game session before updating FromZero.",
+ "Kurulu FromZero dosyaları doğrulanıyor…":"Verifying installed FromZero files…",
+ "Değişen dosya indiriliyor":"Downloading changed file",
+ "FromZero’yu güncellemek için Windows sürücüsünde yer aç.":"Free up space on the Windows drive to update FromZero.",
+ "FromZero güncellemesinin imzası doğrulanamadı.":"The FromZero update signature could not be verified.",
+ "FromZero güncellemesi doğrulamadan geçemedi.":"The staged FromZero update did not pass verification.",
+ "Sunucu istenen FromZero güncelleme baytlarını döndürmedi.":"The server did not return the requested FromZero update bytes.",
+ "Önceki FromZero güncellemesi tamamlanamadı":"The previous FromZero update did not finish"
+}

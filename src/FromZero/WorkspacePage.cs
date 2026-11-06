@@ -10,11 +10,12 @@ public partial class MainWindow
  private void Workspace()
  {
   Header("WORKSPACE","Preferences and verification","Adjust reading size, review source checks and preview a local support report.");
+  ShowFromZeroUpdateCard();
   var sizes=new ComboBox{ItemsSource=new[]{"100%","115%","130%"},SelectedIndex=UiTheme.TextScale==1.3?2:UiTheme.TextScale==1.15?1:0,MinWidth=110};
   System.Windows.Automation.AutomationProperties.SetName(sizes,"Text scale");
   sizes.SelectionChanged+=(_,_)=>{if(sizes.SelectedIndex>=0)UiTheme.SetTextScale(new[]{1d,1.15,1.3}[sizes.SelectedIndex]);};
   Page.Children.Add(Card(Stack(T("Text scale",19,"#B9E2A7",true),T("Choose a reading size. The retro font and language preference remain available.",13,"#B9CBC1"),Row(sizes))));
-  var version=typeof(MainWindow).Assembly.GetName().Version??new Version(0,20,2);
+  var version=typeof(MainWindow).Assembly.GetName().Version??new Version(0,20,3);
   async Task CheckPackage(bool candidate)
   {
    var folder=candidate?PickFolder("Select an extracted FromZero update bundle"):AppContext.BaseDirectory;

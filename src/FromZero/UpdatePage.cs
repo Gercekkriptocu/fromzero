@@ -46,6 +46,7 @@ public partial class MainWindow
    report.IsExpanded=updateInstallationNeedsAttention;
    Page.Children.Add(Card(Stack(T(updateInstallationStatus,17,"#B9E2A7",true),report)));
   }
+  if(!manufacturer)ShowFromZeroUpdateCard();
   var tabs=Row();foreach(var (id,label) in new[]{("all","Results"),("hardware","Hardware"),("catalog","Driver finder"),("oem","Üretici araçları")}){var category=id;var button=Action(label,()=>{updateCategory=category;Navigate("drivers");return Task.CompletedTask;},updateCategory==id);tabs.Children.Add(button);}Page.Children.Add(tabs);
   if(updateCategory=="apps")Page.Children.Add(Row(Action("Yalnız uygulamaları tara",ScanApplicationsAsync,true)));
   if(!manufacturer){var settingsStart=Page.Children.Count;

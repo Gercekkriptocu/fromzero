@@ -14,6 +14,10 @@ internal static class UpdateChecks
   var recommended=WindowsUpdateCatalog.RecommendedDrivers([offers,offers with{Id=Guid.NewGuid().ToString(),Version="32.0.2.0"},offers with{Class="Firmware"}]).ToList();
   check(recommended.Count==1&&recommended[0].Version=="32.0.2.0","Automatic driver queue chooses one newest offered version per device model");
   var exact=offers with{HardwareId=@"PCI\VEN_10DE&DEV_1234"};
+  var replacement=exact with{Revision=exact.Revision+1};
+  check(WindowsUpdateCatalog.RefreshSelection(exact,[replacement,exact])==replacement&&
+   WindowsUpdateCatalog.RefreshSelection(exact,[replacement with{HardwareId=@"PCI\VEN_10DE&DEV_9999"},replacement with{Hidden=true}])==null,
+   "Refreshing a stale selection accepts only the same active update identity, hardware and newer revision");
   var second=exact with{Id=Guid.NewGuid().ToString(),HardwareId=@"PCI\VEN_10DE&DEV_2345"};
   var regular=exact with{Id=Guid.NewGuid().ToString(),Optional=false,Version="31.1.0.0"};
   var optional=exact with{Optional=true};

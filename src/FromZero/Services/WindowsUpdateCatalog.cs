@@ -23,6 +23,11 @@ public static class WindowsUpdateCatalog
  }
  public static bool MatchesDevice(WindowsOffer offer,DeviceInfo device)=>offer.Kind=="Driver"&&device.Present&&
   !string.IsNullOrWhiteSpace(offer.HardwareId)&&device.HardwareIds.Concat(device.CompatibleIds??[]).Contains(offer.HardwareId,StringComparer.OrdinalIgnoreCase);
+ internal static WindowsOffer? RefreshSelection(WindowsOffer selected,IEnumerable<WindowsOffer> current)=>current
+  .Where(offer=>offer.QueueInstallable&&offer.Kind==selected.Kind&&offer.Revision>=selected.Revision&&
+   offer.Id.Equals(selected.Id,StringComparison.OrdinalIgnoreCase)&&
+   (offer.Kind!="Driver"||offer.HardwareId.Equals(selected.HardwareId,StringComparison.OrdinalIgnoreCase)))
+  .OrderByDescending(offer=>offer.Revision).FirstOrDefault();
  public static string ScanScript(bool extended)=>"""
  $s=New-Object -ComObject Microsoft.Update.Session; $s.ClientApplicationID='FromZero';
  $searcher=$s.CreateUpdateSearcher(); $searcher.Online=$true;

@@ -32,11 +32,45 @@ public partial class MainWindow
   var progress=new Progress<string>(message=>OperationTitle.Text=Locale.Text(message));
   var results=new List<string>();
   var installedKeys=new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+  var withdrawnKeys=new HashSet<string>(StringComparer.OrdinalIgnoreCase);
   bool restart=false,attention=false;
   try
   {
    var nativeDrivers=new List<WindowsOffer>();
    var allowed=offers.Where(o=>o.QueueInstallable).OrderBy(o=>o.Kind=="Driver").ToArray();
+   if(allowed.Length>0)
+   {
+    OperationTitle.Text=Locale.Text("Refreshing Windows Update offers…");
+    try
+    {
+     var fresh=await WindowsUpdateCatalog.ScanAsync(false,token);
+     if(fresh.Warnings.Count==0)
+     {
+      var refreshed=new List<WindowsOffer>();
+      foreach(var offer in allowed)
+      {
+       var match=WindowsUpdateCatalog.RefreshSelection(offer,fresh.Offers);
+       if(match!=null)
+       {
+        refreshed.Add(match);
+        if(match.Key!=offer.Key)
+        {
+         withdrawnKeys.Add(offer.Key);
+         windowsScan?.Offers.Add(match);
+         windowsSelection.Add(match.Key);
+        }
+       }
+       else
+       {
+        withdrawnKeys.Add(offer.Key);
+        results.Add(offer.Title+" · "+Locale.Text("Windows no longer offers this update"));
+       }
+      }
+      allowed=refreshed.DistinctBy(o=>o.Key).ToArray();
+     }
+    }
+    catch(Exception ex) when(ex is not OperationCanceledException){Journal.Write("Refresh Windows Update offers",ex.Message,false);}
+   }
    foreach(var offer in offers.Where(o=>!o.QueueInstallable))
    {
     results.Add(offer.Title+" · "+Locale.Text("Requires manual review"));
@@ -72,6 +106,12 @@ public partial class MainWindow
      ??throw new InvalidDataException("Windows Update returned no installation report.");
     foreach(var item in report.Where(r=>r.Code!=5))
     {
+     if(item.NoLongerOffered)
+     {
+      withdrawnKeys.Add(item.Key);
+      results.Add(item.Title+" · "+Locale.Text("Windows no longer offers this update"));
+      continue;
+     }
      var verified=item.Code==2&&item.Installed;
      var driver=batch.FirstOrDefault(o=>o.Kind=="Driver"&&o.Key==item.Key);
      if(!verified&&!item.Reboot&&item.Code!=2&&item.DriverCacheReady&&driver!=null)
@@ -174,8 +214,10 @@ public partial class MainWindow
    updateCancellation=null;
    CancelOperation.Visibility=Visibility.Collapsed;
    windowsSelection.RemoveWhere(installedKeys.Contains);
+   windowsSelection.RemoveWhere(withdrawnKeys.Contains);
    foreach(var key in installedKeys)downloadStatus.Remove(key);
-   windowsScan?.Offers.RemoveAll(o=>installedKeys.Contains(o.Key));
+   foreach(var key in withdrawnKeys)downloadStatus.Remove(key);
+   windowsScan?.Offers.RemoveAll(o=>installedKeys.Contains(o.Key)||withdrawnKeys.Contains(o.Key));
    if(installedKeys.Count>0)hardwareInventoryReady=false;
   }
   if(restart)results.Add(Locale.Text("Restart Windows and run the queue again for remaining updates."));

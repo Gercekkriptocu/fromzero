@@ -1,12 +1,14 @@
 # FromZero
 
-Windows için piksel sanatından ilham alan yerel kurtarma, sürücü ve oyun hazırlık uygulaması. C# / .NET 10 / WPF. Sürüm **0.20.2 ön izleme**.
+Windows için piksel sanatından ilham alan yerel kurtarma, sürücü ve oyun hazırlık uygulaması. C# / .NET 10 / WPF. Sürüm **0.20.3 ön izleme**.
 
 ## İndir / Download
 
 **[FromZero Setup — Windows x64](https://github.com/Gercekkriptocu/fromzero/releases/latest/download/FromZero-Setup-win-x64.exe)** · [SHA-256](https://github.com/Gercekkriptocu/fromzero/releases/latest/download/FromZero-Setup-win-x64.exe.sha256) · [Sürümler / Releases](https://github.com/Gercekkriptocu/fromzero/releases)
 
 Kurulum sihirbazı İngilizce ve Türkçe seçenekleri sunar. Uygulama mevcut dil tercihini korur ve ilk kurulumda sihirbazın dilini kullanır. Windows 10 (21H2 veya sonrası) ve Windows 11 için x64 paket kendi .NET çalışma zamanını içerir.
+
+0.20.3 ve sonraki standart x64 kurulumlarda **Güncellemeler → FromZero uygulama güncellemeleri** yeni sürümleri gösterir. Güncelleyici yalnızca eksik veya değişen dosyaların verilerini indirir. 0.20.2 ve önceki sürümler, bu özelliği almak için 0.20.3 veya sonraki setup ile bir kez güncellenir.
 
 Kurucu varsayılan olarak Program Files klasörüne yükler. FromZero açılışta Windows yönetici onayı alır ve aynı oturumdaki bakım komutları bu yetkiyi kullanır.
 

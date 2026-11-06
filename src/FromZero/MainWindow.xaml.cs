@@ -89,6 +89,7 @@ public partial class MainWindow : Window
   Closed += (_, _) => {ticker.Stop();try{displaySettings.Dispose();}catch(Exception ex){Journal.Write("Ekran kapanış geri alma",ex.Message,false);}};
   Navigate("overview");
   Loaded += async (_, _) => {
+   _=CheckFromZeroOnStartupAsync();
    if(displaySettings.Backup is{Confirmed:false})await RunAsync("Önceki ekran denemesi geri alınıyor",()=>{Detail("Ekran kurtarma",displaySettings.Restore());return Task.CompletedTask;});
    if(gameService.Session!=null)await RunAsync("Önceki oyun oturumu geri alınıyor",async()=>Detail("Oturum kurtarma",await gameService.RestoreAsync()));
    await RunAsync("Donanım taranıyor", ScanAsync);
