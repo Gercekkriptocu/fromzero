@@ -3104,5 +3104,12 @@
   "Paket kuruluyor…": "Installing package…",
   "Kurulan güncelleme doğrulanıyor…": "Verifying the installed update…",
   "Sonraki paket bekleniyor…": "Waiting for the next package…",
-  "Kuyrukta kalan paketler": "Packages left in the queue"
+  "Kuyrukta kalan paketler": "Packages left in the queue",
+  "Bazı uygulama dosyaları kullanımda. Diğer FromZero pencerelerini kapatıp tekrar dene.": "Some application files are in use. Close other FromZero windows and retry.",
+  "Güncelleme kurtarması tamamlanamadı. En son FromZero setup dosyasını kur.": "Update recovery needs attention. Install the latest FromZero setup.",
+  "FromZero zamanında kapanmadı. Uygulamayı kapatıp tekrar dene.": "FromZero did not close in time. Close it and retry.",
+  "İndirilen güncelleme doğrulanamadı. Güncellemeyi yeniden dene.": "The downloaded update did not pass verification. Retry the update.",
+  "Güncellenen FromZero açılamadı. Önceki sürüm geri yüklendi.": "The updated FromZero could not start. The previous version was restored.",
+  "Güncelleme uygulanamadı. Önceki sürüm geri yüklendi.": "The update could not be applied. The previous version was restored.",
+  "Önceki güncelleme tamamlanamadı. Tekrar dene veya en son FromZero setup dosyasını kur.": "The previous update did not finish. Retry or install the latest FromZero setup."
 }

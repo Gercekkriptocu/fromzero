@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json;
 
 namespace FromZero;
 
@@ -31,10 +32,37 @@ internal static class SelfUpdateService
   try
   {
    if(!File.Exists(path)||new FileInfo(path).Length>4096)return null;
-   var last=File.ReadAllText(path).Trim();
-   return last is "" or "OK"?null:last;
+   return FormatFailure(File.ReadAllText(path));
   }
   catch(Exception ex) when(ex is IOException or UnauthorizedAccessException){return null;}
+ }
+ internal static string? FormatFailure(string text)
+ {
+  text=text.Trim();
+  if(text is "" or "OK")return null;
+  try
+  {
+   using var document=JsonDocument.Parse(text);
+   var result=document.RootElement;
+   if(result.GetProperty("Code").GetString()=="ok")return null;
+   if(result.TryGetProperty("RollbackComplete",out var rollback)&&rollback.ValueKind==JsonValueKind.False)
+    return Locale.Text("Update recovery needs attention. Install the latest FromZero setup.");
+   if(result.GetProperty("Code").GetString()=="locked")
+    return Locale.Text("Some application files are in use. Close other FromZero windows and retry.");
+   return Locale.Text(result.GetProperty("Phase").GetString() switch
+   {
+    "wait"=>"FromZero did not close in time. Close it and retry.",
+    "verify"=>"The downloaded update did not pass verification. Retry the update.",
+    "startup"=>"The updated FromZero could not start. The previous version was restored.",
+    _=>"The update could not be applied. The previous version was restored."
+   });
+  }
+  catch(Exception ex) when(ex is JsonException or KeyNotFoundException or InvalidOperationException)
+  {
+   return Locale.Text(text.Contains("Move",StringComparison.OrdinalIgnoreCase)
+    ?"Some application files are in use. Close other FromZero windows and retry."
+    :"The previous update did not finish. Retry or install the latest FromZero setup.");
+  }
  }
 
  public static async Task<ReleaseDelta?> CheckAsync(CancellationToken token)
@@ -152,14 +180,87 @@ internal static class SelfUpdateService
   "$ErrorActionPreference='Stop';$installed="+PackageSafety.QuotePs(installed)+";$stage="+PackageSafety.QuotePs(stage)+
   ";$backup="+PackageSafety.QuotePs(backup)+";$parentId="+parentId+";"+"""
   $log=Join-Path (Split-Path -Parent $installed) 'update-last.log';
-  $oldMoved=$false;$newMoved=$false;$child=$null;
+  $changes=[Collections.Generic.List[object]]::new();$child=$null;$committed=$false;$restored=$true;$phase='wait';
+  function Resolve-File($root,$relative){
+   $base=[IO.Path]::GetFullPath($root).TrimEnd([char]92)+[char]92;
+   $path=[IO.Path]::GetFullPath([IO.Path]::Combine($base,$relative));
+   if(!$path.StartsWith($base,[StringComparison]::OrdinalIgnoreCase)){throw 'Invalid update path.'};
+   for($parent=[IO.DirectoryInfo]::new([IO.Path]::GetDirectoryName($path));$null -ne $parent;$parent=$parent.Parent){
+    if($parent.Exists -and ($parent.Attributes -band [IO.FileAttributes]::ReparsePoint)){throw 'Linked update directory.'};
+   };
+   if([IO.File]::Exists($path) -and ([IO.File]::GetAttributes($path) -band [IO.FileAttributes]::ReparsePoint)){throw 'Linked update file.'};
+   return $path;
+  };
+  function Move-File($source,$destination){
+   [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination));
+   for($attempt=0;;$attempt++){
+    try{[IO.File]::Move($source,$destination);return}
+    catch{
+     $code=$_.Exception.GetBaseException().HResult -band 65535;
+     if($code -notin @(32,33) -or $attempt -ge 39){throw};
+     Start-Sleep -Milliseconds 500;
+    }
+   }
+  };
+  function Same-File($path,$size,$hash){
+   for($attempt=0;;$attempt++){
+    try{
+     if(![IO.File]::Exists($path) -or ([IO.FileInfo]::new($path)).Length -ne $size){return $false};
+     $algorithm=[Security.Cryptography.SHA256]::Create();$inputFile=$null;
+     try{
+      $inputFile=[IO.File]::OpenRead($path);
+      $actual=[BitConverter]::ToString($algorithm.ComputeHash($inputFile)).Replace('-','');
+      return $actual -eq $hash;
+     }finally{if($inputFile){$inputFile.Dispose()};$algorithm.Dispose()};
+    }catch{
+     $errorCode=$_.Exception.GetBaseException().HResult -band 65535;
+     if($errorCode -notin @(32,33) -or $attempt -ge 39){throw};
+     Start-Sleep -Milliseconds 500;
+    }
+   }
+  };
+  function Write-Result($code,$message){
+   $json=[pscustomobject]@{Code=$code;Phase=$phase;Message=$message;RollbackComplete=$restored}|ConvertTo-Json -Compress;
+   [IO.File]::WriteAllText($log,$json,[Text.UTF8Encoding]::new($false));
+  };
   try{
    $parent=Get-Process -Id $parentId -ErrorAction SilentlyContinue;
    if($parent -and !$parent.WaitForExit(30000)){throw 'FromZero did not close in time.'};
-   [IO.Directory]::Move($installed,$backup);$oldMoved=$true;
-   [IO.Directory]::Move($stage,$installed);$newMoved=$true;
-   $exe=Join-Path $installed 'FromZero.exe';
-   $child=Start-Process -FilePath $exe -WorkingDirectory $installed -ArgumentList '--elevated' -PassThru;
+   Set-Location -LiteralPath $env:SystemRoot;
+   $phase='verify';
+   $manifest=Get-Content -LiteralPath (Join-Path $stage 'release-manifest.json') -Raw -Encoding UTF8|ConvertFrom-Json;
+   $next=@{};
+   foreach($file in $manifest.Files){
+    $source=Resolve-File $stage $file.Path;$target=Resolve-File $installed $file.Path;
+    if(![IO.File]::Exists($source) -or !(Same-File $source $file.Size $file.Sha256)){throw 'The staged update file failed verification.'};
+    if($next.ContainsKey($file.Path)){throw 'Duplicate update file.'};
+    $next[$file.Path]=$true;
+    if(!(Same-File $target $file.Size $file.Sha256)){
+     $changes.Add([pscustomobject]@{Source=$source;Target=$target;Saved=(Resolve-File $backup $file.Path);OldMoved=$false;NewMoved=$false});
+    }
+   };
+   $oldManifest=Join-Path $installed 'release-manifest.json';
+   if([IO.File]::Exists($oldManifest)){
+    $old=Get-Content -LiteralPath $oldManifest -Raw -Encoding UTF8|ConvertFrom-Json;
+    foreach($file in $old.Files){
+     if(!$next.ContainsKey($file.Path)){
+      $target=Resolve-File $installed $file.Path;
+      if(Same-File $target $file.Size $file.Sha256){
+       $changes.Add([pscustomobject]@{Source='';Target=$target;Saved=(Resolve-File $backup $file.Path);OldMoved=$false;NewMoved=$false});
+      }
+     }
+    }
+   };
+   foreach($name in @('release-manifest.json','release-manifest.sig')){
+    $changes.Add([pscustomobject]@{Source=(Resolve-File $stage $name);Target=(Resolve-File $installed $name);Saved=(Resolve-File $backup $name);OldMoved=$false;NewMoved=$false});
+   };
+   $phase='apply';
+   foreach($change in $changes){
+    if([IO.File]::Exists($change.Target)){Move-File $change.Target $change.Saved;$change.OldMoved=$true};
+    if($change.Source){Move-File $change.Source $change.Target;$change.NewMoved=$true};
+   };
+   $phase='startup';
+   $child=Start-Process -FilePath (Join-Path $installed 'FromZero.exe') -WorkingDirectory $installed -ArgumentList '--elevated' -PassThru;
    $ready=$false;
    for($i=0;$i -lt 100;$i++){
     Start-Sleep -Milliseconds 250;$child.Refresh();
@@ -167,21 +268,28 @@ internal static class SelfUpdateService
     if($child.MainWindowHandle -ne [IntPtr]::Zero -and $child.Responding){$ready=$true;break};
    };
    if(!$ready){throw 'The updated FromZero did not finish starting.'};
-   Set-Content -LiteralPath $log -Value 'OK' -ErrorAction SilentlyContinue;
-   try{[IO.Directory]::Delete($backup,$true)}catch{};
+   Write-Result 'ok' '';$committed=$true;
   }catch{
-   $message=$_.Exception.Message;
-   if($oldMoved){
-    try{
-     if($child -and !$child.HasExited){$child.Kill();[void]$child.WaitForExit(10000)};
-     if($newMoved){[IO.Directory]::Move($installed,$stage)};
-     [IO.Directory]::Move($backup,$installed);
-     Start-Process -FilePath (Join-Path $installed 'FromZero.exe') -WorkingDirectory $installed -ArgumentList '--elevated';
-    }catch{$message+=' / Rollback: '+$_.Exception.Message};
+   $failure=$_.Exception;$message=$failure.Message;$code='failed';
+   if(($failure.GetBaseException().HResult -band 65535) -in @(32,33)){$code='locked'};
+   try{
+    if($child -and !$child.HasExited){$child.Kill();[void]$child.WaitForExit(10000)};
+    for($i=$changes.Count-1;$i -ge 0;$i--){
+     $change=$changes[$i];
+     if($change.NewMoved){Move-File $change.Target $change.Source};
+     if($change.OldMoved){Move-File $change.Saved $change.Target};
+    }
+   }catch{$restored=$false;$message+=' / Rollback: '+$_.Exception.Message};
+   try{Write-Result $code $message}catch{};
+   if($restored -and [IO.File]::Exists((Join-Path $installed 'FromZero.exe'))){
+    try{Start-Process -FilePath (Join-Path $installed 'FromZero.exe') -WorkingDirectory $installed -ArgumentList '--elevated'}catch{};
    };
-   Set-Content -LiteralPath $log -Value $message -ErrorAction SilentlyContinue;
   }finally{
-   if([IO.Directory]::Exists($stage)){try{[IO.Directory]::Delete($stage,$true)}catch{}};
+   if($committed -or $restored){
+    foreach($folder in @($stage,$backup)){
+     if([IO.Directory]::Exists($folder)){try{[IO.Directory]::Delete($folder,$true)}catch{}};
+    }
+   }
   }
   """;
 }

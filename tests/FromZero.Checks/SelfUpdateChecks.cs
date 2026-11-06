@@ -49,8 +49,73 @@ internal static class SelfUpdateChecks
   await File.WriteAllTextAsync(Path.Combine(live,"before.txt"),"old");
   await File.WriteAllTextAsync(Path.Combine(incoming,"FromZero.exe"),"invalid executable fixture");
   File.Copy(Path.Combine(Environment.SystemDirectory,"where.exe"),Path.Combine(live,"FromZero.exe"));
-  var swap=await Commands.PsAsync(SelfUpdateService.ApplyScript(live,incoming,rollback,int.MaxValue),40);
-  check(swap.Success&&File.Exists(Path.Combine(live,"before.txt"))&&!Directory.Exists(rollback)&&!Directory.Exists(incoming),
-   "The Windows update worker restores the previous directory if the new executable cannot start");
+  await File.WriteAllTextAsync(Path.Combine(incoming,"before.txt"),"new");
+  await File.WriteAllTextAsync(Path.Combine(live,"runtime.dll"),"unchanged");
+  File.Copy(Path.Combine(live,"runtime.dll"),Path.Combine(incoming,"runtime.dll"));
+  var original=await File.ReadAllBytesAsync(Path.Combine(live,"FromZero.exe"));
+  var files=new List<CapsuleFile>();
+  foreach(var file in Directory.GetFiles(incoming))files.Add(await PackageSafety.HashFileAsync(incoming,file));
+  await File.WriteAllTextAsync(Path.Combine(incoming,"release-manifest.json"),JsonSerializer.Serialize(new ReleaseManifest(1,"9.8.7","win-x64",files)));
+  await File.WriteAllTextAsync(Path.Combine(incoming,"release-manifest.sig"),"fixture signature");
+  // This open file denies delete access, reproducing the folder move problem on Windows.
+  using(var held=new FileStream(Path.Combine(live,"runtime.dll"),FileMode.Open,FileAccess.Read,FileShare.Read))
+  {
+   var transient=new FileStream(Path.Combine(live,"before.txt"),FileMode.Open,FileAccess.Read,FileShare.Read);
+   var releaseLock=Task.Run(async()=>{await Task.Delay(2500);transient.Dispose();});
+   var swap=await Commands.PsAsync(SelfUpdateService.ApplyScript(live,incoming,rollback,int.MaxValue),60);
+   await releaseLock;
+   using var last=JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(basePath,"update-last.log")));
+   check(swap.Success&&last.RootElement.GetProperty("Phase").GetString()=="startup"&&
+    last.RootElement.GetProperty("RollbackComplete").GetBoolean()&&
+    (await File.ReadAllBytesAsync(Path.Combine(live,"FromZero.exe"))).SequenceEqual(original)&&
+    await File.ReadAllTextAsync(Path.Combine(live,"before.txt"))=="old"&&
+    !Directory.Exists(rollback)&&!Directory.Exists(incoming),
+    "Transient file locks are retried, unchanged locked runtimes are retained, and startup failure restores original bytes");
+  }
+  check(SelfUpdateService.FormatFailure("{\"Code\":\"ok\"}")==null&&
+   SelfUpdateService.FormatFailure("Exception calling \"Move\" with \"2\" argument(s): broken text")?.Contains("application files")==true,
+   "Old folder-lock errors become readable update feedback and successful structured logs clear the warning");
+  await SuccessfulRestart(basePath,check);
+ }
+
+ private static async Task SuccessfulRestart(string basePath,Action<bool,string> check)
+ {
+  var root=Directory.CreateDirectory(Path.Combine(basePath,"successful-restart")).FullName;
+  var installed=Directory.CreateDirectory(Path.Combine(root,"App")).FullName;
+  var incoming=Directory.CreateDirectory(Path.Combine(root,"next")).FullName;
+  var backup=Path.Combine(root,"previous");
+  var source=Path.Combine(root,"Fixture.cs");
+  await File.WriteAllTextAsync(source,"""
+   using System;
+   using System.Drawing;
+   using System.Windows.Forms;
+   class Fixture {
+    [STAThread] static void Main() {
+     var form=new Form {Text="FromZero update test",StartPosition=FormStartPosition.Manual,Location=new Point(-10000,-10000)};
+     var timer=new Timer {Interval=2500};
+     timer.Tick+=(s,e)=>{timer.Stop();form.Close();};
+     form.Shown+=(s,e)=>timer.Start();
+     Application.Run(form);
+    }
+   }
+   """);
+  var compiler=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows),"Microsoft.NET","Framework64","v4.0.30319","csc.exe");
+  var built=await Commands.RunAsync(compiler,["/nologo","/target:winexe","/reference:System.Windows.Forms.dll","/reference:System.Drawing.dll",
+   "/out:"+Path.Combine(incoming,"FromZero.exe"),source]);
+  if(!built.Success)throw new IOException(built.Output);
+  await File.WriteAllTextAsync(Path.Combine(installed,"FromZero.exe"),"old executable fixture");
+  await File.WriteAllTextAsync(Path.Combine(installed,"stable.dll"),"unchanged");
+  File.Copy(Path.Combine(installed,"stable.dll"),Path.Combine(incoming,"stable.dll"));
+  var files=new List<CapsuleFile>();
+  foreach(var path in Directory.GetFiles(incoming))files.Add(await PackageSafety.HashFileAsync(incoming,path));
+  await File.WriteAllTextAsync(Path.Combine(incoming,"release-manifest.json"),JsonSerializer.Serialize(new ReleaseManifest(1,"9.8.7","win-x64",files)));
+  await File.WriteAllTextAsync(Path.Combine(incoming,"release-manifest.sig"),"fixture signature");
+  using var held=new FileStream(Path.Combine(installed,"stable.dll"),FileMode.Open,FileAccess.Read,FileShare.Read);
+  var applied=await Commands.PsAsync(SelfUpdateService.ApplyScript(installed,incoming,backup,int.MaxValue),60);
+  using var report=JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(root,"update-last.log")));
+  check(applied.Success&&report.RootElement.GetProperty("Code").GetString()=="ok"&&
+   !Directory.Exists(incoming)&&!Directory.Exists(backup)&&
+   (await File.ReadAllBytesAsync(Path.Combine(installed,"FromZero.exe"))).AsSpan(0,2).SequenceEqual("MZ"u8),
+   "The updater replaces a real executable and confirms its window starts while an unchanged runtime remains locked");
  }
 }

@@ -1,4 +1,9 @@
-# FromZero 0.20.5
+# FromZero 0.20.6
+
+- Uygulama içi güncelleyici yalnız değişen dosyaları değiştirir. Değişmeyen ve kullanımda olan çalışma ortamı dosyaları korunur. Geçici dosya kilitlerinde 20 saniyeye kadar yeniden denenir.
+- Değiştirilen dosyalar yedeklenir. Güncelleme ya da yeni sürümün açılışı başarısızsa önceki dosyalar geri konur. Güncelleme hata metinleri UTF-8 ve seçili dilde okunabilir bildirim kullanır.
+
+## 0.20.5
 
 - İndir ve güncelle, geçerli paketin adını, adımını ve geçen süreyi gösteren canlı kuyruk açar. Windows paketleri doğrulama dahil ayrı aşamalarla görünür.
 - Sıradaki paket, tamamlanan işlem sayısı, tek tek sonuçlar ve yeniden başlatma ya da durdurma sonrasında kalan paketler gösterilir.
